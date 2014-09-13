@@ -1,0 +1,56 @@
+<HTML>
+
+<H1><A NAME="top">Printer setup</A></H1></CENTER>
+<BODY>
+<FONT FACE="Tahoma" size=2>
+
+Last revision: May 10, 2004
+&nbsp;&nbsp;
+<A HREF=#top>To print this page, Click here first</A>
+
+<h3>Printer IP Addresses</h3>
+<ul>
+<li>HP4 Si  10.10.1.207
+<li>HP 4050 10.10.1.202
+<li>HP 4300 10.10.1.33
+</ul>
+
+<h3>Adding the HP4050 printer</h3>
+<ol>
+<li>Select Start|Setting|Printers.  Double-click Add Printer, and then click Next. 
+<li>Click Local printer, clear the Automatically detect my printer check box, and then click Next. 
+<li>Click Create a new port, click TCP/IP prot, and then click Next.
+<li>Select TCP/IP port, enter IP address 10.10.1.202, click OK
+<li>When the printer prompts for a driver, browse to the folder p:\drivers\hp4050\newHp4050\.  The computer will find the INF file you need and it will complete the installation.
+</ol>
+
+<h3>Adding the HP4 Si printer</h3>
+<ol>
+<li>Get the installation CD from the file cabinet in the server cubicle.
+<li>Select Start|Setting|Printers.  Double-click Add Printer, and then click Next. 
+<li>Select network printer, then click Next. 
+<li>Select Type printer name, clear the name field, then click next
+<li>The window displays a list of shared printers.  Select \\Ts1\HPLaserJet 4Si, then click Next
+<li>Select YES for Use as default printer, then Next
+<li>Click Finish
+</ol>
+
+<h3>Adding the HP 4300</h3>
+<ol>
+<li>Select Start|Setting|Printers.  Double-click Add Printer, and then click Next. 
+<li>Select Local printer, clear the 'Automatically detect...' box, click [Next]
+<li>Select Create a new port, then select TCP/IP port from the port type list, click [Next]
+<li>The Port Wizard window opens, click [Next], enter printer name 10.10.1.33, then click [Next], then [Finish]. Wait for it to finish, about 10 seconds, and redisplay the Add Printer window again
+<li>Click [Have Disk], insert the HP4300 installation CD
+<li>At the 'Install from Disk' field, browse on the CD (usually drive D:) to folder \English\Drivers\Win2000_XP\PCL6. Click once on the HPxxxx.inf file, click [Open], then [OK], then [Next]
+<li>Select YES for Use as default printer, then Next
+<li>Click Finish
+</ol>
+
+<P>
+<A HREF=#top>Back to top</A>
+</FONT>
+</BODY>
+</HTML>
+
+

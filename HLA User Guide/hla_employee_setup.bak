@@ -1,0 +1,44 @@
+<HTML>
+
+<H1><A NAME="top">Employee Setup</A></H1></CENTER>
+<BODY>
+<FONT FACE="Tahoma" size=2>
+
+Last revision: March 31, 2004
+&nbsp;&nbsp;
+<A HREF=#top>To print this page, Click here first</A>
+
+<h3>Setup of a new Employee to use Oracle HLA</h3>
+<ol>
+<li>Create the Oracle account.
+ <ul>
+ <li>On the HLA1 server, sign in as administrator
+ <li>Click Start|Programs|Oracle|Database Administration|Security Manager. The computer opens the Manager Login window
+ <li>Enter Username: SYSTEM, Password: v*****system, Service: hlaprod. Click OK. The computer opens the Security Manager window. On the left you see a folder named Users.
+ <li>Right-click the mouse on the 'Users' folder. From the popup menu, select Create. The computer opens the Create User window.
+ <li>In the General tab, enter the username in the 'Name:' field (no spaces in the name!). Then, enter the password in the 'Enter Password:' field and again in the 'Confirm Password:' field. Remember the username and password you entered!
+ <li>Click the Role tab. You see a list of roles in the Available section, and you see the CONNECT role in the Granted section. Double click each of these roles: RESOURCE, HLA_USER, LIFC_READER. As you double-click each role, it will be added to the Granted list.
+ <li>The Granted list should now contain CONNECT, RESOURCE, HLA_USER, LIFC_READER.
+ <li>Click the Create button. The computer displays the message 'User created successfully'. Click OK to close the message window.
+ <li>Close the Security Manager window </p>
+ </ul>
+<li>Enter the EMPLOYEE in HLA Oracle system
+<ul>
+  <li>Log into the HLA Oracle system with your normal password. You must have security level 7 in Hla Oracle to perform this set of steps
+  <li>In the HLA Oracle system, select Data Entry,Admin, Codes.  the system opens the Codes maintenance window.
+  <li>Select EMPLOYEE from the list of code types. Using the mouse, right-click in the list of Employe names, then select add.
+  <li>Enter the Employee name, LAST,FIRST, employee initials
+  <li>In the lower window, enter the ORACLE NAME and the SECURITY LEVEL. The ORACLE NAME value you enter must be the same as the Oracle username you created above.
+  <li>These are the security levels: 1-View, 3-Login, 5-ResultEntry, 7-Dictionary maintenance.
+  <li>Click SAVE. This employee can now use HLA Oracle</p>
+</ul>
+<li>Note: Not everyone in the EMPLOYYE code table has an Oracle account! Chip copied the Mumps employee list into the HLA Oracle code table, but Chip is only creating Oracle accounts for people as they are needed.
+</ol>
+
+<P>
+<A HREF=#top>Back to top</A>
+</FONT>
+</BODY>
+</HTML>
+
+

@@ -1,0 +1,822 @@
+arc log.txt
+
+- Dates since 4/1/13 are in the SQL Server log
+
+XLS file from Dynal has value "Z0313_" in the R# column. My reader program does not give a good error message, and it does not update the 'last-reader-run' date, so the next time the reader is run, it pulls up the same files again.
+
+3-6-13 Label spec revision sent to Bob Marsh 1.0
+
+2-26-13  Label and printer spec .50
+
+2-14-13 Label and printer spec .50
+
+2-1-13 Label and printer spec .50
+
+1-15-13 Tues 1.5
+ - Label specs
+
+1-10-13 Fri .75
+ - Label specs
+
+1-9-13 Wed 2.0
+ Created label design document, emailed to Sharon and Michael.
+
+1-7-13 Mon 2.75
+ ARC onsite.  Installed Oracle and HLA Oracle with Frank on hlaxp30
+ Set up label printer and demo with Sharon. Designed label format
+
+1-6-13 Sun 4.5 hrs
+ - n_label_format  NVO, auto-instantiated
+   holds text height/width and barcode height
+ - label print objects like u_person_login instantiate one and use it
+
+n_label_format gets the values from hla.ini
+[LabelFormat]
+textHeight=25
+textWidth=25
+barcodeHeight=60
+
+
+1-5-13 Sat  1.5
+- Directory "c:\hla\pbrun" is defined as AppDirectory in hla.ini [FileLocations]
+- File c:\hla\pbrun\print_login_label.bat, with this one command line:
+	LPR -S192.168.1.16 -PTECPRINTER LoginLabel.ZPL
+On site, should replace this IP with the network IP the printer gets from DHCP
+The batch file must be in the same directory as LoginLabel.zpl
+
+In new label printing lines, changed hard-coded path reference to use:
+ appDirectory = ProfileString(gnv_app.of_GetAppIniFile(), 'FileLocations', 'AppDirectory','c:\hla\')
+ Change was added to these objects:
+    u_person_login
+    u_packinglist_login
+    u_packinglist_login_hk
+    u_packinglist_login_enterolab
+
+1-2-13 Wed 1.75
+  w_print_labels - new window
+  n_hla_person.of_GetNameForPid(pid) - new funtion
+  m_frame_hla.m_tools.m_0 - change it to call 'w_print_labels'
+
+1-1-13 Tues  2.5
+- ARC label printing
+Specimen login:
+ u_packinglist_login
+  - added cb_print_label checkbox, default = checked
+  - cb_login.clicked  - all the code within "if cbx_print_label.checked then"
+ u_packinglist_login_hl (same changes)
+ u_packinglist_login_enterolab (same changes)
+ u_person_login
+   of_PrintLabel() - new function
+   of_save - call of_PrintLabel
+
+Leonor Varela IMDB
+
+12-22-12 Sat 1.5 hr
+- Set up and testing bar code printer on home network - 192.168.1.16
+
+
+12-19-12 Wed 1.5 hr
+- Picked up demo bar code printer from Michael Gopin at Toshiba
+Toshiba office is at One Financial Place near South Station
+
+12-18-12 Tues 1 hr
+tc Sharon bar code printing
+ add specimen received date to patient reports
+Bar code printer, email and phone calls with Toshiba
+
+For datawindows dw_patient_report_item and dw_patient_report_item_landscape:
+
+- added a computed column to the SQL select:
+  SELECT HLA_REPORT_ITEM.STRRELATIONTOPT,   
+         HLA_REPORT_ITEM.PKREPORTID,   
+         -- some columns omitted --
+         '' strdpb12_extra,   
+         to_date(null) c_dtReceived  <<< - this is the new one
+    FROM HLA_REPORT_ITEM  
+   WHERE ( HLA_REPORT_ITEM.PKREPORTID = :al_pkReportId ) AND  
+         ( HLA_REPORT_ITEM.PKREPORTSEQ = :al_pkReportSeq )    
+
+- Added the computed column to the DW display
+
+u_patient_report.of_retrieve() and u_patient_report_landscape.of_retrieve()
+- added code to get the value of received date
+(Note: names on screen do not match DB names and it can be confusing
+   DB name dtBleedDate  displayed as Collected date
+   DB name dtAccessionDate displayed as Received date
+
+for dwRow = 1 to ldwc_item.rowCount()
+	lnv_dict = create n_dictionary
+	lnv_specimen.pkSid = ldwc_item.getItemNumber(dwRow, "fkItemSid")
+        <<<<  --  here is the new code
+	if lnv_specimen.pkSid > 0 then
+		lnv_specimen.of_init(lnv_specimen.pkSid)
+		ldwc_item.setItem(dwRow, 'c_dtReceived', lnv_specimen.dtAccessionDate)
+	end if
+
+
+
+11-13-12 Wed 1 hr
+Research on allowing multiple WORKSHEET assignments per specimen
+Looked at which is called by w_login. The nvo only returns 1 worksheet.
+Looked at w_worksheet_template - table hla_worksheet_template keeps only 1 worksheet per reg-cat, donor-type, test-code. We could add ws2, ws3, etc as new columns
+
+10-8-12 2 hrs
+Email from Sharon on 10/4: The DP ambiguities are a little different than the other ambiguities in the system. DPB1*13:01 is ambiguous with DPB1*133:01 and DPB1*107:01 not DPB1*13:03:01,13:107:01. Most of our other ambiguities are within the same antigen assignment. Can you make that work?
+
+n_hla_antigen.of_FormatAmbigForReport(anbigstr, v1.v2)
+
+n_patient_report_landscape.of_retrieve() - call the function above
+n_patient_report.of_retrieve() - call the function above
+
+Sent New build 4-16 to ARC, tested with R#427845
+
+10-3-12 2.5hr
+- .tc Sharon, email from Sharon
+Email finally working! Attached is the report: DP values did not BOLD on paper, but does bold on screen. Ambiguity value was cut; should be 10701/13301. Also want to decrease the margin on the left to center the entire report a little bit better. We want to search the data base for any patients that were reported as B*15:01, B*35:01. I also forgot to ask you about DOB. Is it possible to have the program accept 00/00/00?
+
+Sent example SKMBT_60112100319060.pdf
+
+Looking at antigen table on ARC
+C*08:01 ambig string is C*08:01/0820/0822/0824  reports as C08:01/20/22/24
+DPB1*13:01 ambig string is DPB1*13:01/10701/13301 reports as DPB1*13:01/10701/13301
+
+dw_patient_report_landscape - added conditional font property to DQA1,DPB1
+
+Double-click to unbold works on screen but not on preview - fixed
+
+Created a new 4-16 build, sent to ARC, downloaded to Sahron's pc, tested
+
+Ran this query on Sharon's PC using SQLPlus Worksheet. Created file 'B15 B35 Patients.txt' and then formatted it into Excel file of the same name.
+
+select substr(p.strrefnum,1,10) Refnum,
+       substr(p.strlastname,1,20) LastName,
+       substr(p.strfirstname,1,20) FirstName,
+       t.strb1,
+       t.strb2
+  from hla_person p, hla_code c, hla_type t
+ where p.pkpid = t.pkpid
+   and p.cdregcat = c.pkcodenumber
+   and c.pkcodetype = 'REG CATEGORY'
+   and c.strcodename like '%PATIENT%'
+   and ( t.strb1 in ('*15:01','*35:01')
+     or  t.strb2 in ('*15:01','*35:01') )
+ order by LastName, FirstName
+;
+
+
+9-23-12 1hr
+Bolding a new antigen value on patient report
+w_patientreport
+  dw_item event itemChanged: add dpb and dqa to Case statement
+          properties for new columns-> format | bold contingent on StrNewLocusList
+  of_fillItemRow()  add dpb, dqa to set of strNewLocusList column value
+
+9-22-12 1.5hr
+Final Report Single displays A*01:01/
+w_final_report_single
+  of_retrieve()
+     calls-> n_final_report.of_retrieve(specimenParm,dw_report)
+
+fixed problem in 9-21 email
+n_final_report.ofSetAntigenDisplayValues() - add '/' to v1 only if v2<>''
+
+9-21-12 - email .25
+I found another problem with the batch reports. Attached you will see two reports that have / mark, but no ambiguity result to follow. I circled them on the reports. I think these are antigens that previously had an ambiguity, but no longer does. When I edit this in the antigen list the only way to get rid of existing ambiguity is to add the antigen, but not list any ambiguities. I didn't realize that the / mark was printing on these reports. Can you add this to the fix list? Thank you so much. // 
+
+449169-1 received 9/10/12
+HLA type is 449169  A*01:01, a*02:01
+
+434234-17 received 9/10/12
+A*74:01 final report displays as 74:01/
+C*07:02 finalreport displays as 07:02/
+
+9-20-12 1hr  Fixed problem reported on 9-17
+- u_patient_report.of_retrieve() copied from landscape version
+
+9-18-12 email .25
+I found a new problem today. I updated a report for a patient typed in 2009 and it did not update all HLA alleles to 2010 nomenclature. It must be connected to the wide report changes, because this was working before. Report is attached. I circled the incorrect ones- all missing the colon. Thanks
+
+9-17-12 email .25
+I think these should be the final corrections.
+1. Can you adjust the margins on either side of the page to center the report?
+2. The name line at the top (RE: )needs to be able to add more letters. For the attached report I was unable to enter FINAL REPORT.
+3. line up the DQB1 values
+4. I added a DQA1 value to a different report and I am unable to BOLD the new value. I didn't check if this also happens with DPB1.
+That's it.
+
+I have another item that I hope you can check for me. Currently we are required to enter a specimen collection date when a sample is logged in. There are some samples where we do not have this info, but because it is a required field we enter T-1. I still want this to be a required field, but can you make it so the program will accept 00/00/00 as an accepted bleed date? This will allow us to log in the sample and the info will be correct. Thanks again for your all of your help.
+
+8-30-12  Thurs  3.75 hours
+
+- w_patient_report.of_FillItemRow()  to add DQA and DPB to fill
+- dw_patient_report_item_landscape  change DPA1 to DPB1
+   had to remove,re-add columns to Select statement, and re-add them to window
+- n_patient_report.of_Retrieve()  add DQA and DPB to arrays
+- n_hla_type.of_StripAsteriskPrefix()  add DQA, DPB
+- n_hla_antigen.ofGetDateAmbiguityString()  return '' if no ambig string (not the value passed in)
+- dw_patient_report_hdr_landscape   Moved 'Updated on' over to the right
+- dw_patient_report_comment_landscape (new)
+- dw_patient_report_landscape - extended footer
+- u_patient_report_landscape.of_retrieve()  minor changes
+- n_final_report  needed changes because GetDatedAmbiguityString returns ''
+
+Email from Sharon
+
+The landscape report looks good. There are a couple of problems. I attached a report for you to see.
+1. The DPB1 typing on file do not automatically populate the DPB1 field. I had to key these results into the field. I haven’t checked a DQA result yet.
+
+2. There is an ambiguity for DPB1*04:01 with DPB1*126:01. The 12601 value also incorrectly populated the DQA,DQB and the DPB1*02:01 fields. I circled all the incorrect fields on the attached report.
+
+3. The printed header is DPA1, should be DPB1. The computer screen shows DPB1, but it prints out as DPA1.
+
+4. Is it possible to move the updated report and date over to the right side of the page?
+
+5. Can you add the word usually to the ambiguous typing comment?
+
+Second email
+Can you make these additional changes as well?
+
+1. Please extend the margins for comments. Now the comments will end about mid page, corresponds with the comment box on the screen- with wider page the comment field can be extended.
+
+2.Can you also extend the footer comment at the bottom of the page to one line instead of two?
+
+3. Is it possible to reduce the large space at the bottom of the report that has RE: and footer. This space takes up 1.5 inches of the page, so reports are printing with more pages.
+
+
+
+8-25-12  3.0 hrs
+ - Created window w_patient_report_landscape
+ - n_patient_report.of_AdjustAntigenDisplay() and of_AdjustDisplayVals() - added locus DPB1,DQA1
+ - n_hla_antigen.of_setDisplayVals() - added locus DPB1,DQA1
+ - u_patient_report_landscape.of_Retrieve()  add DQA1,DPB1 to list and loci fields:
+string	listFld[] = {'a1','a2','b1','b2','cw1','cw2','drb11','drb12','drb3451','drb3452','dqb11','dqb12','dqa11','dqa12','dpb11','dpb12'}
+string	listLociPrefix[] = {'A*','A*','B*','B*','C*','C*','DRB1*','DRB1*', '', '' ,'DQB1*','DQB1*','DQA1*','DQA1*','DPB1*','DPB1*'}
+
+ - Build 4-16, transferred to ARC
+
+ - added user Susan Aronovitz  aronovitz / susan234
+
+
+
+8-19-12  2.5hrs
+ - Created datawindow dw_patient_report_item_landscape. It contains DQA, DPA, DPB
+ - Added columns to table hla_report_item: str_dqa1, str_dqa2, str_dpa1, str_dpa2,
+                                           str_dpb1, str_spb2
+ - Created Datawindow dw_patient_report_lanscape.  Its item report is dw_patient_report_item_landscape
+ - Created u_patient_report_landscape
+
+
+8-16-12 Notes on change to landscape  .5
+- Change to Patient Report: allow landscape option
+- In landscape: start report below the new ARC pre-printed haeder
+              : include DQA1, DPA1, DPB1
+
+6-17-12 On-site  2.0 hrs
+  Maries machine hlaxp15 - no Chimermarker, Excel seems fine
+  Barbara's machine hlaxp17 - no Chimermarker
+  Georgia's machine has Chimermarker 45-day trial, error message on launching program
+    Error Saving Data failed!
+
+  w_new_report.of_MakeNew()  - change function's declaration: return type is long, not int
+
+6-12-12 1.0  1hr
+Sharon sent email:
+- Patient report, on NEW, user needs to reselect the report.  It does not just open
+- Remove Farmington address on Final and Patient reports, and add CLIA and ASHI #
+- Georgia's computer will not run the Chimerism software, some JVM error message
+- Maria's computer (where Eleni used to sit) has some problem
+
+dw_patient_report_hdr  -added CLIA and ASHI numbers as static text.
+de_results_report      -added CLIA and ASHI numbers as static text.
+Build 4-15   \\hla4\HlaOracle\pbrun\copy_hla_415.bat
+
+
+4-11-12 1.0 hrs support
+- Hema quebec email to Christine
+- Conversion of Heme to Hema
+
+4-2-12 5.hrs support
+- Hema-Quebec fix - changed HEME to HEMA
+
+4-1-12  2.5hrs   Version 4.14
+Programming supplier list import for Heme-Quebec samples
+- w_suplier_list_import.  Added HEME-QUEBEC to drop-down list of sippliers
+- dw_inq_person Make the MRN field longer, to accomodate Heme-Quebec ids
+- Documentation updates - email to Sharon
+
+
+3-30-12 .50 hrs
+- Email to Neng on Roadmap
+
+
+3-28-12  NOTES ON LOGIN FUNCTIONS  .50hrs
+Thanks Chip. When this account sends us samples that are labelled with numbers, we enter the last name as Hema and use the numbers for the first name. Some shipments are numbers and some are first and last name. I will problaby use the research log in template for this account since their test orders vary too.
+
+Data Entry | Login Specimen --> w_login
+w_login
+ tab "Login Packinglist NMDP" --> u_packinglist_login
+n_supplier_file_adaptor
+
+
+3-27-12  .50 hrs
+- Email from Sharon with request for batch login of Heme-Quebec file "202 swabs.xls"
+
+
+3-18-12 1.00 hrs
+- Email to Neng with HLA server plans and facts - 1.0hr
+
+Gil and I worked Thursday night on-site, to inventory the servers and discuss options.  Here is what each server has on it today:
+
+HLA1:  Oracle database and the R: 'Results' drive.  This server is almost 9 years old and needs to be replaced. 
+HLA2:  Older OneLambda databases that you still need: Labtype Visual and HLA Visual. These products (we all remember) had complex setup steps, including application installs on the server, database links, etc. We think it would be risky to attempt to move these databases to another server.  They should stay on HLA2
+HLA3:  Holds the S: drive files.  Not a production server suitable for a SQLServer or Oracle database
+HLA4:  Holds HLA Fusion #1 database
+HLA6:  Holds HLA Fusion #2 and #3 databases. Database #3 is our current database
+
+Our priority is to protect the two day-to-day critical databases: Fusion #3 and Oracle.
+- To protect Fusion #3, we can move Fusion #2 from HLA6 to HLA4.  This will leave enough room on HLA6 for one more year of growth.  Growth seems to be 200 gigabytes (GB) per year.
+- To protect Oracle, we need to replace or upgrade the server from NT to Windows Server2003. To do this,we will need a new server. The servers HLA2,HLA3,HLA4,HLA6 are all fully allocated to the tasks described above, so thay cannot hold Oracle.
+
+Gil has got some figures on a potential new server, with a price of $3,316. Please note that this amount is not a quote, but a figure to help you prepare the budget.
+
+I will phone you in the next few days to follow up on this email, so that Gil and I can get started. If you want to reach me anytime before then, my cell phone is best: 617-515-6644.
+
+
+
+3-16-12  2.0 hrs
+- On-site with Gil, planning for future machines
+
+HLA1 machine has Oracle and R: drive and P: drive
+HLA2 has older OneLambda product databases: LabTypeVisual,HLAVisual and these versions had specific installation procedures that included application installs on the server, and which would complex and risky to move to another server.
+HLA4 Has the HLA Fusion #1 database
+HLA6 Has the HLA Fusion #2 and Fusion #3 database. Fusion #3 is our current database and is already 200GB in size. To accommodate 100GB/year projected growth, we will need to move Fusion #2 DB to HLA4.  Even with this, HLA6 can hold only about 1 more year of data.  If there is no DB purge from the vendor, we would need a new server just for Fusion #3 by the year after next.
+
+
+3-5-12  .50 hrs (support)
+- adding employees  support
+
+
+2-24-12 - email from Sharon
+We have 3 new employees that need passwords for HLA Oracle program.
+
+Thea S. Charles  CHARLES / THEA123
+Brigid Bohan     BOHAN / BRIGID123
+Mary Chau        CHAU / MARY123
+
+
+2/6/12  1.0  (on-site support)
+- Adjusted printing margin for Batch Patient Reports (maint)
+- Checked error log
+
+12/19/11 Mon 1.5 hours
+- uType fixes on two machines (config setting and default export path)
+
+12/16/11  .5 hrs
+- TC Sharon: arrangement to be on-site Monday for uType problem
+- Label printer for R# labels.  Chip to look into label printer cost and media cost. Will discuss further in Jan 2012
+
+12/7/11 2.0 hr
+- Installing ChimerMarker on Test machine
+- Intalling GeneMapper on Barbara's and Georgia's machine  (hlaxp10 and hlaxp17)
+
+12/5/11 2.5hr
+- Installing GeneMapper on Eleni's machine, fixing Genemapper export problem to R: drive. Installing uType on Eleni's machine
+
+11/12/11 4.0  Build 4.13
+ - HLA Search: Allow user to select multiple donor centers
+w_hla_search - criteria in dw_criteria, uses datawindow de_hla_search_criteria
+w_hla_search - add multi-select control, get selected values in [search] button code-behind
+
+
+10/30/11 1.5hr on-call
+Synching oracle hla at home bewtween laptop and desktop
+desktop connection: system/manager@deskdb1
+
+Ran tab_columns_query.sql, saved to Z:\hla\dba\hla_tab_columns_laptop.txt
+Ran tab_columns_query.sql, saved to Z:\hla\dba\hla_tab_columns_desktop.txt
+
+Applied hla_packinglist_item and hla_report_hdr sql to desktop, re-ran
+Database tables in sync, 499 rows
+
+
+10/23/11 1.0 hr on-call
+Sharon,  This problem, which occurred for R# 428830, is fixed.  It was a dictionary change needed: the sero equivalent for C*08 is looked up under CW*08, so for antigen CW*08 I set the sero equivalent to CW8.  It was blank before.  This rule is an oddity of the change from CW to C, and being able to report old and new specimens.
+
+10/20/11 1.25hr
+ - Meeting in Dedham on the new contract
+ - Conf Sharon: Final report that does not interpret C08 anbig string.  R# 428830-1
+ - Change donor search report so it allows user to select multiple donor centers
+
+10/5/11 1.0hr
+- (Maint) Christine could not import NMDP packinglist saved from new Outlook2007 email. She forwarded email to me and I tested it from home.  Her email was wrapping at 80 char. Sent instructions to select the email text and save it intyo Notepad,and that worked.
+
+
+10/3/11 2.0hr
+- Discussions about the new contract
+
+09/28/11
+- On-site to check HLA Oracle operation on Tatiana’s machine (1.0 hrs)
+
+8/2/11 1.0 hr  Build 4.12
+- Moved build 4-12 to ARC. Ran add for hla_report_hdr.delflag (value zero is inserted automatically in table modify with default = 0)
+- Start Run  U:\pbrun\copy_hla_412.bat
+
+
+7-30-11  2.5 hr
+---------------
+The Final Single report calls the two NVOs below to create a final or patient report:
+  n_final_report.of_SetAntigenDisplayValues()  added change for ambiguity string extra having length >10, add line to make it wrap in the display column.  Example is C*04:01
+  n_patient_report.of_AdjustAntigenDisplay  added same change as above
+
+Delete a patient report
+Background: The table hla_report_hdr has a report for every version of a report for one person.  The Patient Report edit always opens the most recent version.  So, when a patient deletes a report for patient LAST,FIRST we will need to delete every version.
+
+dba script:  alter_hla_report_hdr_add_delflag.sql
+  alter table hla.hla_report_hdr
+  add (
+    delflag  number(1,0) default 0
+    ) ;
+
+dba script:  update_hla_report_hdr_set_delflag.sql
+  update hla.hla_report_hdr
+   set delflag = 0 ;
+  commit ;
+
+dw_lookup_report_name - add delflag=0 to WHERE clause
+Test at home pkReportId=2542 (refnum=230639) is in list of matches for "SMI".  Delete
+
+w_patient_report.cb_delete  button to delete all version of a report.
+
+When user selects a patient report via the radio button in w_final_report_single, system looks up report by R#, so we needed to make this change also:
+dw_lookup_report_refnum - new select staement is:
+SELECT DISTINCT "HLA_REPORT_ITEM"."PKREPORTID"  
+    FROM "HLA_REPORT_ITEM",   
+         "HLA_REPORT_HDR"  
+   WHERE ( "HLA_REPORT_ITEM"."PKREPORTID" = "HLA_REPORT_HDR"."PKREPORTID" ) and  
+         ( ( "HLA_REPORT_ITEM"."STRREFNUM" = :as_refnum ) AND  
+         ( "HLA_REPORT_ITEM"."NBRITEMSEQ" = 1 ) AND  
+         ( "HLA_REPORT_HDR"."DELFLAG" = 0 ) )    
+
+- tested with refnum = 230639, said No Patient Reports on file.
+
+w_lookup_patient_report.dw_lookup  un-check property ib_rmbmenu so user does not get pop-up menu that shows insert/add/delete. The actions are not avilable from this dw
+w_lookup_specimen.dw_lookup - unchecked ib_rmbmenu like above
+u_nmdp_find.dw_find  - same change
+w_lookup_person_for_login.dw_lookup - same change
+
+
+7-21-11  0.5 hrs 
+----------------
+Email from Sharon:
+I hope you are enjoying the summer. There are two small problems in the Oracle program that need to be fixed when you get a chance. The first one is the ambiguity string on the individual reports is being cut off for some of the longer strings. An example is 324461-2 where C*04:01 string is cut off.
+ 
+The second problem has been around for a long time. I just keep forgetting to let you know. For patient reports, we need the ability to delete the report. You can enter a report name and right click where there is a prompt to delete. When you do this the report isn’t actually deleted. Use the report for Landon, Celia. This report was created by mistake. She is a sibling of an existing patient, not a patient.
+
+
+
+6-3-11 .25 hrs
+--------------
+Email from Sharon still have a problem with one of the ambiguity strings cutting off values. Take a look at the report for patient Quinn, J.
+In the ambiguity string for C*03:04 the last half of the 6 for 106 is cut off the report. Can you fix this?
+Thank you so much. Have a great weekend.
+C*03:04 ambig string is C*03:04/100/101/105/106  (this last '6' is getting truncated.
+Sent a build to ARC
+
+5-9-11 1.0 hr Thank you so much. The reports look good. Is it possible to add a line to the bottom of the last donor or family member entered? There is a line after each entry except the last one. Also can you fix the header DRB3,4,5* instead of DRB*3,4,5? Thank you.
+
+05-08-11 Sun  2.0 hrs  Version 4.11  2011-05-08
+ - u_patient_report.of_Retrieve()  If ambig string 12 char or longer,add spaces so it can wrap. The autoheight property of the dw column does not work unless there is a space in the string so it can wrap
+
+
+04-12-11 Mon .25 hrs  Email
+
+04-07/11 Thu .5 hrs
+ - several emails
+
+04-04-11 Mon  .5 Hrs
+ - Email on Excel version
+
+04-02-11 Sat 2.5
+ - n_dynalsbtreader.of_readfile()  Corrected Excel file reader problem
+ - w_reading - in menu Reports > Readings For Date
+ - UNIT Test ver 4-10 document
+ - version 4-10 build
+
+
+03-29-11 Tue 1.5
+ - Version 4-09 with Project 22 fixes, code ambiguities, extra column in that table
+ - Email from Sharon: I have a new problem. Today Neng asked me to remove the colons in the ambiguity strings for the reports. I wasn’t sure If I could just edit, but I did and tested B:35:01/35:41 and CW:04. It worked fine. Look at report for Faberman. So using the ambiguity table I edited all of the others. However not all of them changed. If you look up C*07:02 in the antigen dictionary, you can see what I mean. The ambiguity string below is without colons and the list on the same line as the antigen (saved value) still has the colons. HLA-B*07:02 has the same problem, but it doesn’t save the value in the line. Can you take a look and see if you can fix?
+
+connect hla/v*****prod@hlaprod
+
+
+03/28/11 - Mon 3.0
+ - added new column to hla_antigen_ambiguity
+alter table hla.hla_antigen_ambiguity
+add (strCodedAmbiguity  varchar2(30)) ;
+ - dw_hla_antigen_ambiguity - added new column (this dw is in w_hla_antigen_de)
+ - made the dw control on the window wider
+ - w_ambiguity_strings - added strCodeAmbiguity to dw column list
+
+
+03/27/11 - Sun 4.0
+ - u_nmdp_epxort.of_project22_export removed repeating <hla-typing and <interpretation for each haploid
+ - n_hla_antigen.of_getdatedcodeforambig(ambig_str, asof_date, bNewNomenclature)
+C*12:03  > C*12:03/12:23  3/2/11 
+C*12:CNM > C*12:03/12:23  3/2/11
+
+C*01:03  > C*01:03/01:24  2/1/2010
+C*01:AHC > C*01:03/01:24  2/1/2010
+
+
+03/25/11 Fri .5
+ - w_reader.pfc_postopen - change DynalSbt so it collects *.txt,*.xls,*.xlsx
+
+
+03/24/11 Thu .5 hours
+ - Email on Excel spec and Amig string
+ - email to Tatiana saying longer column format is OK
+   Tatiana: I saved some test xls files in S\HLA\Preliminary SBT reports\test xls files.
+ - Sharon emailed on repeating <hla-typing and <interpretation in project 22; otherwise fine
+Also need to have the * on DRB3,4,5 corrected on patient reports. I have seen a couple of patient reports that add an extra spacing/row for ambiguities. It only happens on some reports and I’m not sure why. You can see an example if you look at patient report Belfi,Kathryn. The problem is visible on the print screen.
+
+03/23/11 Wed 2.25 hrs
+ - n_dynal_sbtreader.of_readfile to read tab-delim text or Excel
+ - email to Tatiana and Sharon about getting test files
+
+
+03/22/11 Tue 2.0 hours
+ - OLE automation function in w_test_nvo.
+ - Purchased MS Office Word and Excel
+ - Sharon emailed that Excel export of tab_delim_5538.txt was addding or truncating digits.
+   Replied that Excel is seeing "27:04" like a time of day, turning it into 27:04:00
+ - Downloaded the file from R:, imported into Excel as text
+ - Emailed to Sharon, with a Word doc showing screenshots of Excel import wizard
+
+
+03/21/11 Mon 1.5 hours
+ - u_nmdp_export added XX conversion to program, finished export window
+ - build ver 4-08, copied to HLA4 folder
+ - changed specimen num on deleted entries, because there were duplicates and specimen lookup brought
+   up the deleted entry first. User could not get to non-deleted entry
+     specimen 381070-3 -> 381070-3A  (pkSid = 489313)
+     specimen 381070-4 -> 381070-4A  (pkSid = 489314)
+
+
+03/20/11 Sun 4 hours
+ - u_nmdp_export - Project 22. extra button, st_hospital, function of_project22_export()
+ - change batch item DW to include hla_specimen.cdHospital
+ - hla.ini file add "HOSPITAL=TC CODE to [EXTRAFIELDS] section
+ - n_hla_type.getname2010(), add it to display grid
+ - n_hla_type.AddXXToLowRes()
+
+
+03/18/11 Fri 1.0 Hour
+
+ - programming u_nmdp_export, tc. Sharon
+Just checking to see how you are doing with the project 22 export for NMDP. I was hoping to talk with you about adding two functions to this export. Is it possible for the program to add XX to any low resolution value for export? An example of this would be DRB4*01 automatically convert to DRB4*01XX in export file. The message will be rejected if I send low resolution without XX. This will save me from keying it in for every donor.
+ 
+The second request is it possible for the program to add the code for ambiguity samples? I know if I enter a code for an ambiguity the hard copy report can be decoded. Can it work the other way too? For example if I enter DRB1*1201 can the export program automatically code it DRB1*12DUKV? This would only apply to the antigens listed in the ambiguity strings table.
+ 
+On another subject I had a problem sample this week that I was unable to edit. The sample ID is R381070. There were two previous entries for this patient -3 and -4 that were deleted. We logged in a new -4 on 3/16/11 and forgot to add to the specimen type as a bone marrow sample. When you attempt to edit this you only have access to edit the deleted sample. Is there a way to access the new -4 entry to edit?
+
+ Agreed that I will fix the new add so it does not use deleted items.
+
+03/17/11  Thu .5 hours
+ - Continue grid display changes
+ - todo: Project 22 export
+ - u_nmdp_export
+   1. Add button 'Select Hospital', disabled by default
+   2. Add extra field TC CODE UNDER HOSPITAL in hla_ini
+
+
+03/09/11  Wed 1.0 hours 
+
+ - Make the NMDP Export grids display new nomenclature for the antigens. Right now it is translating only for the output file, not for the display.
+ - n_hla_type.of_getType2010(as_type) converts comma-delim list of antigens to new nomenclature values
+
+
+03/08/11 Tues 3.0 hours
+
+ - Version 3.07 build, sent to Sharon's PC and network
+ - NMDP export TAB-DELIM format, added new nomenclature
+ - Added security definition "AMBIGUITY STRINGS" to hla_security; changed ambiguity string window to look for this security code
+ - Dated ambig strings: they were using result date, but CW test was not identified as giving a result date for C locus. Edited TEST CODE "Cw High resolution" in extra fields "RESULT FOR LOCI" changed "CW" to "CW,C"
+ - Sharon phoned to say HML export not translating to new nomenclature.  I had tested this at home, and it worked on my pc for NMDP batch #5521.
+ - Patient report: added '*' to DRB1/DRB3/DQB1; R12345 w/o space, cbx_ambig and cbx_name2010 checked by default.
+ - Final report: made cbx_ambig and cbx_name2010 checked by default
+
+
+03/07/11 Mon 1.5 hours
+
+ - Project 22 spec: New format named 'Project 22', user will select a hospital, system will print donors in open batch that have specimens logged in with that hospital
+ - Patient report formatting: 'R' is separated from number that wraps, make it "R123456" w/o spaces. Add '*' to DRB1, DB1 headers
+ - Add security level to the new Ambig String window
+ - TAB-delim export - make it convert values to new nomenclature
+ - Make ambig-string and new-nomenclature checked 'y' by default on final single, final batch, patient report
+ - Printing NMDP export grid, it goes to two pages so that Sharon has to look at two pages to see a single row
+- After we spoke today I found another problem. I made several changes to ambiguity strings on Friday with effective date change of 3/2/11. I entered the changes thru the antigen dictionary, but they are not printing on the patient reports.
+Two examples C*12:03 has new ambiguity C*12:23 (also entered C*1203/1223). This should print for sample 412415 and 411234-2 entered today. The patient report is Perez,J.
+Also added a new ambiguity for C*0501. Previous string was C*0501/0503; new string is C*0501/0503/0537 (also entered as C*05:01/05:03/05:37). This should print for R412310 on patient report Boone,P.
+They look correct on both the ambiguity string table and the amb dictionary, but don’t appear on reports. Can you check? I will hold up sending these reports. Thanks
+
+
+03/05/11 Sat .5 hours
+ - NMDP Package 22 changes, include TC CODE on export. NMDP documetn is "HML Directions TC Style.doc"
+
+
+03/04/11 Thu .25 hours
+ - Email to Tatiana re: possibility of importing Excel-formatted files (.25)
+
+
+03/02/11 2.0 hrs
+ - Changed Donor Info report to include true logic for 3/5/8 day turnaround
+
+
+03/01 Tues On-site 5.0 hours 4:30-9:30
+ - Removed "TEST" warning text from patient reports and final reports
+ - Changed Dynal SBT export to read tab-delimited files, tested on TEST.txt reading file
+ - Changed Donor Info Report dw_donorinfosheet_report to include 3-day and 5-day boxes for turnaround
+ - Installed version 4-06 New Nomenclature on 18 clent PCs
+
+
+02/27/11 Sunday On-site 3:15pm - 8:15 5.0 hourshine
+ - Ran the antigen conversion, updated ambig strings for new antigens
+ - Changed the Patient report to Portrait mode, adjusted size - u_patient_report.  This report refreshes slowly, traced it to the ldwc_ite.SetItem commands. Left it as-is, this is just a slow command in PB
+ - Fix to NMDP export - code was wrong in translating DQB1 values to new nomenclature
+ - Rebuilt, put on U: version 4-06, on Sharon's machine.
+
+
+02/25/11 Fri 2 hrs
+ TC Sharon:  Report problems came from defintition - all set.
+  Created a build on Friday night
+
+
+02/24/11 Thu .5hrs
+Hi Chip,
+I was able to test the new build to the test system. There are still problems in results entry and in the reports.
+ 
+1. Result entry- still have the same problems entering C typing results; won’t accept values 0202, 0802 etc, but will accept 02:02 and 08:02. Gives the same message.
+
+2. Single reports- still a problem, if you select 2010 nomenclature only – the report is correct. If you select 2010nom and ambiguity the report is incorrect for A,B and DRB3/4/5, but correct for C,DR and DQ.
+
+3. Patient reports- same problem as seen with single report described above. Also landscape doesn’t work with letterhead and has an extra box around results. Do we really need landscape?
+
+4. Tested the antigen list and new ambiguity strings. This worked well. I added a new ambiguity B:35:01/35:42. Unfortunately I can’t get it display on any report. I am not sure if this is related to problems listed above.
+
+5. New C values are missing sero equivalents. Will I have to add them all to the live system?
+
+6. I couldn’t locate the antigen list on the C drive. Can you help me again with this? Thanks
+Do you have time on Friday to talk? I am available from noon on. Look forward to hearing from you.
+
+
+02/22/11 Tues - On-site 4.5 hrs
+  - tc Sharon: Check import of expected typings
+  - w_antigen_translation - it now adds ambiguity string rows for the v3 allele to match the v2 allele
+  - w_ambiguity_strings - to update the ambiguity strings of v3 alleles
+  - m_frame_hla - in Data Entry > Admin > added menu item for ambig strings
+  - checked that NMDP export sends v3 values
+  - new nomenclature
+
+ - Description of the antigens changes - sent what's below to Sharon for her to review
+
+=====================================================
+
+Later this week, the HLA Oracle application will be implementing support for WHO HLA Nomenclature Version 3.0. To do this, we will be adding ver3 nomenclature values to two places in our master Antigens table:
+
+
+1) For existing antigens, such as B*0702, we will add the ver3 value, B*07:02 as the value of the new field "Name2010":
+
+  Antigen name   Sero equiv   Current Ambig string	Name 2010
+  B*0702         B7           B*0702/0716               B*07:02
+
+This change will aid reporting: if the user clicks the "2010 Nomenclature" checkbox in Final or Patient Reports, a person typed as B*0702 will be reported as B*07:02
+
+2) For each new ver3 value we use above, we will also create a new antigen row
+
+  Antigen name   Sero equiv   Current Ambig string	Name 2010
+  B*07:02         B7                                    B*07:02
+
+This change will allow the antigen B*07:02 to be used in Result Entry. Note that this entry does NOT have an ambiguity string - the HLA staff must define these.
+
+3) Many of the mappings are being done based on the hla_nomenclature_file.txt provided to me by ARC.
+The remainder of the mappings, for example NMDP codes, are done with an algorithm that follows NMDP document 12269 and dated JUL 2010.
+
+  Antigen name   Sero equiv   Current Ambig string	Name 2010
+  B*07AEBM       B7                                     B*07:AEBN
+
+Some antigens are not mapped: those with 2 or 5 characters after the "*", or multiple values: For example, these antigens are not mapped:
+  A*01011, A*02, A*02014, DRB1*15/16
+
+4) How reports will work
+
+- The antigen reported
+    If person typed as B*0702, the report will show B*0701, or if the "2010 Nomenclature" box is checked, B*07:02
+    If person typed as B*07:02, the value B*07:02 will ALWAYS be reported
+
+- The ambiguity string reported:
+    If person typed as B*0702, report will show ambig string for B*0702, but if "2010 Nomenclature" box is checked it will show the ambig string assigned for B*07:02. So it's IMPORTANT to define all ambiguity strings for these antigens
+    If person typed as B*07:02, report will always show the ambig string for B*07:02
+
+=========================================================
+
+
+02/20/11 Sun - arc 5.0 hrs  w_antigen translation, 3 buttons
+
+ - Clear: remove all rows from hla_antigen and hla_antigen_ambiguity that have an antigen primary
+   key containing a colon, e.g. A*01:01. Set NULL for strName2010 column of all antigens
+
+ - Run mapping: read hla_nomenclature_file.txt.  Each row of this file has an old nomenclature allele in column 1, and the map-to new nomenclature value in column 2. Populate the strName2010 field, and create a new antigen for the new value
+
+  Example: the row:   A*0101     A*01:01
+  For antigen A*0101, set strName2010 = A*01:01
+  Create new row for antigen A*01:01, and its strName2010 value is also A*01:01
+
+ - Map un-mapped values, such as NMDP codes: DRB5*0108N has strName2010 = DRB5*01:08N
+
+Some values do not get mapped:
+  A*02 - only two digits
+  A*01011 - five digits
+  DRB5*01011,0105,0109
+
+
+02/17/11 Thu 5:30-8:30 3 hrs
+ - User TOMAZOU added role LIFC_READER so she could use Result Entry
+ - At Dedham, moved build of Ver 4-06 to hal2db machine, fixed "too many values" problem
+ - Added TC CODE extra field to hla.ini on hla2db only
+       [EXTRA FIELDS]
+       HOSPITAL=TC CODE
+ - Sharon emailed NMDP spec for 22E typings. Workflow is that after patient report is final, HLA staff will pick a transplant center, enter the new donor results into NMDP Open Batch. Then export it under new format "22E
+ - Updated time on hla2db machine (bc91ca2) 
+
+
+02/12/11 - Sat 2 hrs
+
+ - w_rlog (note: w_rlog is called by w_batch report to add items to table hla_rlog). Allow r-numbers  like 021863. When user enters FROM r-number, set TO r-number equal to it
+ - w_patient_report - changed name cb_view to cb_preview
+ - u_patient_report.of_Retrieve()  added patientname value
+
+
+02/10/11 - Thurs 1.0 hrs
+
+ - moved ver 4-06 into c:/hla/app
+ - added changes I made to version 4.03, sorting and homozygous hla_search
+ - w_final_report_batch  added cbx_name_2010
+   in of_retrive() added  inv_final_report.ib_name_2010 = cbx_name_2010.checked
+ - on single report, ambig string and sero equivalent cannot both be selected; the print in the same part of the report.  removed this restriction: allow all three to be checked.
+
+02/05/11 - Sat 1.0 hrs
+
+  - Sharon validated ver 4-06 on test machine, emailed 11 issues
+
+01/04/11 Tue  2.0 hrs
+
+ - build 20110103 4-03.txt
+
+r:\hla\reports\
+
+w_hla_search  cb_search.Clicked()
+
+	if not bFiltered then
+		for i = 1 to 4 
+			dAntigenArray[i] = ''
+			pSkipArray[i] = 0
+		next
+		if len(dA1) > 0 then dAntigenArray[1] = 'A' + dA1
+		if len(dA2) > 0 then
+			dAntigenArray[2] = 'A' + dA2
+		else
+			// homozygous A
+			dAntigenArray[2] = 'A' + dA1
+		end if			
+		if len(dB1) > 0 then dAntigenArray[3] = 'B' + dB1
+		if len(dB2) > 0 then 
+			dAntigenArray[4] = 'B' + dB2
+		else
+			// homozygous B
+			dAntigenArray[4] = 'B' + dB1
+		End If
+
+The patient that I tried to search for today is Rachel Reggip R#396977. Her HLA type is A2,A24,B7.
+I am looking for donors that are A2,A24,B7 or donors that are A2,B7 only. Here is a list of donors that should come up on search:
+R338333 zimmerman,m   	(R=383333)	Burlington, VT
+095245 swanson, Robert		Burlington, VT
+375163 fitzpatrick, john	Boston ACS
+346099 wry, Karen			Boston ACS
+333768 romeo, lori			Boston ACS
+251545 hallet, Jason		Boston ACS
+347730 maltbie, erin		Dedham
+
+Added sort to two windows:
+
+w_final_report_batch  dw_report.constructor
+this.of_setUpdateable(false)
+this.of_SetSort(true)
+//this.ib_Resizable = true
+
+w_login_worklist_print  dw_worklist.constructor
+
+this.setTransObject(sqlca)
+this.of_setUpdateable(false)
+this.of_SetSort(true)
+

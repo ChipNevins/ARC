@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE>Packing Lists, Panels, and Donor Info Sheets</TITLE>
+	<META NAME="GENERATOR" CONTENT="StarOffice 6.0  (Win32)">
+	<META NAME="CREATED" CONTENT="20030630;12354236">
+	<META NAME="CHANGEDBY" CONTENT="Arthur Nevins">
+	<META NAME="CHANGED" CONTENT="20030709;15423750">
+	<!-- Doc.Information -->
+	<!-- Printed: by Arthur Nevins on 12/13/2002, 13:16:25 -->
+</HEAD>
+<BODY LANG="en-US">
+
+<H1><A NAME="re_top"></A>Packing Lists, Panels, and Donor Information Sheets</H1>
+
+<P><FONT FACE="Tahoma" SIZE=2>
+<BR>Last revision: November 13, 2003&nbsp;
+<A HREF="#pl_top">To print this page, Click here first</A>
+</P>
+
+<HR>
+The packing list windows let you import NMDP packing lists, create specimen panels from the list which can be exported to Luminex, and add packing list specimens to your Result List.  To see directions for logging in a packing list, 
+see <A HREF="hla_login.htm" TARGET="ls_single">Login Specimens</A>.
+<BR>
+<BR><A HREF="#pl_import">Import Packing List</A>
+<BR><A HREF="#pl_importtypings">Import Expected Typings</A>
+<BR><A HREF="#pl_open">Open Packing List</A>
+<BR><A HREF="#pl_working">Working with Packing List Grids</A>
+<BR><A HREF="#pl_createpanel">Creating a panel</A>
+<BR><A HREF="#pl_editpanel">Edit/Delete a panel</A>
+<BR><A HREF="#pl_addtoresultlist">Add items to your Result List</A>
+<BR><A HREF="#pl_donorinfosheet">Donor Information Sheets</A>
+
+<H3><A NAME="pl_import"></A>Import Packing List</H3>
+<OL>
+	<li>Packing lists are stored in Oracle, but you need to import then first. Open the Packing List window under the Data Entry menu. Click the button labelled Import Packing List, the computer opens the New Import File window</p>
+	<li>Click the Select File button, and the computer opens a file selection window. For NMDP contracts, go to folder and select the MSG file you want. For other lists, select the appropriate folder, or folder A: if the file is on a diskette.</p>
+	<li>The computer will read the file into a white display area, and when done it will show the filename in the gray box above this area. </p>
+	<li>Enter a name for this packing list, then click OK, and the computer will import data from this file into Oracle tables. The data values imported are: NMDP packinglist name, NMDP#, box-slot location, category, turn-around days, donor center code, sample type, list of tests ordered. </p>
+	<li>The computer will return you to the main Packing List window. The packing list data will be displayed in a grid.</p>
+	<li>Note: When you select a file to import, the computer does an initial scan of the file. It checks if the NMDP TR-xxxx number in the file matches any of the files previously imported; if it does match, the computer displays a warning message which can override.
+</OL>
+
+<H3><A NAME="pl_importtypings"></A>Import Expected Typings</H3>
+<ol>
+  <li>Before using the HLA function, take the attachment which NMDP sent with the expected typings email, and move this file to folder r:\hla\import.</p>
+  <li>Select menu item Data Entry|Packing Lists. When the window opens, select the tab header 'Import Expected Typings'</p>
+  <li>Click 'Import Expected Typings', and the computer opens a file selection window. Select the expected typings file from folder where you saved the NMDP attachment. The computer imports these values, and says 'Ready' when it is finished. <u>Note:</u> You need to do this step only when the NMDP sends a new file, not every time you print donor sheets.</p>
+  <li>The data values imported are: NMDP#, date-shipped (may be blank), HLA-type for A/B/C/DRB1/DRB3/DRB4/DRB5/DQB1.</p>
+  <li>Expected Typings report (build 1-32). You can run a report for any R# range. It does not need to be the values you just imported (in fact, it will usually be the R# range of a large NMDP packing list we just logged in). Enter the starting and ending R-numbers in the two data entry fields, then click Retrieve. You can then click the print icon on the toolbar to print the list. The report lists every R# in the range, whehter or not is has an expected typing on file.
+</ol>
+
+<H3>Open Packing List</H3>
+<OL>
+	<li>In the main Packing List, click the button Open Packing List.  The compter opens the Select Packing List window. Enter a value in 'Files since date', the T or T-n syntax is allowed. Packing lists imported since that date are displayed.  Note the the relevant date is import date, not typing request date. <b>If the packing list is not shown, this may mean it has not yet been imported</b></p>
+	<li>Click on the row for the packing list you want.</p>
+	<li>The computer will return you to the main Packing List window. The packing list data will be displayed in a grid.</p>
+</OL>
+
+<H3><A NAME="pl_working"></A>Working with Packing List Grids</H3>
+<OL>
+  <li>The display grid for a packing list shows the row number, the box and slot, the donor id, the turnaround days, sample type, HR (high resolution y/n) and the tests ordered.</p>
+  <li>You can resize the column width display, and scroll up-down</p>
+  <li>Sorting the grid. Select menu item View|Sort or by clicking the toolbar sort icon. </p>
+  <li><b>Example: Sorting HR rows first, by days due</b></p>
+    <ul>
+      <li>Select menu item View|Sort. The computer opens the Specify Source Columns window.
+      <li>Drag the field named 'ynhighresrequest' from the Source Fields list and drop it just above the field named 'plpackinglistitemseq'. Uncheck the box to the right of this field, so that the sort is reversed - 'Y' comes before 'N'
+      <li>Drag the field named 'nbrturnarounddays' and drop it <b>under</b> the field 'ynhighresrequest'.  Leave its box checked.
+      <li>Click OK.  The computer closes the Specify Source Columns window and the grid is sorted with HR rows first, and 7 day rows before 14 day rows.
+    </ul></p>
+  <li>Selecting multiple rows. To select individual rows, hold down the Ctrl key and click each row you want. To select a range of rows, click the first row, hold down the Shift key, move to the bottom row and click the last row you want. You can move down the list using the down-arrow key on the keyboard or by clicking the down-arrow in the scrollbar.
+</OL>
+
+<H3><A NAME="pl_createpanel"></A>Create a Panel</H3>
+<ol>
+  <li>Select the packing list you want to use. When this list is displayed in the grid, select the range of rows you want to put in the panel. Remember that if you are creating a 96-well panel that has 6 controls, you can select at most 90 rows from the packing list, that is all it will fit.</p>
+  <li>Enter a name for the panel you are going to create</p>
+  <li>Select a panel template from the drop-down list</p>
+  <li>Select Create Panel. The computer creates two files: the data panel and the luminex export panel. Both panels are in column/row format (A1,B1, etc.). The computer displays a message when it is done.
+</p>
+  <li>Click the tab header 'Edit Panel List' to see the panel</p>
+</ol>
+
+<H3><A NAME="pl_editpanel"></A>Edit/Delete a Panel</H3>
+<ol>
+  <li>In the Edit Panel List, click in a well labelled CONTROL, and change the value to an actual control name</p>
+  <li>When you have entered the actual control values, click Save Panel to save the changes</p>
+  <li>You can check the box 'View Panel in large format' to exapnd the panel.  You should expand the panel before you print it.</p>
+  <li>Click 'Select another Panel' to edit another panel.</p>
+  <li>To create another panel: Click the tab header 'Import Packing List' to move back to the packing list grid. Follow the steps under Create a Panel</p>
+  <li>Click the Print button to print a panel. Ver1-24 added the Red Cross header and the date/tech footer lines to the printout</p>
+  <li><u>(Coming in version 1-26) File locations and export.</u> Panels are stored as simple text files in folder r:/hla/panel/data/. They are not stored in Oracle. Data for export to Luminex is stored in r:/hla/panel/luminex/.</p>
+  <li>Delete Panel (v1.35) Click the Delete button on the Panel Window, the system will prompt you to confirm, then it removes the Panel file and deletes the panel data from the database.
+</ol>
+
+<H3><A NAME="pl_addtoresultlist"></A>Adding items to your Result List</H3>
+<ol>
+  <li>You must close the Result Entry screen first if you have it open on any machine. It is OK if other users have their Result List open.</p>
+  <li>In the packing list grid, select the rows you want to add to your Reuslt List window.  You may want to sort the grid first, so that you can select a range of rows, e.g., HR rows due in 7 days</p>
+  <li>Click 'Add Selected Rows to Result List'.</p>
+    <ul>
+      <li>The computer adds the rows to the Result List, and displays a message when done
+      <li>Rows added to the result list have status 'New'
+      <li>If some rows could not be added, the computer displays the donor ids for these rows in a message window, which you can print.
+      <li>If a row is not added, it is probably because that Donor Id has not yet been logged into the system
+    </ul></p>
+  <li>Close the Packing List window and open the Result Entry window
+</ol>
+
+<H3><A NAME="pl_donorinfosheet"></A>Donor Information Sheets</H3>
+<ol>
+<li>Make sure you have imported the most recent expected typings file from the NMDP. See section <A HREF="#pl_importtypings">Import Expected Typings</A></p>
+<li>Select menu item Data Entry|Packing List. Select the packing list you want to use.</p>
+<li>Move to the Donor Info Sheets tab section of this window</p>
+<li>Click 'Import Expected Typings', and the computer opens a file selection window. Select the expected typings file from folder r:\hla\import. The computer imports these values, and says 'Ready' when it is finished. <u>Note:</u> You need to do this step only when the NMDP sends a new file, not every time you print donor sheets.</p>
+<li>Click the 'Retrieve Typings for List' button.  The computer retrieves the specimens in the packing list, with their expected typings, and displays them in the list grid. The grid sorts High Resolution test requests at the top.</p>
+<li>Check that the expected typings are dispayed in the grid. If they are not, make sure you have imported the <b>most recent</b> expected typing file from the NMDP.</p>
+<li>Select the range of rows you wish to print, then click 'Print Donor Sheets for Selected Rows'. (See section <A HREF="#pl_working">Working with Packing List Grids</A> for instructions on how to select multiple rows.) The computer opens a confirmation window - enter the date you wish to have printed as the Date Received on each Donor Sheet. Then click OK, the computer dismisses this window and prints the reports. Each report includes: date received, Ref# if this donor is logged in, NMDP#, donor center, expected typings, and tests requested.</p>
+<li>When the reports are printed, the compter asks if you good a good copy of the reports. Click 'Yes' - the compter assigns Date Printed to each selected row which has an expected typing</p>
+</ol>
+
+<P><A HREF="#re_top">Back to top</A></P>
+
+</BODY>
+</HTML>

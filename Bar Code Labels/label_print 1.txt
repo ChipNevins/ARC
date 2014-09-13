@@ -1,0 +1,38 @@
+appDirectory = ProfileString(gnv_app.of_GetAppIniFile(), 'FileLocations', 'AppDirectory','c:\hla\')
+
+fileNum = FileOpen(appDirectory + "LoginLabel.zpl",LineMode!,Write!,LockWrite!,Replace!,EncodingANSI!)
+
+labelText =  "^XA"
+labelText += "^FO300,25^BCN,65,N,N,N^FD" + as_RefNumber + "^FS~r~n"
+labelText += "^FO265,100^ACN,45,40^FD" + as_RefNumber + "^FS~r~n"
+
+labelText += "^FO745,25^BCN,65,N,N,N^FD" + as_RefNumber + "^FS~r~n"
+labelText += "^FO710,100^ACN,45,40^FD" + as_RefNumber + "^FS~r~n"
+
+
+labelText += "^FO300,250^BCN,65,N,N,N^FD" + as_RefNumber + "^FS~r~n"
+labelText += "^FO265,325^ACN,45,40^FD" + as_RefNumber + "^FS~r~n"
+
+labelText += "^FO745,250^BCN,65,N,N,N^FD" + as_RefNumber + "^FS~r~n"
+labelText += "^FO710,325^ACN,45,40^FD" + as_RefNumber + "^FS~r~n"
+
+
+labelText += "^FO300,460^BCR,50,N,N,N^FD" + as_RefNumber + "^FS~r~n"
+labelText += "^FO255,455^ACR,27,27^FD" + as_RefNumber + "^FS~r~n"
+
+labelText += "^FO525,460^BCR,50,N,N,N^FD" + as_RefNumber + "^FS~r~n"
+labelText += "^FO475,455^ACR,27,27^FD" + as_RefNumber + "^FS~r~n"
+
+labelText += "^FO750,460^BCR,50,N,N,N^FD" + as_RefNumber + "^FS~r~n"
+labelText += "^FO700,455^ACR,27,27^FD" + as_RefNumber + "^FS~r~n"
+
+labelText += "^FO975,460^BCR,50,N,N,N^FD" + as_RefNumber + "^FS~r~n"
+labelText += "^FO925,455^ACR,27,27^FD" + as_RefNumber + "^FS~r~n"
+
+labelText += "^XZ"
+    
+
+FileWrite(fileNum, labelText)
+
+FileClose(fileNum)
+Run(appDirectory + "print_login_label.bat")

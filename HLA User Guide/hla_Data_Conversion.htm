@@ -1,0 +1,31 @@
+<HTML>
+
+<CENTER>
+<H2><A NAME=top>Data Conversion</A></H2>
+</CENTER>
+
+<Font Face="Arial" size=2>
+[15 October 2002]
+
+<H4>Overview</H4>
+Part of the project is to convert the existing Mumps data into Oracle.  I am converting the data starting with the most recent data, one month at a time.  To convert a particular month, I convert the data for all patients/donors that have a specimen accessioned during that month. The conversion program I use is just the XML writer and XML Reader run in batch mode. There is no separate conversion program except for a small driver.
+<P>
+<P ALIGN="left">The data I convert for each patient/donor is:</P>
+<UL>
+<LI>PERSON - ref#, name, DRN, Registration categ, Donor type, Donor location, donor center code, availability, comments</LI>
+<LI>SPECIMEN - Number, specimen type, accession date, bleed date, who entered, hospital, comment (Note: inventory will be converted later)</LI>
+<LI>HLA TYPE - The full HLA type and its history</LI>
+<LI>TESTS - The test code, test type (e.g., HLA Test), order date, result date, result text, who entered, comment.</LI>
+<LI>PERSON AUDIT - Converting the Mumps file which audits changes to the person</LI>
+<LI>DICTIONARIES - The EMPLOYEE dictionary was converted in full.  Deleted entries are preserved as deleted. Other dictionaries have been populated as needed, e.g., when a specimen is converted that was collected at a particular hospital, that hospital is added to the dictionary</LI>
+</UL>
+<H4>Conversion progress</H4>
+<UL>
+  <LI>Current data - The XML writer and reader have been converting new and updated person, specimen, hlt type and test data, since Friday 20-Sep</LI>
+  <LI>2002 - Jan-Dec  completed on 23-Sep</LI>
+  <LI>2001 - Jan-Dec  completed on 01-Oct-02</LI>
+  <LI>2000 - Jan-Dec  completed on 01-Dec-02</LI>
+</UL>
+<A HREF="#top">Back to top</A>
+</HTML>
+

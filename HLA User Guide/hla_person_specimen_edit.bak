@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE>Result Entry</TITLE>
+	<META NAME="GENERATOR" CONTENT="StarOffice 6.0  (Win32)">
+	<META NAME="CREATED" CONTENT="20030630;12354236">
+	<META NAME="CHANGEDBY" CONTENT="Arthur Nevins">
+	<META NAME="CHANGED" CONTENT="20030708;15263880">
+	<!-- Doc.Information -->
+	<!-- Printed: by Arthur Nevins on 12/13/2002, 13:16:25 -->
+</HEAD>
+<BODY LANG="en-US">
+<H1><A NAME="re_top"></A>Edit Person/Specimen</H1>
+
+<FONT FACE="Tahoma" Size=3><BR>Last revision: Sep 4, 2003
+&nbsp; <A HREF="#re_top">To print this page, Click here first</A> 
+
+<HR>
+<OL>
+<li>There are two ways to get to the Edit Person/Specimen window:
+  <ul>
+  <li>Select DataEntry|EditPersonSpecimen from the menu bar
+  <li>From the Result Entry detail window, click the [Edit Person/Specimen] button</p>
+  </ul>
+<li>The compter opens the Edit Person/Specimen data entry window. You can change any of the values except Ref# or Specimen number.  You can also remove a value unless it is a required value. To remove a dictionary value, select the item -not entered-</p>
+<li>Delete Specimen. You can delete a specimen by selecting the checkbox 'Flag as Deleted'.  The system prompts you to confirm. When you click the SAVE button, the specimen is deleted. Notes on deletion: 
+  <ul>
+  <li>The specimen is not physically removed: it has its deletion flag set (so it cannot be selected) and it has the comment '*** DELETED ***' added.
+  <li>When deleted, this specimen is removed from these batches: NMDP Open Batch, Report Queue, Recent list.
+  <li>Deleting a specimen does not change the HLA type, which is a person-level value. However, the specimen will not be included on NMDP or Cord exports.
+  </ul>
+</OL>
+
+<P><A HREF="#re_top">Back to top</A>
+
+</P>
+</BODY>
+</HTML>

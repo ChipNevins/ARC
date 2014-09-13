@@ -1,0 +1,23 @@
+Contract Lab Packing List
+
+From:                                             To:
+Repository 802 (FPR)                              American Red Cross, New England Region
+711 Fifth Street SW                               HLA Services
+Suite #6                                          180 Rustcraft Road, Suite 115
+New Brighton, MN 55112                            
+(651) 746-5000                                    Dedham, MA 02026
+
+Date:06/28/2012                    Repository 802
+
+                   Request for Typing
+                   TR-0209570
+
+                                             Turn Around        Smpl
+  Box & Slot #    Donor ID       Category       Time        DC# Type Message
+  ------------   -----------     --------    -----------    --- ---- ------------------
+      1 -  4     0434-7764-5       Cust.          8         091  (A) A*
+      1 - 19     0442-8072-5       Cust.          8         070  (A) A*
+    F 1 - 13     0586-9696-4       Cust.          8         067  (F) A*
+    F 1 - 24     0472-6937-8       Cust.          8         066  (F) A*
+Tracking Information:  Shipper = FedEx, Tracking Number = 535740850659
+Comments:

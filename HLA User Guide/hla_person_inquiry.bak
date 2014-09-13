@@ -1,0 +1,30 @@
+<HTML>
+
+<H1><A NAME=top>Person Inquiry Window</A></H1>
+<BODY>
+
+<Font Face="Tahoma" size=3>
+Last revision: march 19, 2004
+&nbsp;&nbsp;
+<A HREF=#top>To print this page, Click here first</A>
+
+<P ALIGN="left">
+The Person Inquiry window is used to display and print the information for a single patient or donor.</P>
+
+<H3>Additions</H3>
+Version 1-22: Family-relation comment added to display
+Version 1-43: Added Inventory section
+
+<H3>Procedure</H3>
+<OL>
+  <LI>Select menu option Tools|Inquiry. The Person Inquiry opens,and it immediately opens the Person Lookup window. Use the <A HREF="hla_person_lookup.htm">Person Lookup</A> window to select a patient or donor</LI>
+  <LI>The system retrieves the data for the donor and displays it.  You can scroll up/down and left/right in this display to see all the data.</LI>
+  <LI>To print the data, click the printer icon in the toolbar, or press ctrl-P.</LI>
+  <LI>You can click the <TT>LOOKUP</TT> button to select another patient or donor.</LI>
+</OL>
+
+<A HREF=#top>Back to top</A>
+</BODY>
+</HTML>
+
+

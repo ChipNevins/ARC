@@ -1,0 +1,268 @@
+
+SQLSever conversion from HLA Oracle.txt
+
+
+==========================================
+Changes made in Database selects for SQLServer
+
+sysdate     GETDATE()
+
+to_date    to_date(Null) cDateReceived
+           CAST(Null AS DATETIME) cDateReceived
+
+to_number  to_number(null) as cMyNum
+           cast (Null as Integer) as MyNum
+           cast (<colnanme> AS INTEGER)
+
+to_char    to_char(null) as MyNullStr
+           str(Null) as MyNullStr
+
+Decode     Decode(NBRTURNAROUNDDAYS,3,'Y','N') cTat3
+           case when pli.nbrturnarounddays = 3 then 'Y' else 'N' end as cTat3
+
+NVL        NVL(t.strresulttext,'')
+           isnull(t.STRRESULTTEXT,'')
+
+INSTR      INSTR(pli.strTestlist, 'A*')
+           CHARINDEX('A*',pli.strTestlist)
+
+
+Concatenation   a||b
+                a + b
+
+Remove double quotes   "HLA_PERSON"
+                       HLA_PERSON
+
+CURSORS    FETCH cursor_name INTO variable_name[, ...n]
+           seems like no change needed
+
+JOINS       FROM HLA_EXPECTED_TYPING,   
+                 HLA_PACKINGLIST_ITEM,   
+                 HLA_WORKLIST_ITEM  
+           WHERE (hla_packinglist_item.strnmdpid = hla_expected_typing.pknmdpid (+)) and  
+                 (HLA_WORKLIST_ITEM.STRNMDPID = HLA_PACKINGLIST_ITEM.STRNMDPID) and
+             (HLA_PACKINGLIST_ITEM.PKPACKINGLIST = :ai_pkPackingList) and 
+             ((HLA_WORKLIST_ITEM.PKUSERNAME = :as_username ) AND  
+             (HLA_WORKLIST_ITEM.PKWORKLISTNAME = :as_worklistname ) )    
+
+            FROM HLA_PACKINGLIST_ITEM pli
+             INNER JOIN hla_worklist_item as wli on pli.strnmdpid = wli.strnmdpid
+             LEFT OUTER JOIN HLA_EXPECTED_TYPING as e on e.pknmdpid = pli.strnmdpid
+           WHERE pli.PKPACKINGLIST = 3
+             and wli.PKUSERNAME = :as_username 
+             and wli.PKWORKLISTNAME = :as_worklistname 
+
+JOIN with multiple columns
+
+    FROM HLA_SPECIMEN   
+         LEFT OUTER JOIN HLA_CODE as EMPLOYEE on hla_specimen.cdwhoentered = EMPLOYEE.pkcodenumber AND EMPLOYEE.pkcodetype = 'EMPLOYEE'
+         LEFT OUTER JOIN hla_code as HOSPITAL on hla_specimen.cdhospital = HOSPITAL.pkcodenumber and HOSPITAL.pkcodetype = 'HOSPITAL'
+   WHERE HLA_SPECIMEN.STRSPECIMENNUM LIKE :as_RefNum+'%'
+
+COMPLEX DECODE
+         decode(e.stra1+e.stra2,'','-', e.stra1,e.stra1, e.stra2,e.stra2, e.stra1+','+e.stra2) a_val,   
+
+         case when IsNull(e.stra1,'')='' and (IsNull(e.stra2,'')='') then '-'
+              when IsNull(e.stra2,'')='' then e.stra1
+              when IsNull(e.stra1,'')='' then e.stra2
+              else e.stra1 + ',' + e.stra2 end as a_val,
+
+SEQUENCES  See notes for date 6-9-12
+================================================================
+
+
+-- 10 connection values for pfc_n_tr
+- SQL Server uses DBParm
+this.DBMS= ProfileString (as_inifile, as_inisection, 'DBMS', '')
+this.Database = ProfileString (as_inifile, as_inisection, 'Database', '')
+this.LogID = ProfileString (as_inifile, as_inisection, 'LogID', '')
+this.LogPass = ProfileString (as_inifile, as_inisection, 'LogPassword', '')
+this.ServerName = ProfileString (as_inifile, as_inisection, 'ServerName', '')
+this.UserID = ProfileString (as_inifile, as_inisection, 'UserID', '')
+this.DBPass =ProfileString (as_inifile, as_inisection, 'DatabasePassword', '')
+this.Lock =ProfileString (as_inifile, as_inisection, 'Lock', '')
+this.DBParm =ProfileString (as_inifile, as_inisection, 'DBParm', '')
+this.AutoCommit = lnv_conversion.of_Boolean (ProfileString (as_inifile, as_inisection, 'AutoCommit', 'false'))
+
+
+
+
+HLA4                       Home
+
+MyDocuments                C:\HlaSqlServer
+ \SqlServer Mgmt Studio        DBA\Tables
+    \Projects
+
+ \Visual Studio BIDS           DBA\SSIS
+    \Projects
+
+
+how to truncate:
+backup log dbname with truncate_only
+
+Home machine:
+
+------------------------------------------------
+database role hla_user
+
+Create database role 'hla_user', owner is 'dbo'
+Under Role > Securables, select sp_GetSequence, add 'exceute' permission
+Run all_grants.sql  (see below)
+
+----------------
+--all_grants.sql
+ 
+ grant select,insert,update,delete on hla_antigen to hla_user 
+ grant select,insert,update,delete on hla_antigen_ambiguity to hla_user 
+ grant select,insert,update,delete on hla_batch_hdr to hla_user 
+ grant select,insert,update,delete on hla_batch_item to hla_user 
+ grant select,insert,update,delete on hla_audit to hla_user 
+ grant select,insert,update,delete on hla_box to hla_user 
+ grant select,insert,update,delete on hla_canned_comment to hla_user 
+ grant select,insert,update,delete on hla_code to hla_user 
+ grant select,insert,update,delete on hla_code_extras to hla_user 
+ grant select,insert,update,delete on hla_expected_typing to hla_user 
+ grant select,insert,update,delete on hla_contact to hla_user 
+ grant select,insert,update,delete on hla_import_file to hla_user 
+ grant select,insert,update,delete on hla_inventory to hla_user 
+ grant select,insert,update,delete on hla_lock to hla_user 
+ grant select,insert,update,delete on hla_login_templatefield to hla_user 
+ grant select,insert,update,delete on hla_packinglist to hla_user 
+ grant select,insert,update,delete on hla_packinglist_item to hla_user 
+ grant select,insert,update,delete on hla_panel to hla_user 
+ grant select,insert,update,delete on hla_panel_item to hla_user 
+ grant select,insert,update,delete on hla_qc_rnum to hla_user 
+ grant select,insert,update,delete on hla_reading to hla_user 
+ grant select,insert,update,delete on hla_recent to hla_user 
+ grant select,insert,update,delete on hla_report_comment to hla_user 
+ grant select,insert,update,delete on hla_report_hdr to hla_user 
+ grant select,insert,update,delete on hla_report_item to hla_user 
+ grant select,insert,update,delete on hla_result_list to hla_user 
+ grant select,insert,update,delete on hla_rlog to hla_user 
+ grant select,insert,update,delete on hla_sbt_outbox to hla_user 
+ grant select,insert,update,delete on hla_security to hla_user 
+ grant select,insert,update,delete on hla_session to hla_user 
+ grant select,insert,update,delete on hla_specimen to hla_user 
+ grant select,insert,update,delete on hla_sysvalues to hla_user 
+ grant select,insert,update,delete on hla_tabsections to hla_user 
+ grant select,insert,update,delete on hla_test to hla_user 
+ grant select,insert,update,delete on hla_type to hla_user 
+ grant select,insert,update,delete on messages to hla_user 
+ grant select,insert,update,delete on hla_worklist_item to hla_user 
+ grant select,insert,update,delete on hla_worksheet to hla_user 
+ grant select,insert,update,delete on hla_worksheet_test to hla_user 
+ grant select,insert,update,delete on hla_worksheet_template to hla_user 
+ grant select,insert,update,delete on hla_person to hla_user 
+
+go
+----------------
+
+
+---------------------------------------------------
+How to add logins and users
+
+Follow the steps below. The login for each user is first, then user
+
+----  Login
+Under SQL Server Security (no under database)
+Add Login
+
+Login name: YU
+Click SQL Server authentication
+Enter pw and confirm pw
+Uncheck ' Enforce pw policy', pw expiration, pw change
+Default database: HLA
+- Click OK to save
+
+---- User
+Go to database HLA, then folder Security > Users
+Right-click to Add user
+
+Username: YU
+Login: YU
+
+Schemas owned: HLA
+Database role membership: hla_user
+- Click OK to save
+
+-------------------------------------------------------
+
+
+
+
+Migrating from Oracle to SQLServer:
+http://technet.microsoft.com/en-us/library/cc917573.aspx
+
+SQLServer Setup in Dedham
+HLA4 = 10.10.1.4
+Server: administrator / hla4
+Test database will be on HLA4 – DB Name: HLA_Test
+
+SqlServer Logins:
+   HLAAdmin(as DBO) / hlacmd!
+   sa/sahla4
+   HLA / hla4pw   - 1/6/13
+
+Initial DB size 3GB with Max growth 10GB (can be changed if necessary).
+
+hla6 = 10.10.1.6
+
+
+LOCKING ROW FOR UPDATE
+Oracle	  Select strSpecimenNum into :temp from hla_specimen
+	   where pkSid = :specimenSid For Update NOWAIT ;
+
+SqlServer Select strSpecimenNum into :temp from hla_specimen with (ROWLOCK) 
+	   where pkSid = :specimenSid;
+
+
+
+Connection string from Powerbuilder
+// Profile HLA
+SQLCA.DBMS = "OLE DB"
+SQLCA.LogPass = <*****>
+SQLCA.LogId = "HLA"
+SQLCA.AutoCommit = False
+SQLCA.DBParm = "PROVIDER='SQLOLEDB',PBCatalogOwner='dbo',DelimitIdentifier='No',DATASOURCE='CHIP-HP7\SqlExpress',PROVIDERSTRING='Database=HLA'"
+
+//In Pb Database profile create/edit, Connection tab, Extended Properties, type: PROVIDERSTRING='Database=HLA'"
+
+Scripting the tables, indexes and constraints
+- In SQlServer Mgmt Studio, right-click on HLA database, tasks, generate scripts
+- Generate all db
+- Save to c:\hlaSqlServer\DBA\script_chip7_hla_database.sql
+
+
+// Import sequence_master.csv
+
+Flat file source:  Locale=English (US), code page=1253, format=delimited, header row delim=CRLF
+  Header rows skip=0, col names in first row=checked
+
+Compare dates:
+
+  WHERE Fileimportdatetime > '01/01/2013'  // it's that easy
+
+==========================================
+
+
+Installed SQLServer Express, imported hla_oracle backup into the new database HLA
+
+Added HLA Login, but it was not attached to the HLA user that was already defined in the DB created from the backup
+
+How to fix orphaned SQL Server users:  When you restore a Microsoft SQL Server database on a different machine, you cannot access the database until you fix the permissions. The problem is that the user in the database is an "orphan". This means that there is no login id or password associated with the user. This is true even if there is a login id that matches the user. There is a GUID (called a SID in Microsoft-speak) that has to match as well.
+
+All of these instructions should be done as a database admin, with the restored database selected.
+
+First, make sure that this is the problem. This will lists the orphaned users:
+
+    EXEC sp_change_users_login 'Report'  // ran this, listed HLA user
+
+If you already have a login id and password for this user, fix it by doing:
+
+    EXEC sp_change_users_login 'Auto_Fix', 'HLA'
+
+If you want to create a new login id and password for this user, fix it by doing:
+
+    EXEC sp_change_users_login 'Auto_Fix', 'user', 'login', 'password'
+
+

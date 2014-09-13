@@ -1,0 +1,55 @@
+Contract Lab Packing List
+
+From:                                             To:
+Repository 802 (FPR)                              American Red Cross, New England Region
+711 Fifth Street SW                               HLA Services
+Suite #6                                          180 Rustcraft Road, Suite 115
+New Brighton, MN 55112                            
+(651) 746-5000                                    Dedham, MA 02026
+
+Date:08/30/2012                    Repository 802
+
+                   Request for Typing
+                   TR-0209878
+
+                                             Turn Around        Smpl
+  Box & Slot #    Donor ID       Category       Time        DC# Type Message
+  ------------   -----------     --------    -----------    --- ---- ------------------
+      1 -  1     0434-7465-9       Cust.          8         091  (A) A*
+      1 -  1     0423-4661-9       Cust.          8         066  (A) A B C
+      1 -  2     0440-1237-5       Cust.          8         060  (A) A B C
+      1 -  1     0456-9472-6       Cust.          8         002  (A) A B C
+      1 -  2     0442-6582-5       Cust.          8         066  (A) A B C
+      1 -  3     0479-1536-8       Cust.          8         090  (A) A B C
+      1 -  4     0421-7554-7       Cust.          8         002  (A) A B C
+      1 -  5     0451-4478-9       Cust.          8         074  (A) A B C
+      1 -  6     0476-0850-0       Cust.          8         074  (A) A B C
+      1 -  7     0424-7843-8       Cust.          8         006  (A) A B C
+      1 -  8     0431-1014-7       Cust.          8         002  (A) A B C
+      1 -  9     0431-1220-0       Cust.          8         002  (A) A B C
+      1 - 10     0413-1615-9       Cust.          8         002  (A) A B C
+      1 - 11     0437-1213-2       Cust.          8         067  (A) A B C
+    F 1 -  1     0594-4775-5       Cust.          8         039  (F) A B C
+    F 1 -  2     0363-4842-3       Cust.          8         060  (F) A B C
+    F 1 -  3     0546-7021-1       Cust.          8         060  (F) A B C
+    F 1 -  4     0546-6757-1       Cust.          8         060  (F) A B C
+    F 1 -  5     0565-5320-9       Cust.          8         091  (F) A B C
+    F 1 -  6     0534-2345-5       Cust.          8         074  (F) A B C
+    F 1 -  7     0546-5830-7       Cust.          8         060  (F) A B C
+    F 1 -  8     0535-7851-4       Cust.          8         002  (F) A B C
+    F 1 -  9     0519-8098-5       Cust.          8         060  (F) A B C
+    F 1 - 10     0530-4860-9       Cust.          8         037  (F) A B C
+    F 1 - 11     0529-7353-4       Cust.          8         101  (F) A B C
+    F 1 - 12     0492-0348-2       Cust.          8         013  (F) A B C
+    F 1 - 13     0492-0829-1       Cust.          8         013  (F) A B C
+    F 1 - 14     0468-1610-4       Cust.          8         039  (F) A B C
+    F 1 - 15     0531-7285-4       Cust.          8         091  (F) A B C
+    F 1 - 16     0527-0871-6       Cust.          8         002  (F) A B C
+    F 1 - 17     0501-5009-3       Cust.          8         060  (F) A B C
+    F 1 - 18     0525-1780-2       Cust.          8         060  (F) A B C
+    F 1 - 19     0507-7924-8       Cust.          8         013  (F) A B C
+    F 1 - 20     0455-3061-5       Cust.          8         090  (F) A B C
+    S 1 -  1     0544-7953-0       Cust.          8         026  (S) A*
+
+Tracking Information:  Shipper = FedEx, Tracking Number = 535740854698
+Comments:

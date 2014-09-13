@@ -1,0 +1,24 @@
+Label Printing Changes.txt
+
+if cbx_print_label.checked then
+	fileNum = FileOpen(appDirectory + "LoginLabel.zpl",LineMode!,Write!,LockWrite!,Replace!,EncodingANSI!)
+end if
+
+	// Add to label text after person, specimen and tests filed to DB
+	if cbx_print_label.checked then
+		labelText =  "^XA^FO50,50^BCN,65,N,N,N"
+		labelText += "^FD" + inv_specimen.strSpecimenNum + "^FS"
+		labelText += "^FO50,125^A0,30,30"
+		labelText += "^FD" + inv_specimen.strSpecimenNum + ' ' + inv_person.strLastName +',' + inv_person.strFirstName + "^FS"
+		labelText += "^XZ"
+		FileWrite(fileNum, labelText)
+	end if
+
+If SpecimenSeq = 1 ...
+
+if cbx_print_label.checked then
+	FileClose(fileNum)
+	Run(appDirectory + "print_login_label.bat")
+end if
+
+dw_packing_list.Update()

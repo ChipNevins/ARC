@@ -1,0 +1,648 @@
+arc_SqlServer_Pb_log.txt
+
+
+12-12-13
+Hi Chip,
+ 
+Maybe you remember, about a month ago you made a fix to the expected typing import function. We couldn’t do a real test of the fix because the typings were already imported into the system from the old-format file that NMDP re-sent us that day. It looked like the importing was going on (you know how it kind of flicks while it imports the file, whereas before it just didn’t do anything with the new format file). The NMDP IT department switched to the new format today without notifying us and the file gets imported only partially – only serology (two-digit) typings go in. The difference with the old format is in the spacing that was changed to accommodate 5-letter codes that go in effect in 2014.
+ 
+Do you think it can be fixed by tomorrow morning or do we need to tell NMP that we are not ready? The downside of the latter will be that we won’t be able to test it again if we import the typings in the old format.
+ 
+Thanks for your help,
+Tatiana
+
+
+10-29-13  Expected typings change  2.5hr
+Example of new report _ Sharon sent it. hr_rpt_new4.txt  hr_rpt_new3.txt
+
+Starting position of the locus value in old and new formats:
+Locus  Old   New
+A      14    14
+B      22    24
+C      30    34
+DRB1   38    44
+DRB3   46    54
+DRB4   54    64
+DRB5   62    74
+DQB1   70    84
+
+w_packinglist.cb_import_typings Click()
+  -> n_hla_expected_typings.of_Import(<file>)
+
+runtime libs
+libjcc.dll
+libjutils.dll
+pbdpl115.dll
+pbdpp115.dll
+pbdwe115.dll
+pbodb115.dll
+pbole115.dll
+pbshr115.dll
+pbsnc115.dll
+pbvm115.dll
+
+
+
+9-24-13  support  1.5
+Build 5-08
+
+w_hla_search.cb_search  clicked()
+09/23/13  changed SELECT statement in cursor loop so it builds the complete hla_type
+  string and puts it in the DW at that time if donor passes criteria.
+  Removed the separate call to n_hla_type to build this string
+
+
+SQLCODE error:
+error:
+If sqlca.sqlcode <> 0 Then
+	ls_msgparm[1] = sqlca.sqlerrtext
+	gnv_app.inv_error.of_Message('pfc_dwdberror', ls_msgparm, errorText)
+	rtn = -1
+Else
+	MessageBox(errorTitle, errorText)
+End if
+
+
+On Aug 16, 2013 11:26 AM, "Alosco, Sharon" <Sharon.Alosco@redcross.org> wrote:
+Hi Chip,
+Sorry it has taken me so long to respond. I have run this report successfully several times. I just found the patient that gave me the problem and reran the search today. Still does not display HLA typing for donors on the screen and paper.
+The patient is S,A; hospital is Beth Isreal/ Deaconess; HLA-A1,A68,B56,B57.
+ 
+
+8-4-13 Sun  2.5hr
+On site in Dedham to set up the backup label printer
+
+7-31-13 Wed  2.5hr   Ver 5.07
+Multi-worksheet templates
+Print labels from supplier login
+New label format
+
+5.  NB Fix for wide format patient report which was repeating a DRB1 ambiguity under the DQB1
+Note:  Please do not copy this to any other machines until you are comfortable with it.
+
+New report: Summary A4 and AB  1.5 NB
+report to the server and left it open on your desktop.  The report as shown has one row per test code. Click the (+) to expand that row and see the donor location totals for that test.
+
+
+7-30-13 tues  1.75
+ -Bar codes  n_label_format.of_GetLabelText()  - use new values for fonts
+ -Supplier login.  u_supplierlist_login - make same changes as those done on 5/11/13 for
+   u_packinglist_login, to print labels
+ - Maps  - multiple templates
+  n_hla_worksheet
+     of_GetWorksheetTemplateList()   // new function
+     of_AddWorksheetTest()  // call the new funtions above, change to a FOR loop
+         to work with an array of worksheet templates returned
+  dw_worksheet_template_1  // add columns for worksheets 2,3 this DW is used in the initdw()
+   function of n_hla_worksheet
+  tested on Chip7 with JULYTESTING,AA  - on 3 templates
+
+6-28-13 fri 1.5
+ On site in Dedham to try out other fonts for barcodes. Emailed Sharon with two alternatives
+
+5-29-13 Wed 2.50
+ Label printing for NMDP packinglist
+ Added single specimen print to Print R-number labels
+ Version 5.06 to ARC
+
+5-22-13 Wed 1.0 Help ARC with label printer setup
+
+5-21-13 Tues 2.0 hr
+Added new label format to Log-in, removed Edit Person button
+Added label print to Print R-number labels
+
+5-20-13 Mon 1.5 hr
+- setting up printer with Gil
+
+5-14-13 1.5 hr
+- Brought printer to Dedham, could not set it up
+
+5-11-13  5.0 hrs
+
+Label format:
+- Logical label is 2.25in perf to perf
+- Black mark backing
+- Each logical label has 8 physical labels:
+
+ ------- black mark perf ---- 
+  __________     ___________
+ /          \   /           \
+ \__________/   \___________/
+  __________     ___________
+ /          \   /           \
+ \__________/   \___________/
+
+  ___    ___     ___    ___
+ /   \  /   \   /   \  /   \
+ |   |  |   |   |   |  |   |
+ |   |  |   |   |   |  |   |
+ \___/  \___/   \___/  \___/
+
+ ------- black mark perf ---- 
+
+On the first 4 labels, we print left-to-right.
+On the botton 4 labels, we print top to bottom
+
+Printer settings:
+ - Sensor type: reflective  (to recognize black mark)
+ - Thermal transfer - uses a ribbon
+ - This is a network printer: DHCP, port 9100
+ - Z-Mode On (to recognize ZPL)
+
+To print a label, the Powerbuilder application runs a batch file
+This batch file issues a DOS LPR command to the IP of the printer.
+
+-- print_login_label.bat
+-- Note: this file is changed to have the IP that the printer gets from DHCP
+-- and is not configurable now through the application
+LPR -S192.168.1.9 -PTECPRINTER Label1.ZPL
+
+LoginLable.zpl
+^XA
+^FO225,25^AFN,52,26^FD392565^FS
+^FO500,20^BXN,3,100,26,24^FD392565^FS
+^FO240,100^AFN,52,13^FDPATIENT,TESTMORE^FS
+^FO675,25^AFN,52,26^FD392565^FS
+^FO950,20^BXN,3,100,26,24^FD392565^FS
+^FO690,100^AFN,52,13^FDPATIENT,TESTMORE^FS
+^FO225,250^AFN,52,26^FD392565^FS
+^FO500,245^BXN,3,100,26,24^FD392565^FS
+^FO240,325^AFN,52,13^FDPATIENT,TESTMORE^FS
+^FO675,250^AFN,52,26^FD392565^FS
+^FO950,245^BXN,3,100,26,24^FD392565^FS
+^FO690,325^AFN,52,13^FDPATIENT,TESTMORE^FS
+^FO320,470^AFR,26,13^FD392565^FS
+^FO275,470^AFR,26,13^FDPATIENT^FS
+^FO235,470^AFR,26,13^FDTESTMORE^FS
+^FO550,470^AFR,26,13^FD392565^FS
+^FO500,470^AFR,26,13^FDPATIENT^FS
+^FO460,470^AFR,26,13^FDTESTMORE^FS
+^FO775,470^AFR,26,13^FD392565^FS
+^FO730,470^AFR,26,13^FDPATIENT^FS
+^FO690,470^AFR,26,13^FDTESTMORE^FS
+^FO995,470^AFR,26,13^FD392565^FS
+^FO950,470^AFR,26,13^FDPATIENT^FS
+^FO910,470^AFR,26,13^FDTESTMORE^FS
+^XZ^XA
+^FO225,25^AFN,52,26^FD392566^FS
+^FO500,20^BXN,3,100,26,24^FD392566^FS
+^FO240,100^AFN,52,13^FDPATIENT,TESTEVENMORE^FS
+^FO675,25^AFN,52,26^FD392566^FS
+^FO950,20^BXN,3,100,26,24^FD392566^FS
+^FO690,100^AFN,52,13^FDPATIENT,TESTEVENMORE^FS
+^FO225,250^AFN,52,26^FD392566^FS
+^FO500,245^BXN,3,100,26,24^FD392566^FS
+^FO240,325^AFN,52,13^FDPATIENT,TESTEVENMORE^FS
+^FO675,250^AFN,52,26^FD392566^FS
+^FO950,245^BXN,3,100,26,24^FD392566^FS
+^FO690,325^AFN,52,13^FDPATIENT,TESTEVENMORE^FS
+^FO320,470^AFR,26,13^FD392566^FS
+^FO275,470^AFR,26,13^FDPATIENT^FS
+^FO235,470^AFR,26,13^FDTESTEVENMORE^FS
+^FO550,470^AFR,26,13^FD392566^FS
+^FO500,470^AFR,26,13^FDPATIENT^FS
+^FO460,470^AFR,26,13^FDTESTEVENMORE^FS
+^FO775,470^AFR,26,13^FD392566^FS
+^FO730,470^AFR,26,13^FDPATIENT^FS
+^FO690,470^AFR,26,13^FDTESTEVENMORE^FS
+^FO995,470^AFR,26,13^FD392566^FS
+^FO950,470^AFR,26,13^FDPATIENT^FS
+^FO910,470^AFR,26,13^FDTESTEVENMORE^FS
+^XZ
+
+
+In this file, the commands print 8 labels; each label has a bar code and text.
+
+^XA  start a new label
+^FO300,25 - statr at x=300, y=25 'FO' is field orientation
+^BCN - Use bar code 128 font
+^FD123456^FS  - the field to print has the value '123456'
+^ACN,45,40 - use font 'N' (built in font) with height54, width 40
+^XZ - end label
+
+
+How this works in application:
+
+-- hla.ini file
+[LabelFormat]
+PrintLabels=Y
+
+-----
+u_person_login has check box for printing label.
+
+ue_init sets the checked property based on the ini file setting
+If ProfileString(gnv_app.of_GetAppIniFile(), 'LabelFormat', 'PrintLabels','N') = "Y" then
+	cbx_print_label.checked = true
+Else
+	cbx_print_label.checked = false
+End If
+
+u_person_login.of_PrintLabel()
+string textToPrint
+integer li_ret
+n_label_format lnv_label_format
+
+textToPrint = lnv_label_format.of_getLabelText(inv_specimen.strSpecimenNum,inv_person.strLastName, inv_person.strFirstName)
+li_ret = lnv_label_format.of_PrintLabel(textToPrint)
+return li_ret
+-------
+
+-------
+u_packinglist_login, u_packinglist_login_enterolab, u_packinglist_login_hk
+  ue_init  - same code as in u_person_login
+  cb_login.clicked
+    declare n_label_format, labelText
+    labelText = ''
+   <For loop through specimens> ...
+	// Add to label text after person, specimen and tests filed to DB
+	if cbx_print_label.checked then
+		labelText += lnv_label_format.of_GetLabelText (inv_specimen.strSpecimenNum,
+                       inv_person.strLastName, inv_person.strFirstName)
+	end if
+   <Next>
+   // after the loop, print the labels
+	if cbx_print_label.checked then
+		lnv_label_format.of_PrintLabel(labelText)
+	end if
+--------
+
+
+n_label_format.of_GetLabelText(specimenNum, personLastName, personFirstName)  As string
+  returns a string with the ZPL command for one logical label,
+  starting with ^XA and ending with ^XZ
+
+n_label_format.of_PrintLabel(labelText)
+  prints a label using the label text argument:
+  - opens the file <appdir>Loginlabel.zpl in REPLACE mode
+  - writes labelText to the file
+  - closes the file
+  - calls print_login_label.bat to print the file to the IP of the printer
+
+
+
+
+-----------------------------------------------------------
+
+
+
+5-9-13 Labels formatting 2.0
+
+5-8/13 Label printer 1.5
+
+5-6-13 Label printer 3.0
+
+5-7/13 Tues 1.0 Support
+- hla_antigen date columns are displayed incorrectly. Need to change data type to datetime
+
+-- Change datatype to datetime
+ALTER TABLE hla_antigen ALTER COLUMN dtRecordCreated datetime
+go
+-- change to datetime
+ALTER TABLE hla_antigen ALTER COLUMN dtRecordDeleted datetime
+go
+
+
+4-22-13 Mon (billable)
+- 2.0 New printer set-up. Labels are wrong: no black mark, diameter is too big. Phoned Bob Marsh.
+
+4-2-13 Tues 1.0  (support)
+Reader having problems, shows file in SBT folder that are not really there.
+Seems to happen mostly on Paul's machine.
+
+================================================================================
+All the work below is part of the fixed price quote for the SQL Server conversion
+
+4/7/13  Deployment
+Doc: apptech.pdf, chap 36
+SQL Server Native Client version 10 was released with SQL Server 2008.
+Include "Provider=SQLNCLI10" in the connection string to use this provider.
+
+
+3-26-13
+- Final report did not show the correct ambiguity string. Ambig set on 3/21/13, did DQA1 result entry on 3/27/13, report did not show any ambiguity.  ref# 392560, pkpid= 479245.
+
+hla_test: 
+
+2-19-13 1.5 - moving software to HLA4, setting up R: drive folders
+login  hla/hla4test
+login alosco/****   must change login
+
+2-18-13
+changing all sysdate to GETDATE() in sql
+
+run scramble_hla_person_strlastname.sql
+run scramble_hla_report_hdr_pkreportid.sql
+run delete_hla_recent.sql
+
+
+========================
+10-14-12
+testing Login - patient NEVINS,CHIP R# 392546
+testing Result Entry - R# 395246
+testing Reader Dynal file 04-26-10-RPTS.txt
+testing Reader HML file
+testing NMDP new batch from open batch
+testing NMDP Tab-delim export
+testing NMDP HML export
+testing NMDP return speciment to open batch
+testing add new code - Donor Center XYZ
+testing add antigen - A*01:08
+testing worksheet - add panel PANEL 2012 10 14
+testing panel grid
+testing pabel move items up and down
+testing panel export - PANME 2012 10 14
+testing Inventory - new box, update box, duplicate box
+
+
+Changed sysdate to getdate()
+ ---------- Search: Searching Library C:\HlaSqlServer\App\hla_nvo.pbl for 'sysdate'    (4:58:31 PM)
+ ---------- 8 Matches Found On "sysdate":
+hla_nvo.pbl(n_hla_antigen).of_setnewantigen.0029:    Values(:newValue, 0, sysdate, :newValue, :intHighRes) ;
+hla_nvo.pbl(n_hla_code).of_define.0012:           0, sysdate, sysdate) ;
+hla_nvo.pbl(n_hla_panel).of_additem.0035:  //     dtRecordCreated = sysdate
+hla_nvo.pbl(n_hla_panel).of_additem.0040:  //   values (:panelName, :wellNumber, :wellLabel, :contentsType, :contentsname, :nmdpid, sysdate) ;
+hla_nvo.pbl(n_hla_panel).of_new() (did this one before the search)
+hla_nvo.pbl(n_hla_worksheet).of_new.0021:    Values (:pkworksheet, :worksheetname, '0-0-0', 0, sysdate, sysdate) ;
+hla_nvo.pbl(n_recent).of_addtolist.0011:       set dtRecordUsed = sysdate, strDescription = :as_description
+hla_nvo.pbl(n_recent).of_addtolist.0021:     sysdate) ;
+hla_nvo.pbl(u_nmdp_export).cb_return.clicked.0029:       Values ('LBSW', 0, :specimenSid, :personPid, :personNmdpId, sysdate) ;
+ ---------- Done 8 Matches Found On "sysdate":
+ ---------- Finished Searching Library C:\HlaSqlServer\App\hla_nvo.pbl for 'sysdate'    (4:58:31 PM)
+
+
+========================
+10-13-12
+testing NMDP packinglist Import, Login packinglist
+
+========================
+10-11-12
+ From Chip3, exported objects updated since 9/10/12, via Z drive to Chip7 folder:
+    c:\HlaSqlServer\chip3_pbobject_export\2012_10_11
+
+
+========================
+9-10-12
+ Imported new patient report preview objects
+ Added new columns to hla_patient_report_hdr
+ Fixed SQL syntax in dw_patient_report_item_landscape
+
+
+========================
+9-9-12 Lots of work with HLA db exports, re-added sp
+ Changed SELECT ... FOR UPDATE NOWAIT with SELECT .... WITH (ROWLOCKS)
+
+===========================================
+8-30-12
+  w_result_entry_list.of_enterresults()
+Select strSpecimenNum into :temp from hla_specimen 
+	where pkSid = :specimenSid For Update NOWAIT ;
+	If sqlca.SqlCode = 0 Then
+-- problem with sqlcode
+
+
+===========================================
+8-26-12
+  Library hla_dw FINISHED datawindows
+  Libray hla_dwe datawindows through
+
+  todo: d_interpretation list should be de_interpretation list
+        d_report_header_rte  - same
+        look at dw_worksheet_template and dw_worksheet_template_1
+
+===========================================
+8/1/12 Wed
+  datawindows through dw_sbt_batch_hdr
+
+===========================================
+7/28/12 Sat
+  datawindows through dw_prelim_results
+
+===========================================
+7-17-12 Tues
+  datawindows through dw_inq_inventory
+
+  w_report_hdr_rte - to test capabilities of RTE control as header for patient report
+  w_final_report_single
+    - removed the text headers for ARC, address phone
+    - inserted rte_1
+    - in function of_retrieve()
+           dw_report.reset()
+           rte_1.InsertDocument("c:\HlaSqlServer\patient_report_header.rtf", true)
+           of_displaymessage('')
+  
+  n_final_report
+
+
+===========================================
+7-15-12  Sun
+   through dw_hla_search
+
+
+===========================================
+7-14-12  Sat
+- Changes to datawindows in hla-dw.pbl:
+Including Update properties
+   dw_cord_completion  -to-  dw_donorinfosheet_single
+   through dw_hla_import_file
+
+
+===========================================
+7-12-12 Thu
+- Changes to datawindows in hla-dw.pbl:
+   d_cords_for_site  -to-  dw_contact_de
+
+===================================
+7-7-12 Sat
+
+w_final_report_batch.of_retrieve  - CURSORS
+
+dw_lookup_specimen - change DECODE to CASE
+d_debug_wacb_trail  - simple change
+dw_login_worklist2 - same change as dw_login_worklist
+dw_login_worklist - decode, concat
+dw_donorinfosheet_report  // decode, to_char, outer join
+dw_donorinfosheet_single - done
+dw_expected_typings_2 - done
+dw_inq_test - joins, decode, nvl
+dw_inq_specimen - joins
+dw_expected_typings_refnum_range
+
+ ---------- Search: Searching Library C:\HlaSqlServer\App\hla_dwe.pbl for '||'    (10:46:31 AM)
+ ---------- 2 Matches Found On "||":
+hla_dwe.pbl(dddw_donor_center).dddw_donor_center:   retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"hla_code~" ) COLUMN
+hla_dwe.pbl(dw_hla_search_results_old).dw_hla_search_results_old:   retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"hla_person~" )  TABLE  ---------- Done 2 Matches Found On "||":
+ ---------- Finished Searching Library C:\HlaSqlServer\App\hla_dwe.pbl for '||'    (10:46:31 AM)
+
+
+ ---------- Search: Searching Library C:\HlaSqlServer\App\hla_dw.pbl for 'nvl'    (10:25:48 AM)
+ ---------- 23 Matches Found On "nvl":
+hla_dw.pbl(dw_audit_daterange_detail).dw_audit_daterange_detail:   retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"hla_audit~" )
+hla_dw.pbl(dw_audit_person).dw_audit_person:   
+hla_dw.pbl(dw_display_prelim_results).dw_display_prelim_results:            
+hla_dw.pbl(dw_hla_antigen_de).dw_hla_antigen_de:    
+hla_dw.pbl(dw_inq_test).dw_inq_test:           
+hla_dw.pbl(dw_inq_type).dw_inq_type:
+hla_dw.pbl(dw_inq_type).dw_inq_type:
+hla_dw.pbl(dw_inq_type).dw_inq_type:
+hla_dw.pbl(dw_inq_type).dw_inq_type:
+hla_dw.pbl(dw_inq_type).dw_inq_type:
+hla_dw.pbl(dw_inq_type).dw_inq_type:
+hla_dw.pbl(dw_inq_type).dw_inq_type:
+hla_dw.pbl(dw_inq_type).dw_inq_type:
+hla_dw.pbl(dw_inq_type).dw_inq_type:
+hla_dw.pbl(dw_inq_type).dw_inq_type:
+hla_dw.pbl(dw_inq_type).dw_inq_type:
+hla_dw.pbl(dw_lifc_assignments).dw_lifc_assignments:
+hla_dw.pbl(dw_lifc_assignments).dw_lifc_assignments:
+hla_dw.pbl(dw_patient_report_item)
+hla_dw.pbl(dw_prelim_results).dw_prelim_results:
+hla_dw.pbl(dw_result_entry_reading).dw_result_entry_reading:
+hla_dw.pbl(dw_specimens_for_pid).dw_specimens_for_pid:
+ ---------- Done 23 Matches Found On "nvl":
+ ---------- Finished Searching Library C:\HlaSqlServer\App\hla_dw.pbl for 'nvl'    (10:25:49 AM)
+
+=======================================
+7-6-12 Fri
+ ---------- Search: Searching Library C:\HlaSqlServer\App\hla_win.pbl for 'declare'    (7:15:55 AM)
+ ---------- 3 Matches Found On "declare":
+hla_win.pbl(w_final_report_batch).of_retrieve.0012:  declare cur_rlog cursor For
+hla_win.pbl(w_hla_search).of_populate_donorlocationlist.0005:  declare cur_donorlocation cursor for 
+hla_win.pbl(w_hla_search).cb_search.clicked.0112:  declare cur_Donor cursor for 
+ ---------- Done 3 Matches Found On "declare":
+ ---------- Finished Searching Library C:\HlaSqlServer\App\hla_win.pbl for 'declare'    (7:15:55 AM)
+
+
+==============================================
+7/4/12  WED
+
+w_hla_logon
+- in database ddlb_database, added item: HLASQLSERVER
+- in pfc_default, set initial ddlb_database text to HLASQLSERVER
+
+In hla.ini file, changed [Database] connection from HLAPROD to HLASQLSERVER
+
+Implemeting change:
+   old code:  select seq_hla_code.nextVal into :ll_ret from dual ;
+   new code:  ll_ret = sqlca.sp_GetSequence('SEQ_HLA_CODE')  // calls the new ext func defined for n_tr
+
+application variable sqlca uses class n_tr
+n_tr - define new local external function sp_GetSequence
+PB Guide: "Application Technique" - Using Transaction Objects to Call Stored Procedures
+
+
+Making this change to items below.
+ ---------- Search: Searching Library C:\HlaSqlServer\App\hla_win.pbl for 'SEQ_HLA_'    (9:11:41 PM)
+ ---------- 19 Matches Found On "SEQ_HLA_":
+done. hla_win.pbl(w_inventory_de).of_newitem.0008:   select seq_hla_inventory.nextVal into :pkInventory from dual ;
+done. hla_win.pbl(w_inventory_de).cb_select_rnum_range.clicked.0021:  select seq_hla_inventory.nextVal into :pkInventory from dual ;
+done. hla_win.pbl(w_inventory_de).cb_select_plist_items.clicked.0043: select seq_hla_inventory.nextVal into :pkInventory from dual ;
+done. hla_win.pbl(w_login).of_handlenewspecimen.0038:   select seq_hla_worklist_item.nextVal into :workListItem from dual ;
+done. hla_win.pbl(w_login).of_clearworklist.0008:  select seq_hla_session.nextVal into :pkSessionNumber from dual ;
+done. hla_win.pbl(w_login_enterolab_specimens).of_handlenewspecimen.0038: select seq_hla_worklist_item.nextVal into :workListItem from dual ;
+done. hla_win.pbl(w_login_enterolab_specimens).of_clearworklist.0008:  select seq_hla_session.nextVal into :pkSessionNumber from dual ;
+done. hla_win.pbl(w_login_hk_specimens).of_handlenewspecimen.0038:   select seq_hla_worklist_item.nextVal into :workListItem from dual ;
+done. hla_win.pbl(w_login_hk_specimens).of_clearworklist.0008:  select seq_hla_session.nextVal into :pkSessionNumber from dual ;
+done. hla_win.pbl(w_new_packinglist).cb_import_nmdp.clicked.0069:  select seq_hla_packinglist.nextVal into :pkPackingList from DUAL ;
+done. hla_win.pbl(w_new_packinglist).cb_import_sg.clicked.0053:  select seq_hla_packinglist.nextVal into :pkPackingList from DUAL ;
+done. hla_win.pbl(w_new_packinglist_enterolab).cb_import.clicked.0042:  select seq_hla_packinglist.nextVal into :pkPackingList from DUAL ;
+done. hla_win.pbl(w_new_packinglist_hk).cb_import_hk.clicked.0042:  select seq_hla_packinglist.nextVal into :pkPackingList from DUAL ;
+done. hla_win.pbl(w_new_report).of_makenew.0020:    Select seq_hla_patient_report.Nextval into :ll_pkReportId from dual ;
+done. hla_win.pbl(w_patient_report)pfc_new.0027:  select seq_hla_patient_report.NextVal into :il_pkreportid from dual ;
+done. hla_win.pbl(w_sbt).cb_build.clicked.0021:  select seq_hla_sbt_log.nextVal into :sbtLogSeq from dual ;
+done. hla_win.pbl(w_supplier_list_import).of_importfile.0052:  select seq_hla_packinglist.nextVal into :pkPackingList from DUAL ;
+done. hla_win.pbl(w_supplierlist_login).of_handlenewspecimen.0038:   select seq_hla_worklist_item.nextVal into :workListItem from dual ;
+done. hla_win.pbl(w_supplierlist_login).of_clearworklist.0008:  select seq_hla_session.nextVal into :pkSessionNumber from dual ;
+ ---------- Done 19 Matches Found On "SEQ_HLA_":
+ ---------- Finished Searching Library C:\HlaSqlServer\App\hla_win.pbl for 'SEQ_HLA_'    (9:11:41 PM)
+
+
+==================================
+6-9-12  Sat  5 hr
+
+Installed SQLServer Express, imported hla_oracle backup into the new database HLA
+
+Added HLA Login, but it was not attached to the HLA user that was already defined in the DB created from the backup
+
+How to fix orphaned SQL Server users:  When you restore a Microsoft SQL Server database on a different machine, you cannot access the database until you fix the permissions. The problem is that the user in the database is an "orphan". This means that there is no login id or password associated with the user. This is true even if there is a login id that matches the user. There is a GUID (called a SID in Microsoft-speak) that has to match as well.
+
+All of these instructions should be done as a database admin, with the restored database selected.
+
+First, make sure that this is the problem. This will lists the orphaned users:
+
+    EXEC sp_change_users_login 'Report'  // ran this, listed HLA user
+
+If you already have a login id and password for this user, fix it by doing:
+
+    EXEC sp_change_users_login 'Auto_Fix', 'HLA'
+
+If you want to create a new login id and password for this user, fix it by doing:
+
+    EXEC sp_change_users_login 'Auto_Fix', 'user', 'login', 'password'
+
+
+========================
+Sequences
+
+Creating and using table sequence_master to assign primary keys, takes the place of Oracle sequences
+
+- In Oracle, selected the sequence name and current value (from dba_sequences) and created a tab-delim file sequence_master.txt
+- In SQL Server, created table sequence_master
+- Imported sequence_master.txt into the table
+
+sequence_name	sequence_num
+SEQ_HLA_AUDIT	12119640
+SEQ_HLA_BOX	15200
+SEQ_HLA_CODE	4940
+SEQ_HLA_INVENTORY	265180
+SEQ_HLA_LOGIN_SESSION	2040
+SEQ_HLA_PACKINGLIST	19380
+SEQ_HLA_PANEL	2021
+SEQ_HLA_PATIENT_REPORT	25401
+SEQ_HLA_PERSON	479220
+SEQ_HLA_REFNUM	233356
+SEQ_HLA_RUN	1
+SEQ_HLA_SBT_LOG	22
+SEQ_HLA_SESSION	69021
+SEQ_HLA_SPECIMEN	486360
+SEQ_HLA_WORKLIST_ITEM	187260
+SEQ_HLA_WORKSHEET_TEST	478240
+
+
+In SQLServer created stored procedure: sp_GetSequence()
+
+n_tr  - created new external function
+To see this, open the object, select the 'Declare Instance Variables' tab, then in the middle drop-down at the top, change it from Instance Variables to Local External functions
+
+Then, added this declaration:
+FUNCTION long sp_GetSequence(string seq_name) RPCFUNC
+
+// now need to retrofit all the PB code that selected into Oracle sequences
+n_hla_code.of_getnextseq()
+
+   old code:  select seq_hla_code.nextVal into :ll_ret from dual ;
+
+   new code:  ll_ret = sqlca.sp_GetSequence('SEQ_HLA_CODE')  // calls the new ext func defined for n_tr
+
+
+ ---------- Search: Searching Library C:\HlaSqlServer\App\hla_nvo.pbl for 'SEQ_HLA_'    (8:53:23 PM)
+ ---------- 11 Matches Found On "SEQ_HLA_":
+hla_nvo.pbl(n_hla_activity).of_init.0003:  Select seq_hla_activity.NextVal into :seq from dual;
+hla_nvo.pbl(n_hla_audit).of_file.0001:  select seq_hla_audit.nextval into :pkAuditSeq from dual ;
+hla_nvo.pbl(n_hla_box).of_getnextpk.0003:  Select seq_hla_box.NextVal into :pk from dual ;
+hla_nvo.pbl(n_hla_code).of_getnextseq.0005:  //select seq_hla_code.nextVal into :ll_ret from dual ;
+hla_nvo.pbl(n_hla_code).of_getnextseq.0007:  ll_ret = sqlca.sp_GetSequence('SEQ_HLA_CODE')
+hla_nvo.pbl(n_hla_inventory).of_getnextpk.0005:   select seq_hla_inventory.nextVal into :pk from dual ;
+hla_nvo.pbl(n_hla_person).of_getnextpid.0005:   select seq_hla_person.nextVal into :pid from dual ;
+hla_nvo.pbl(n_hla_specimen).of_getnextsid.0005:   select seq_hla_specimen.nextVal into :sid from dual ;
+hla_nvo.pbl(n_hla_worksheet).of_newworksheettestpk.0004:  select seq_hla_worksheet_test.nextval into :pk
+hla_nvo.pbl(n_xml_reader).of_readhlaaudit.0051:  //    //Select seq_hla_audit.nextval into :ll_pk from dual ;
+hla_nvo.pbl(n_xml_reader).of_readhlaaudit.0067:  //   //Select seq_hla_audit.nextval into :ll_pk from dual ;
+ ---------- Done 11 Matches Found On "SEQ_HLA_":
+ ---------- Finished Searching Library C:\HlaSqlServer\App\hla_nvo.pbl for 'SEQ_HLA_'    (8:53:23 PM)
+
+Ignored n_hla_activity:   sequence not used, table not used
+Others changed
+
+
+
+

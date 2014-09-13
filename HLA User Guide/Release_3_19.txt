@@ -1,0 +1,16 @@
+Release notes for HLA Version 3-19      Nov 19, 2007
+
+- Created a window called HLA Antigen Ambiguity, lets user enter an antigen, date, and the ambiguity string that is
+effective on that date
+
+- Changed Final Report Single to use the new dated ambiguities
+
+
+Steps to defining and using the new dated ambiguities
+
+- Link test codes to result locus values:  Select menu Data Entry | Admin | Codes. Select TEST CODES, select each test that will create a HR result for a locus,
+e.g. HLA A (High Res). In the extra field (bottom of screen) named 'RSLT FOR LOCI' enter 'A'. This will tell the system that
+the effective date of the A antigen value is equal to the result date of the HLA A (High Res) test.
+
+- Fill in the Antigen Ambiguities:  Select Data Entry | Admin | Antigen Ambiguity Strings.  Right-click in the white area under any
+existing rows, then select Add.  IN each new row, you

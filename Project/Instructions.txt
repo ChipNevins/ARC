@@ -1,0 +1,20 @@
+I found a change I could make that unlocks tables after the data is first retrieved onto your screen.  SQL Server does a lock on retrieval, but the important lock is needed on update. I moved this version to the P: drive (instructions below) and tested it remotely with sessions on Neng's PC and Sharon's PC. Our scenario - two users in Edit Patient - worked fine where it was locking on Monday.
+
+To load this version:  Start >Run > P:\HlaSqlServer\XcopyDeploy\Copy Recent Version.bat
+To run SqlServer, you can launch it from the desktop if the icon is there. If not, you can do this:
+- Go to folder c:\hlasqlserver\pbrun
+- Look for the shortcut file (icon displays as the globe), Double-click this file.
+
+The more testing you can do between now and next go-live, the better. Test multiple functions with multiple users.  If things look good, we could try for next Monday morning.
+
+To remove HLASqlServer from desktop:
+- right-clik icon on desktop, select cut
+- go to folder c:\hlasqlserver\pbrun
+- right-click, select paste (OK to overwrite)
+
+To put Oracle icon on desktop:
+- go to folder c:\hla\pbrun
+- find the globe shortcut file, right-click it, select copy
+- click on your desktop, then right-click, select paste
+
+To

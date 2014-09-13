@@ -1,0 +1,83 @@
+Contract Lab Packing List
+
+From:                                             To:
+Repository 802 (FPR)                              American Red Cross, New England Region
+711 Fifth Street SW                               HLA Services
+Suite #6                                          180 Rustcraft Road, Suite 115
+New Brighton, MN 55112                            
+(651) 746-5000                                    Dedham, MA 02026
+
+Date:06/28/2012                    Repository 802
+
+                   Request for Typing
+                   TR-0209570
+
+                                             Turn Around        Smpl
+  Box & Slot #    Donor ID       Category       Time        DC# Type Message
+  ------------   -----------     --------    -----------    --- ---- ------------------
+      1 -  1     0431-9351-5       Cust.          8         081  (A) A B C
+      1 -  2     0458-8310-5       Cust.          8         045  (A) A B C
+      1 -  3     0438-5374-6       Cust.          8         023  (A) A B C
+      1 -  4     0028-1609-8       Cust.          8         081  (A) A B C
+      1 -  5     0485-6110-4       Cust.          8         037  (A) A B C
+      1 -  6     0393-8716-2       Cust.          8         037  (A) A B C
+      1 -  7     0314-6619-6       Cust.          8         060  (A) A B C
+      1 -  8     0314-6621-2       Cust.          8         060  (A) A B C
+      1 -  9     0314-6250-0       Cust.          8         060  (A) A B C
+      1 - 10     0396-7057-5       Cust.          8         037  (A) A B C
+      1 - 11     0335-6195-2       Cust.          8         018  (A) A B C
+      1 - 12     0391-0611-7       Cust.          8         037  (A) A B C
+      1 - 13     0406-3942-9       Cust.          8         037  (A) A B C
+       1 -  1     0407-5408-7       Cust.          8         045  (A) A B C
+      1 -  2     0410-4121-1       Cust.          8         002  (A) A B C
+      1 -  3     0382-1456-5       Cust.          8         070  (A) A B C
+      1 -  4     0434-7764-5       Cust.          8         091  (A) A*
+      1 -  5     0424-9226-4       Cust.          8         002  (A) A B C
+      1 -  6     0402-2949-4       Cust.          8         066  (A) A B C
+      1 -  7     0384-8481-2       Cust.          8         094  (A) A B C
+      1 -  8     0426-7734-4       Cust.          8         067  (A) A B C
+      1 -  9     0384-9951-3       Cust.          8         074  (A) A B C
+      1 - 10     0431-4719-8       Cust.          8         002  (A) A B C
+      1 - 11     0431-1912-2       Cust.          8         002  (A) A B C
+      1 - 12     0431-1902-3       Cust.          8         002  (A) A B C
+      1 - 13     0393-0202-1       Cust.          8         063  (A) A B C
+      1 - 14     0431-1913-0       Cust.          8         002  (A) A B C
+      1 - 15     0386-4712-9       Cust.          8         074  (A) A B C
+      1 - 16     0450-1615-1       Cust.          8         091  (A) A B C
+      1 - 17     0431-4736-2       Cust.          8         002  (A) A B C
+      1 - 18     0387-6973-3       Cust.          8         002  (A) A B C
+      1 - 19     0442-8072-5       Cust.          8         070  (A) A*
+      1 - 20     0431-2973-3       Cust.          8         002  (A) A B C
+      1 - 21     0386-5566-8       Cust.          8         074  (A) A B C
+      1 - 22     0437-9435-3       Cust.          8         039  (A) A B C
+      1 - 23     0413-9008-9       Cust.          8         091  (A) A B C  
+    F 1 -  1     0500-2404-1       Cust.          8         037  (F) A B C
+    F 1 -  2     0499-8086-5       Cust.          8         074  (F) A B C
+    F 1 -  3     0499-1025-0       Cust.          8         101  (F) A B C
+    F 1 -  4     0496-9302-1       Cust.          8         002  (F) A B C
+    F 1 -  5     0504-7109-3       Cust.          8         054  (F) A B C
+    F 1 -  6     0508-8432-9       Cust.          8         037  (F) A B C
+    F 1 -  7     0449-6266-0       Cust.          8         013  (F) A B C
+    F 1 -  8     0468-6111-8       Cust.          8         045  (F) A B C
+    F 1 -  9     0478-9218-7       Cust.          8         070  (F) A B C
+    F 1 - 10     0492-6793-3       Cust.          8         045  (F) A B C
+    F 1 - 11     0480-5868-9       Cust.          8         060  (F) A B C
+    F 1 - 12     0455-3061-5       Cust.          8         090  (F) A B C
+    F 1 - 13     0586-9696-4       Cust.          8         067  (F) A*
+    F 1 - 14     0488-6851-7       Cust.          8         060  (F) A B C
+    F 1 - 15     0563-6312-0       Cust.          8         060  (F) A B C
+    F 1 - 16     0447-9503-7       Cust.          8         063  (F) A B C
+    F 1 - 17     0586-3049-2       Cust.          8         064  (F) A B C
+    F 1 - 18     0460-9907-3       Cust.          8         116  (F) A B C
+    F 1 - 19     0491-1519-9       Cust.          8         039  (F) A B C
+    F 1 - 20     0544-3581-3       Cust.          8         058  (F) A B C
+    F 1 - 21     0559-8648-3       Cust.          8         102  (F) A B C
+    F 1 - 22     0644-1303-2       Cust.          8         081  (F) A B C
+    F 1 - 23     0549-4839-3       Cust.          8         037  (F) A B C
+    F 1 - 24     0472-6937-8       Cust.          8         066  (F) A*
+    F 1 - 25     0476-6140-0       Cust.          8         037  (F) A B C
+    F 1 - 26     0498-7609-7       Cust.          8         002  (F) A B C
+    S 1 -  1     0657-6560-4       Cust.          8         037  (S) A B C
+    S 1 -  2     0658-6328-4       Cust.          8         070  (S) A B C
+Tracking Information:  Shipper = FedEx, Tracking Number = 535740850659
+Comments:

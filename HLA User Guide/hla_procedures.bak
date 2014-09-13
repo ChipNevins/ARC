@@ -1,0 +1,48 @@
+<HTML>
+<H1 NAME=top>HLA Computers Procedures</H1>
+
+<Font Face="Tahoma" size=3>
+Last revised: March 11, 2004
+&nbsp;&nbsp;
+<A HREF=#top>To print this page, Click here first</A>
+
+<H3 NAME=login>Login and logout.</H3>
+<OL>
+<LI>Quicktype.  You must enter username, password, and the data source 'HLAPROD'.  When you close the application, you are automatically logged out of the database.</LI>
+<LI>HLA Oracle System.  The Login window is presented after you click the HLA System icon.  Username is normally your last name, password is the same as in the Mumps system.  The login window remembers the last login name used, so normally you will need to enter only your password. When you close the application, you are automatically logged out of the database.
+</OL>
+
+<H3 NAME=Lock>Locking your workstation</H3>
+Workstations lock automatically after 30 minutes, but whenever you leave your workstatin for more than a few minutes, you should lock your workstation.  here is how to do it: Hold down the Ctrl and Alt keys, press the Delete key.  The system presents a window with Lock Worstation as default. Press Enter to lock the workstation. No open windows are lost when you lock a workstation!
+
+<H3 NAME=backup>Backup procedures</H3>
+NOTE: As of 8-Mar-04, we are NOT doing backup on the HLA server
+Each morning, perform these steps on both the HLA1 servers:
+<OL>
+ <LI>Log into the server under an administrator account. Check the backup log. The backup log is OK if all files were backed up, on both the C: and D: drives, and all files were OK in the tape verify portion of the log.  Remove the tape from the tape drive.  If the backup log indicated that the backup was OK, write today's date on the tape label.  If the backup was not OK, phone support - do not write on the tape.
+ <LI>Note the backup in the log book for this server. Be sure to clearly write the date, your initials, and whether the backup was or was not successful.
+ <LI>Put the next tape in sequence into the tape drive.  E.g., if you remove the 'B' tape, insert the 'C' tape. (There should be 10 tapes, labelled A-J, in the tape sequence).
+</OL>
+<p>Offsite storage: Each Tuesday, send the last good tape offsite.  Usually this will be the tape you just removed from the drive.
+
+<H3 NAME=support>Support</H3>
+Chip Nevins and Gil DeSantis maintain the computers used in the HLA network.  This includes the machines used for the HLA Mumps and Oracle systems, Quicktype, RELI, ABI, and the Macintosh applications.
+<P>
+<Font Face="Arial" size=3>
+<P>Chip: Cell phone# is 617.515.6644
+<P>Gil: Pager# is 877.627.5619, follow the verbal instructions
+</font>
+<P>
+<H3>Information for programmers</H3>
+<UL>
+<LI>Copying builds to user PCs.  Run program P:\HLA\PbRun\copy_hla.bat.  This program copies the runtime software from the current release folder, to the folder c:\hla\pbrun. Desktop systems run from the local copy on the C: drive
+<LI>Restore a previous build. If the current build has a fatal problem, go back to a previous build. Edit program copy_hla.bat so it copies files from an earlier folder, e.g. change the 1-20 entries to 1-19. Run this program on all user machines. Going back 1-2 builds will work with the current Oracle table structure
+</UL>
+
+<P>
+<A HREF=#top>Back to top</A>
+
+
+</HTML>
+
+

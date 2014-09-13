@@ -1,0 +1,82 @@
+<HTML>
+
+<H1><A NAME="top">HLA Workflow</A></H1>
+<BODY>
+
+<Font Face="Tahoma" size=3>
+Last revision: July 10, 2003
+&nbsp;&nbsp;
+<A HREF=#top>To print this page, Click here first</A>
+
+<P ALIGN="left">
+This page is a start, but incomplete description of, HLA workflow.
+<BR>
+<BR><A HREF="#wf_nmdp_contract">NMDP Contract Work</A>
+<BR><A HREF="#wf_patients">Regular Patients</A>
+<BR><A HREF="#wf_patient_family">Patient Family</A>
+<BR><A HREF="#wf_customized">Customized Contract</A>
+<BR><A HREF="#wf_cord_blood">Cord Blood</A>
+
+
+<h3><A NAME="wf_nmdp_contract"></A>NMDP Contract work</h3>
+<ol>
+  <li>NMDP sends a large set of samples, and an electronic packing list file.
+  <li>HLA staff imports this packing list into Quicktype (LifeCodes). These samples are <u>not</u> accessioned into the Mumps HLA system
+  <li>Typing results are recorded in QuickType
+  <li>Results are exported from Quicktype directly to NMDP
+</ol>
+
+<h3><A NAME="wf_patients"></A>Regular Patients</h3>
+<ol>
+  <li>Request for patient typing is sent to us from a hospital
+  <li>Patient is accessioned into Mumps system.
+  <li>Login data is sent over the HLA bridge to Oracle
+  <li>Testing is done in Quicktype and/or RELI, depending on the test. RELI readings go over HLA bridge to Oracle
+  <li>HLA staff enter results using Oracle 'Result Entry' screen. This program can read the RELI and Quicktype readings
+  <li>A Result Report is printed to paper and faxed to the requesting hospital
+</ol>
+
+<h3><A NAME="wf_patient_family"></A>Patient Family</h3>
+<ol>
+  <li>Request for patient/famil typing is sent to us from a hospital
+  <li>HLA staff create a PATIENT REPORT for this patient. This can happen before or after login, so the report is indexed by patient name, not Ref#
+  <li>Patient is accessioned into Mumps system. Login data is sent over the HLA bridge to Oracle
+  <li>Requests come in to test this patient for compatibility with donors.  Donors can be family members, or URD (unrelated donors). 
+  <li>As donor requests come in, the donor name is added to the patient report. The donor name can be added before the donor is logged in.
+  <li>Donor sample arrives and it is logged into Mumps, bridged over to Oracle.
+  <li>Testing is done for patient and for donors, in Quicktype and/or RELI, depending on the test. RELI readings go over HLA bridge to Oracle
+  <li>HLA Results are entered in Oracle, via Result Entry. The program can read the RELI and Quicktype readings
+  <li>HLA Results transferred to the Patient Report
+  <li>Patient Report is printed to paper and faxed to the requesting hospital
+</ol>
+
+<h3><A NAME="wf_cutomized_contract"></A>Customized Contract</h3>
+<ol>
+  <li>NMDP sends samples and a packing list. The packing list contains a mix of customized and other samples
+  <li>HLA staff create a Donor Information Sheet for each customized contract donor. The donor is logged into Mumps, bridged over to Oracle. Ref# is written on the Donor Information Sheet.
+  <li>Lab testing is done for the donor: Quicktype, RELI, ABI (for sequence-based typing)
+  <li>HLA staff imports the NMDP packing list into an Oracle packing list.  They select the customized samples, and add them to their Result Entry sample list, with status 'New'
+  <li>When testing is done, HLA staff use Result Entry to enter HLA type.  RELI and Quicktype readings are read by the program, SBT readings are on paper and need to be re-keyed into the Result Entry screen
+  <li>Each specimen is added to the Open Batch from the result entry screen.  No paper reports are printed
+  <li>HLA staff creates NMDP export file using the Orcale function 'LBSW Export'
+</ol>
+
+<h3><A NAME="wf_cord_blood"></A>Cord Blood</h3>
+<ol>
+  <li>Cord collection site sends cord blood sample sent to HLA lab
+  <li>Sample logged into Mumps, bridged over to Oracle. In login, the cord is entered as, e.g., '22KH12345,DONOR' for donor id 22KH12345.
+  <li>Testing done in RELI or Quicktype
+  <li>HLA staff enters HLA type using Oracle 'Result Entry' screen. Cords are marked for Open Batch, and paper report is printed. Note: sometimes low res results are entered first, high res results later.  After high res entered, user flags 'Typing done = Y' in Result Entry
+  <li>Paper report sent to cord site
+  <li>HLA staff uses Oracle 'Cord Export' screen to send HLA types in a batch to the requesting site. Sites are: Worcester (Dedham), StPaul, Capitol
+  <li>Cord site enters data into NMDP Cordlink system, which generates NMDP identifiers. Cord site sends new identifiers in a batch back to HLA lab.
+  <li>HLA staff imports NMDP identifiers using MUMPS function 95;10;1. New ids in Mumps are bridged over to Oracle.
+  <li>HLA staff uses Oracle 'LBSW Export' screen to send HLA types to NMDP
+<ol>
+
+<p>
+<A HREF=#top>Back to top</A>
+</BODY>
+</HTML>
+
+

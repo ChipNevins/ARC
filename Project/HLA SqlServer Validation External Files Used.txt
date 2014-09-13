@@ -1,0 +1,130 @@
+HLA SqlServer Validation External Files Used.txt
+
+
+[FileLocations]
+errorlog=c:\hlasqlserver\log\errorlog.txt
+userinifile=c:\hlasqlserver\app\user.ini
+AppDirectory=c:\hlasqlserver\pbrun\
+DynalSbtDirectory=c:\hlasqlserver\SBTreports\
+ExportDirectory=c:\hlasqlserver\export\
+LbswDirectory=c:\hlasqlserver\mci\
+LIFCDirectory=c:\neng\
+LogDirectory=c:\hlasqlserver\log\
+LuminexLbswDirectory=c:\hlasqlserver\Luminex-LBSW\Clinical Results
+PanelTemplateDirectory=c:\hlasqlserver\panel\template\
+PanelDataDirectory=c:\hlasqlserver\panel\data\
+PanelLuminexDirectory=c:\hlasqlserver\luminex_map\
+PanelFooterDirectory=c:\hlasqlserver\panel\footer\
+ReliDirectory=c:\hlasqlserver\SbtReports\
+SbtDirectory=c:\NMDP Results\SBT\
+XmlDirectory=c:\hlasqlserver\Luminex-LBSW\Clinical Results
+HmlDirectory=c:\hlasqlserver\Luminex-LBSW\Clinical Results
+
+
+-- List of objects that use external files:
+
+ ---------- Search: Searching Library C:\HlaSqlServer\App\hla_nvo.pbl for 'FileLocations'    (11:27:13 AM)
+ ---------- 12 Matches Found On "FileLocations":
+hla_nvo.pbl(n_dynalsbt_reader).of_readfile.0047:   fileDirectory = ProfileString(gnv_app.of_GetAppIniFile(), 'FileLocations', 'DynalSbtDirectory', 'c:\hla\')
+hla_nvo.pbl(n_hla_panel).of_create_luminex_export.0022:   dir = ProfileString(gnv_app.of_getAppIniFile(), 'FileLocations', 'PanelLuminexDirectory', 'c:\hla\')
+hla_nvo.pbl(n_lifc_reader).of_filereading.0009:  If ProfileString(gnv_app.of_getAppIniFile(), 'FileLocations', 'LifcDirectory', "") = "" Then
+hla_nvo.pbl(u_cord_export_site).cb_export.clicked.0037:  strFileName = ProfileString(gnv_app.of_GetAppIniFile(), 'FileLocations', 'ExportDirectory','c:\hla\export') &
+hla_nvo.pbl(u_nmdp_export).of_lbsw_export.0033:  strDirectory = ProfileString(gnv_app.of_GetAppIniFile(), 'FileLocations', 'LBSWDirectory','c:\hla\mci\')
+hla_nvo.pbl(u_nmdp_export).of_hml_export.0045:  strDirectory = ProfileString(gnv_app.of_GetAppIniFile(), 'FileLocations', 'LBSWDirectory','c:\hla\mci\')
+hla_nvo.pbl(u_nmdp_export).of_tabdelim_export.0045:  strDirectory = ProfileString(gnv_app.of_GetAppIniFile(), 'FileLocations', 'LBSWDirectory','c:\hla\mci\')
+hla_nvo.pbl(u_nmdp_export).of_project22_export.0060:  strDirectory = ProfileString(gnv_app.of_GetAppIniFile(), 'FileLocations', 'LBSWDirectory','c:\hla\mci\')
+hla_nvo.pbl(u_packinglist_login).cb_login.clicked.0012:  appDirectory = ProfileString(gnv_app.of_GetAppIniFile(), "FileLocations", "AppDirectory", "c:\hla\")
+hla_nvo.pbl(u_packinglist_login_enterolab).cb_login.clicked.0012:  appDirectory = ProfileString(gnv_app.of_GetAppIniFile(), "FileLocations", "AppDirectory", "c:\hla\")
+hla_nvo.pbl(u_packinglist_login_hk).cb_login.clicked.0012:  appDirectory = ProfileString(gnv_app.of_GetAppIniFile(), "FileLocations", "AppDirectory", "c:\hla\")
+hla_nvo.pbl(u_person_login).of_printlabel.0005:  appDirectory = ProfileString(gnv_app.of_GetAppIniFile(), 'FileLocations', 'AppDirectory','c:\hla\')
+ ---------- Done 12 Matches Found On "FileLocations":
+ ---------- Finished Searching Library C:\HlaSqlServer\App\hla_nvo.pbl for 'FileLocations'    (11:27:13 AM)
+
+ ---------- Search: Searching Library C:\HlaSqlServer\App\hla_win.pbl for 'FileLocations'    (11:30:26 AM)
+ ---------- 34 Matches Found On "FileLocations":
+hla_win.pbl(w_hla_search).of_html_export.0004:  strDirectory = ProfileString(gnv_app.of_GetAppIniFile(), 'FileLocations', 'ExportDirectory','c:\hla\export\')
+hla_win.pbl(w_lbsw_filter)pfc_postopen.0011:  //ls_ExportDir = ProfileString(gnv_app.of_GetAppIniFile(), 'FileLocations', 'ExportDirectory', 'c:\hla\export\')
+hla_win.pbl(w_low_res_historical_typing)pfc_postopen.0011:  //ls_ExportDir = ProfileString(gnv_app.of_GetAppIniFile(), 'FileLocations', 'ExportDirectory', 'c:\hla\export\')
+hla_win.pbl(w_packinglist).of_retrievepanel.0011:   dir = ProfileString(gnv_app.of_getAppIniFile(), 'FileLocations', 'PanelDataDirectory', 'c:\hla\')
+hla_win.pbl(w_packinglist)pfc_postopen.0008:  directoryName = ProfileString(gnv_app.of_getAppIniFile(), 'FileLocations', 'PanelTemplateDirectory', 'c:\hla\')
+hla_win.pbl(w_packinglist).cb_create_panel.clicked.0027:  dir = ProfileString(gnv_app.of_getAppIniFile(), 'FileLocations', 'PanelTemplateDirectory', 'c:\hla\')
+hla_win.pbl(w_packinglist).cb_create_panel.clicked.0066:  dir = ProfileString(gnv_app.of_getAppIniFile(), 'FileLocations', 'PanelDataDirectory', 'c:\hla\')
+hla_win.pbl(w_packinglist).cb_create_panel.clicked.0077:  dir = ProfileString(gnv_app.of_getAppIniFile(), 'FileLocations', 'PanelLuminexDirectory', 'c:\hla\')
+hla_win.pbl(w_packinglist).dw_panel_edit.pfc_update.0011:  dir = ProfileString(gnv_app.of_getAppIniFile(), 'FileLocations', 'PanelDataDirectory', 'c:\hla\')
+hla_win.pbl(w_packinglist).dw_panel_edit.pfc_update.0036:  dir = ProfileString(gnv_app.of_getAppIniFile(), 'FileLocations', 'PanelLuminexDirectory', 'c:\hla\')
+hla_win.pbl(w_packinglist).cb_panel_select.clicked.0006:   panelDirectory = ProfileString(gnv_app.of_getAppIniFile(), 'FileLocations', 'PanelDataDirectory', 'c:\hla\')
+hla_win.pbl(w_packinglist).cb_panel_delete.clicked.0004:  dir = ProfileString(gnv_app.of_getAppIniFile(), 'FileLocations', 'PanelDataDirectory', 'c:\hla\')
+hla_win.pbl(w_panel_grid_display)pfc_postopen.0015:   pathName = ProfileString(gnv_app.of_getAppIniFile(), 'FileLocations', 'PanelFooterDirectory','') &
+hla_win.pbl(w_panel_load)open.0007:  ls_PanelDataDirectory = ProfileString(ls_iniFile, 'FileLocations', 'PanelDataDirectory', 'r:\hla')
+hla_win.pbl(w_paneltemplate).cb_save.clicked.0006:  folderName = ProfileString(gnv_app.of_getAppIniFile(), 'FileLocations', 'PanelTemplateDirectory', 'c:\hla\')
+hla_win.pbl(w_print_labels).cb_print.clicked.0006:  appDirectory = ProfileString(gnv_app.of_GetAppIniFile(), "FileLocations", "AppDirectory", "c:\hla\")
+hla_win.pbl(w_reader).of_run.0030:    ls_CurrentDirectory = ProfileString(ls_iniFile, 'FileLocations', 'XmlDirectory', 'r:\hla\xml\')
+hla_win.pbl(w_reader).of_run.0032:    // ls_MirrorDirectory = ProfileString(gnv_app.of_getAppIniFile(), 'FileLocations', 'MirrorDirectory','')
+hla_win.pbl(w_reader).of_run.0046:    ls_CurrentDirectory = ProfileString(ls_iniFile, 'FileLocations', 'HmlDirectory', 'r:\hla\xml\')
+hla_win.pbl(w_reader).of_run.0057:    ls_CurrentDirectory = ProfileString(ls_iniFile, 'FileLocations', 'ReliDirectory', 'c:\hla\ReliRm\')
+hla_win.pbl(w_reader).of_run.0068:    ls_CurrentDirectory = ProfileString(ls_iniFile, 'FileLocations', 'LuminexLbswDirectory', 'c:\hla\')
+hla_win.pbl(w_reader).of_run.0079:    ls_CurrentDirectory = ProfileString(ls_iniFile, 'FileLocations', 'DynalSbtDirectory', 'c:\hla\')
+hla_win.pbl(w_reader)pfc_postopen.0035:  ls_Directory = ProfileString(ls_iniFile, 'FileLocations', 'HmlDirectory', 'r:\hla\xml\')
+hla_win.pbl(w_reader)pfc_postopen.0054:   ls_Directory = ProfileString(ls_iniFile, 'FileLocations', 'XmlDirectory', 'r:\hla\xml\')
+hla_win.pbl(w_reader)pfc_postopen.0067:  ls_Directory = ProfileString(ls_iniFile, 'FileLocations', 'ReliDirectory', 'r:\hla\ReliRm\')
+hla_win.pbl(w_reader)pfc_postopen.0086:  ls_Directory = ProfileString(ls_iniFile, 'FileLocations', 'LuminexLbswDirectory', 'r:\Luminex-Lbsw\')
+hla_win.pbl(w_reader)pfc_postopen.0109:  ls_Directory = ProfileString(ls_iniFile, 'FileLocations', 'DynalSbtDirectory', 'r:\hla\sbt\')
+hla_win.pbl(w_reader).cb_run.clicked.0006:  ls_logFilePath = ProfileString(ls_iniFile, 'FileLocations', 'LogDirectory', 'c:\hla\') + ls_logFileName
+hla_win.pbl(w_rnumber_list).cb_save.clicked.0006:  ls_folder = ProfileString(gnv_app.of_getAppIniFile(), 'FileLocations', 'ExportDirectory', '')
+hla_win.pbl(w_sbt).of_displayoutboxfile.0007:  ls_SbtDirectory = ProfileString(gnv_app.of_getAppIniFile(), 'FileLocations', 'SbtDirectory', '')
+hla_win.pbl(w_sbt)pfc_postopen.0011:  ls_SbtDirectory = ProfileString(gnv_app.of_GetAppIniFile(), 'FileLocations', 'SbtDirectory', '')
+hla_win.pbl(w_sbt).cb_build.clicked.0014:  ls_Folder = ProfileString(gnv_app.of_getAppIniFile(), 'FileLocations', 'LogDirectory', '')
+hla_win.pbl(w_sbt).cb_build.clicked.0090:  ls_Folder = ProfileString(gnv_app.of_getAppIniFile(), 'FileLocations', 'SbtDirectory', '') + 'Outbox\SBT_' 
+hla_win.pbl(w_worksheet_template_edit).cb_edit_footer.clicked.0003:  panelFooterFolder = ProfileString(gnv_app.of_getAppIniFile(), 'FileLocations', 'PanelFooterDirectory', '')
+ ---------- Done 34 Matches Found On "FileLocations":
+ ---------- Finished Searching Library C:\HlaSqlServer\App\hla_win.pbl for 'FileLocations'    (11:30:26 AM)
+
+
+ ---------- Search: Searching Library C:\HlaSqlServer\App\hla_win.pbl for 'lnv_panel'    (12:05:49 PM)
+ ---------- 44 Matches Found On "lnv_panel":
+hla_win.pbl(w_packinglist).of_retrievepanel.0003:  n_hla_panel  lnv_panel
+hla_win.pbl(w_packinglist).of_retrievepanel.0005:  lnv_panel = create n_hla_panel
+hla_win.pbl(w_packinglist).of_retrievepanel.0016:    panelRow = lnv_panel.of_cvtLineToGrid(lineCount)
+hla_win.pbl(w_packinglist).of_retrievepanel.0031:  destroy  lnv_panel
+hla_win.pbl(w_packinglist).cb_create_panel.clicked.0006:  n_hla_panel  lnv_panel
+hla_win.pbl(w_packinglist).cb_create_panel.clicked.0010:  lnv_panel = create n_hla_panel
+hla_win.pbl(w_packinglist).cb_create_panel.clicked.0033:   nUpGridRow = lnv_panel.of_cvtLineToGrid(textLineRow)
+hla_win.pbl(w_packinglist).cb_create_panel.clicked.0043:   dsRow = lnv_panel.of_cvtLineToGrid(i)
+hla_win.pbl(w_packinglist).cb_create_panel.clicked.0069:   nUpGridRow = lnv_panel.of_cvtLineToGrid(textLineRow)
+hla_win.pbl(w_packinglist).cb_create_panel.clicked.0074:  lnv_panel.of_InitFromFile(dir + newPanelName + '.txt', newPanelName)
+hla_win.pbl(w_packinglist).cb_create_panel.clicked.0082:   nUpGridRow = lnv_panel.of_cvtLineToGrid(textLineRow)
+hla_win.pbl(w_packinglist).cb_create_panel.clicked.0093:  destroy lnv_panel
+hla_win.pbl(w_panel_grid_display)pfc_postopen.0003:  n_hla_panel  lnv_panel
+hla_win.pbl(w_panel_grid_display)pfc_postopen.0010:  lnv_panel = create n_hla_panel
+hla_win.pbl(w_panel_grid_display)pfc_postopen.0013:   lnv_panel.of_init(il_pkPanel)
+hla_win.pbl(w_panel_grid_display)pfc_postopen.0014:   this.title += ' -  ' + lnv_panel.strPanelName
+hla_win.pbl(w_panel_grid_display)pfc_postopen.0016:       + lnv_panel.strPanelType + '.txt'
+hla_win.pbl(w_panel_grid_display)pfc_postopen.0022:   dw_panel_grid.object.panelName.text = lnv_panel.strPanelName
+hla_win.pbl(w_panel_grid_display)pfc_postopen.0039:    nUpRow = lnv_panel.of_cvtItemSeqToNupRow(pkItemSeq)
+hla_win.pbl(w_panel_grid_display)pfc_postopen.0045:  destroy  lnv_panel
+hla_win.pbl(w_paneltemplate).cb_open.clicked.0003:  n_hla_panel  lnv_panel
+hla_win.pbl(w_paneltemplate).cb_open.clicked.0005:  lnv_panel = create n_hla_panel
+hla_win.pbl(w_paneltemplate).cb_open.clicked.0025:   nUpGridRow = lnv_panel.of_cvtLineToGrid(textLineRow)
+hla_win.pbl(w_paneltemplate).cb_open.clicked.0042:  destroy  lnv_panel
+hla_win.pbl(w_paneltemplate).cb_save.clicked.0003:  n_hla_panel  lnv_panel
+hla_win.pbl(w_paneltemplate).cb_save.clicked.0005:  lnv_panel = create n_hla_panel
+hla_win.pbl(w_paneltemplate).cb_save.clicked.0013:     nUpGridRow = lnv_panel.of_cvtLineToGrid(textLineRow)
+hla_win.pbl(w_paneltemplate).cb_save.clicked.0035:  destroy  lnv_panel
+hla_win.pbl(w_test_panels).dw_list_view.dragdrop.0003:  n_hla_panel  lnv_panel
+hla_win.pbl(w_test_panels).dw_list_view.dragdrop.0005:  lnv_panel = create n_hla_panel
+hla_win.pbl(w_test_panels).dw_list_view.dragdrop.0023:   this.object.strWellLabel[iRow] = lnv_panel.of_cvtWellNbrToLabel(iRow)
+hla_win.pbl(w_test_panels).cb_displaygrid.clicked.0002:  n_hla_panel  lnv_panel
+hla_win.pbl(w_test_panels).cb_displaygrid.clicked.0009:  lnv_panel = create n_hla_panel
+hla_win.pbl(w_test_panels).cb_displaygrid.clicked.0021:    nUpRow = lnv_panel.of_cvtItemSeqToNupRow(pkItemSeq)
+hla_win.pbl(w_test_panels).cb_displaygrid.clicked.0027:  destroy  lnv_panel
+hla_win.pbl(w_worksheet_tests).of_panel_recalc.0002:  n_hla_panelitem  lnv_panelItem
+hla_win.pbl(w_worksheet_tests).of_panel_recalc.0004:  lnv_panelItem = create n_hla_panelItem
+hla_win.pbl(w_worksheet_tests).of_panel_recalc.0009:    lnv_panelItem.of_reset()
+hla_win.pbl(w_worksheet_tests).of_panel_recalc.0010:    lnv_panelitem.pkPanel = inv_panel.pkPanel
+hla_win.pbl(w_worksheet_tests).of_panel_recalc.0011:    lnv_panelitem.pkPanelItemSeq = row
+hla_win.pbl(w_worksheet_tests).of_panel_recalc.0012:    lnv_panelItem.of_recalc()
+hla_win.pbl(w_worksheet_tests).of_panel_recalc.0014:    dw_panel.object.nbrRow[row] = lnv_panelitem.nbrrow
+hla_win.pbl(w_worksheet_tests).of_panel_recalc.0015:    dw_panel.object.nbrColumn[row] = lnv_panelitem.nbrcolumn
+hla_win.pbl(w_worksheet_tests).of_panel_recalc.0016:    dw_panel.object.strWellLabel[row] = lnv_panelitem.strwelllabel
+ ---------- Done 44 Matches Found On "lnv_panel":
+ ---------- Finished Searching Library C:\HlaSqlServer\App\hla_win.pbl for 'lnv_panel'    (12:05:49 PM)

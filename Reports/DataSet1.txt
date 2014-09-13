@@ -1,0 +1,19 @@
+select hla_specimen.strspecimennum SpecimenNum,
+       hla_person.strlastname + ',' + hla_person.strfirstname DonorName,
+       REGCAT.strcodename RegCategory,
+       IsNull(DONORTYPE.strcodename,' - not entered -') DonorType,
+       TESTCODE.strcodename TestCode,
+       HLA_Test.dtorderdate OrderDate,
+       HLA_Test.dtresultdate ResultDate,
+       1 QTY
+  from hla_person
+ left outer join hla_code as REGCAT on hla_person.cdregcat = REGCAT.pkcodenumber and REGCAT.pkcodetype = 'REG CATEGORY'
+ left outer join hla_code as DONORTYPE on hla_person.cddonortype = DONORTYPE.pkcodenumber and DONORTYPE.pkcodetype = 'DONOR TYPE',
+       hla_specimen,
+       HLA_Test
+ left outer join hla_code as TESTCODE on HLA_Test.cdtestcode = TESTCODE.pkcodenumber and TESTCODE.pkcodetype = 'TEST CODE'
+ where CAST(hla_test.dtorderdate AS DATE) between @FromDate and @ToDate
+   and hla_specimen.fkpid = hla_person.pkpid
+   and hla_test.pksid = hla_specimen.pksid
+   and hla_specimen.pksid = HLA_Test.pksid
+order by TestCode,RegCategory,DonorType,DonorName

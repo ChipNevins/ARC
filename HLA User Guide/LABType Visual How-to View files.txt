@@ -1,0 +1,50 @@
+LABType Visual How-to View Files.txt
+
+
+I have installed LABType Visual 2.0 on the computer named HLAXP3 (next to georgia's cubicle), and put the historical MDB data on that machine.  I also put a copy of these files on the T: drive  (\\hla4\ltv) .
+
+Why we need LTVdbGlobal.mdb as well as LTVdbRecords_2p0...
+- it has the catalog list; without it the sample detail is not dislayed
+- it stores the current DB an operator (user) is using. Without this the ability to switch db's does not work
+
+Warning:  I used the LTVGlobal.mdb file from Sharon's old PC.  I am not sure if this MDB has all catalogs, and I do not know how to load a catalog into this MDB.  You may need to follow up on this part.
+
+The files on HLAXP3:
+Data files:
+  C:\LABTypeVisual_2p0\LumAnalysisNet\LTVdbRecords\LTVdbRecords_2p0_01.mdb
+  C:\LABTypeVisual_2p0\LumAnalysisNet\LTVdbRecords\LTVdbRecords_2p0_02.mdb
+  C:\LABTypeVisual_2p0\LumAnalysisNet\LTVdbRecords\LTVdbRecords_2p0_03.mdb
+  C:\LABTypeVisual_2p0\LumAnalysisNet\LTVdbRecords\LTVdbRecords_2p0_04.mdb
+Global file:
+    C:\LABTypeVisual_2p0\LumAnalysisNet\bin\LTVdbGlobal_2p0.mdb
+
+The files on T: drive   (\\hla4\ltv\)
+Data files:
+  T:\LTVdbRecords\LTVdbRecords_2p0_01.mdb
+  T:\LTVdbRecords\LTVdbRecords_2p0_02.mdb
+  T:\LTVdbRecords\LTVdbRecords_2p0_03.mdb
+  T:\LTVdbRecords\LTVdbRecords_2p0_04.mdb
+Global file:
+    T:\LTVdbGlobal_2p0.mdb
+
+
+How to open a database:
+
+1. On HLAXP3, double-click the LABTypeVisual icon on the desktop
+2. Enter your login information, click 'Login' I have checked accounts OLI and SMA
+3. Select Control Panel, and from there you can select the normal viewing options.
+
+To to switch databases:
+
+1. After login, close all viewing windows you may have open, return to Control Panel.
+2. Select menu item 'LTV Utilities', then 'Set Database Path".  A window opens with fields you can set.  You only need to change the Default Database value. The next steps are right from the OneLambda installation document.
+3.	Under the Default Database - select <Change…>
+a.	Locate and open C:\LABTypeVisual_2p0\LumAnalysisNet\LTVdbRecords\ folder.  
+b.	Double click on "LTVdbRecords_2p0_01.mdb" file   (or 02, 03, 04, etc)
+c.	You will see that the Default Database is "C:\LABTypeVisual_2p0\LumanalysisNet\LTVdbRecords\LTVdbRecords_2p0.mdb"
+4.	Select the <Set to Default> button to set Current Database to the default database.
+5.	Select <SAVE> to change links to selected database and paths.
+A status bar will appear.  When complete, a message will appear to verify that paths/links have been set.
+6.	Select <OK> - status bar will appear again.  A message will appear “Network path and global database has been reset – select <OK> and then <Close>.  Note that if a message box appears to indicate that paths are to be set, you will need to select <OK> to close the message box and the click <Close> to close the database setup menu.
+
+-  end  -
