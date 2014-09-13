@@ -1,5 +1,15 @@
 arc_SqlServer_Pb_log.txt
 
+9-8-14
+Emailed XCopyDeploy instructions to Christine
+1. Log onto the PC under the HLAUSER account.
+2. Start > MyComputer, then navigate to folder p:\HlaSqlserver\XcopyDeploy
+3. Run the batch file Install Runtime.bat
+4. Run the batch file Copy Latest Version.bat
+5. Copy the HLA SqlServer shortcut (the 'globe') to the desktop of the PC
+
+But there was no INI file in the deploy
+
 
 12-12-13
 Hi Chip,
