@@ -1,5 +1,23 @@
 arc_SqlServer_Pb_log.txt
 
+09-14-16  9.5 hours  Report comments
+From: Chip Nevins [mailto:chip.nevins@gmail.com] 
+Sent: Wednesday, September 14, 2016 10:16 PM
+To: Fulgencio, Rommel Y.; Yu, Neng
+Subject: Re: HLA report method comments
+ 
+Neng and Romie:
+ 
+I got version 5.14 working with the patient comments you can select on patient reports.  Romie: I downloaded this version to your PC only and left it there. You will probably want formatting changes, so please try it on this machine and let me know what you think.
+ 
+The comment selection is a data entry function, and the selections are kept in the database. For this reason, I put the window for selecting comments at the bottom of the patient report data entry window - where you add patient/donor rows and comments and make other changes to the report.  The preview windows will print with your comments.
+ 
+This is implemented only for individual reports, not batch patient reports.
+ 
+I am working at DFCI on Thursday, working from home on Friday, and out most of next week for a medical procedure. So Thu/Fri would be the best time for me to make improvements.  Each PC can use either 5.14 or stay with 5.13.
+ 
+Chip
+
 Modification 4/17/16
 
 3/22 Meeting with ARC on new contract.  ARC will move DB to new server,run HLA SqlServer there until end of year.

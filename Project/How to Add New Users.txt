@@ -1,0 +1,31 @@
+To add a new server, there is one part you do on the server, and another part withing the HA SQL Server application
+
+SQL Server
+---------------------------------------------------
+Remote to server HLA6 and open SQL Server Management Studio
+or go to the server itself and login if you are in Dedham
+
+----  Login
+Under SQL Server Security (no under database)
+Add Login
+
+Login name: YU
+Click SQL Server authentication
+Enter password and confirm password
+Uncheck 'Enforce pw policy', pw expiration, pw change
+Default database: HLA
+- Click OK to save
+
+---- User
+Select database HLA_LIVE
+Select folder Security > Users
+Right-click to Add user
+
+Username: YU
+Login: YU
+
+Schemas owned: HLA
+Database role membership: hla_user  (need to scroll down to see this role)
+- Click OK to save
+
+-------------------------------------------------------

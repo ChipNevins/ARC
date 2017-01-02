@@ -1,0 +1,436 @@
+<HTML>
+<HEAD>
+<H1>HLA Oracle Lab System - Release Notes</H1>
+</HEAD>
+
+<BODY>
+<Font Face="Tahoma" size=3>
+Last revision: May 03, 2004&nbsp;&nbsp;
+<A HREF=#top>To print this page, Click here first</A>
+
+<HR ALIGN="left">
+
+<h4>Version 2.01  MaY 03, 2004</h4>
+<ul>
+<li>Worksheets and Panels.
+ <ul>
+  <li>Worksheet template. Lets user define where each test goes based on Reg Cat, Donor Type and test code
+  <li>Codes. TEST CODE table now has extra field for PANEL LOCI
+  <li>Login. Each logged-in test go onto a worksheet based on Worksheet Template definition
+  <li>Worksheet window, user can assign worksheet tests to panels. User can add/delete items from worksheets or panels. Panels use the same table as the previous Panel setup in Packinglist window
+  <li>Test Order Progress. Report shows test orders for date range, with Worksheet and panel
+  <li>Login. Logged-in items go on Worksheets
+ </ul>
+<li>Inquiry.
+ <ul>
+   <li>Lookup window stays open so that user can look sequentially at several records which match the original lookup value
+   <li>Problemm with truncation of two-line comment fixed
+   <li>Display of HLA type with in Login lookup fixed
+   <li>Panels section added to Inquiry
+ </ul>
+<li>Inventory. Several small problems fixed
+<li>Login.
+  <ul>
+    <li>Added warning if user attempts to login a packinglist which was already logged in
+    <li>On 2nd, 3rd specimens for Pt/Donor, unlock all of the Pt/Donor data entry fields
+  </ul>
+</ul>
+
+<h4>Version 1.50  March 29, 2004</h4>
+<ul>
+<li>Login.  From the Worklist tab, user can now edit Pt/Donor, or add/delete test orders
+<li>Result Entry.  Correction: Deleted test was AUTO flagged with HLA result
+<li>Inventory.  Several corrections:
+  <ul>
+   <li>For new entry, window automatically adds a row
+   <li>Fixed problem where the error message 'BOX, CONTENTS or ADD/REMOVE required' was displaying incorrectly
+  <li>User can single-click an inventory row to bring it into the data entry area
+  <li>The Box display now has a grey background so it is not confused with the data entry area.
+  </ul>
+</ul>
+
+<h4>Version 1.49  March 19, 2004</h4>
+<ul>
+<li>Login. Added test order fields 6,7,8
+<li>Login. Lookup window has Display Detail checkbox to display the Inquiry Screen for each record chosen in the matching records list
+<li>Login. Print Worklist section allows you to choose number of copies first
+</ul>
+
+<h4>Version 1.48  March 17, 2004</h4>
+<ul>
+<li>Login. Allow user to remove template tests, as long as one test is ordered.
+<li>Audit Sessions. New section of Audit report which shows user sessions
+<li>Open sesisons. New window in reports memu which shows open database sesisons
+<li>Login. DOB field warns if future date entered for date of birth or bleed date. Fix to pull in Hospital template.
+<li>Crystyal reports. HLA Test Counts report.
+</ul>
+
+<h4>Version 1.47  March 11, 2004</h4>
+<ul>
+<li>Login. Change R# banner to black on white for more contrast. Fixed problem where template was not applying on repeat specimens.
+<li>Lookup. Some Reg Categ were displaying as integers, not names - fixed.
+<li>Login. When user enters new pt/donor, window ignores middle initial when searching for matching records.
+<li>Final reports. Report always prints the HLA type
+<li>Security window. Enabled add-row and insert-row functionality. Be careful in making changes to this grid!
+</ul>
+
+<h4>Version 1.46  March 8, 2004</h4>
+<ul>
+<li>Login NMDP Packing list - function added to Login window
+<li>Panels: New format of signature lines at the bottom, also correction so highlighted cell is not darkened on the printout
+<li>TEST CODE table - added extra field NMDP ORDER to link NMDP orders codes in packing lists to the HLA test code
+</ul>
+
+<h4>Version 1.45  March 5, 2004</h4>
+<ul>
+<li>Track hla sessions - system logon/logoff and login specimen
+<li>Login Window changes:
+  <ol>
+  <li>Change billing code column to shortname in Worklist Report
+  <li>Display -2,-3 etc for new specimen
+  <li>Remove the  -NONE- display
+  <li>Remove the confirmation prompt for saving data
+  <li>Fix Session# problem
+  <li>Re-order Worklist Report to sort by seq number (as added)
+  </ol>
+<li>LBSW filter. Enable [SAVE] button even if user does not change the file
+<li>Lookup windows. Lookup Donor firstname against the NMDP Id list, so that an entry like 'DONOR, 042162759' will find previous name 'DONOR, 0421-6275-9' 
+<li>Inquiry Window. Always open this window on top
+<li>Result Entry. If user added R-Numbers in sequence, add each one to the Recent List.
+<li>Login Template.  Fixed error in saving data
+</ul>
+
+<h4>Version 1.44  March 3, 2004</h4>
+<ul>
+<li>Login window.  Implemented in hlaprod database.
+<li>Patient reports. Fixed problem in trnslation of canned comments
+</ul>
+
+<h4>Version 1.43  March 2, 2004</h4>
+<ul>
+<li>Inventory.  Implemented in HLAPROD datrabase, with data conversion of new items
+<li>Inquiry. Added Inventory section
+</ul>
+
+<h4>Version 1.42  February 27, 2004</h4>
+<ul>
+<li>(TEST DATABASE ONLY). Inventory.  Add R-Nbr batch, empty box, add from packing list
+<li>Result Entry.  Change AUTO apply of HLA types so that no typing is applied until an HLA type order is checked off from the test list
+<li>DONOR LOCATION Codes - new extra field: Prompt for Typing Final
+</ul>
+
+<h4>Version 1.41  February 18, 2004</h4>
+<ul>
+<li>(TEST DATABASE ONLY). Inventory.  Changed data entry so user specifies Add/Remove first, then nbr-items. Allow Save without printing.
+<li>Luminex bridge. Allow import of luminex LBSW files when ID field has r-number without 'R' prefix
+</ul>
+
+<h4>Version 1.40  February 9, 2004</h4>
+<ul>
+<li>(TEST DATABASE ONLY). Inventory.  Audit trail added.
+<li>Batch Patient reports.  New window which lets the user print a batch of Patient Reports
+</ul>
+
+<h4>Version 1.39  February 5, 2004</h4>
+<ul>
+<li>Database. All NON/LIM donors in Oracle verified against Mumps list
+<li>Audit Report. You can now limit the report to show changes for one field only, for any date range
+<li>(TEST DATABASE ONLY). Inventory Box dictionary window.  Allows user to add/update the box dictionary. Also converted BOX dictionary from the Mumps.
+<li>(TEST DATABASE ONLY). Inventory Entry.  Enter inventory for specimens.  Also wrote converter program from Mumps, but I converted only a sample of data into HLATEST. (Does not yet include audit trail for inventory.)
+<li>Lookup windows.  The recent patient/specimen list expands to show over 20 entries now.
+</ul>
+
+<h4>Version 1.38, January 15, 2004 (Updated 2-Feb-04)</h4>
+<ul>
+<li> Bugfix build 2-Feb-04: Increased font size of results field in Batch/Single result reports, Fixed flgDelete problem in Contact Entry, so that new contacts show up in Patient Reports lookup list
+<li>Converted questionable HLA allele values from Mumps Db into the HLA TEST comment field in Oracle.
+<li>(TEST database only) Login Worksheets now allow more flexible assignment of templates.
+<li>Patient reports. Correction to problem: when user tried to file with a null comment, caused DB error and version number got out of sync.
+<li>Patient/Donor inquiry - corrected sort-order problem for people with more than 
+9 specimens.
+<li>Result reports, Batch and Single. New format which shows result date of each order.
+<li>Result Entry. Do not pre-assign preliminary readings to the HLA type if the specimen does not have any new HLA test orders. We had a few cases where a RELI result came over the bridge after the last update of HLA type, so when the user went into Result Entry for a new specimen, which had only an Antibody Screen order, the RELI reading was considered to be new, and it pre-filled. This problem is now corrected.
+</ul>
+
+<h4>Version 1.37, release date 17-Dec-03</h4>
+<ul>
+<li>TEST DB ONLY: Worksheets.
+  <ul>
+  <li>(new) Worksheet definition window
+  <li>Worksheet section to LOGIN window
+  <li>(new) Worksheet Test Routing window
+  </ul>
+<li>ADDED index of Audit table by Ref#
+<li>Login (TEST DB ONLY), Patient/Specimen Edit. Added check-logic for NMDP identifiers
+</ul>
+
+<h4>Version 1.36, release date 8-Dec-03</h4>
+<ul>
+<li>Patient/Donor/Specimen lookup: Allows R# lookup w/o leading zero
+<li>HLA Type Compare window - for conversion only
+<li>Worksheets (TEST ONLY). Added test routing to worksheets as 3rd tab section of Login window
+<li>Inquiry. Expanded display of comments in Tests section
+</ul>
+
+<h4>Version 1.35, release date 13-Nov-03</h4>
+<ul>
+<li>LBSW export. Add 'XX' to 2-char values
+<li>Panels. File panels and panel items to database, to allow a locator function later (Locator is NOT in this build).
+<li>Luminex bridge
+<li>SBT. Change to accept ABI files with linefeeds in sequence strings
+<li>Login. Filter deleted templates, print billing-code for tests in the login list. Make all drop-down lists filter out deleted codes.
+<li>Edit Patient/Specimen. Drop-down lists filter out deleted codes, unless the code on file is a deleted code.
+<li>Edit Patient/Specimen. This window now includes patient-dob, patient-ssn, specimen-mrn.
+</ul>
+
+<h4>Version 1.34, release date 05-Nov-03 </h4>
+<ul>
+<li>Cord Import of NMDP ID. Changed to accept NMDP ID in column 1 or 2
+<li>SBT. Change to accept .fasta file names
+<li>Panels. Change logic for row-column ordering, to match Luminex
+<li>Inquiry. Corrected problem that Null values displayed for user-initials
+</ul>
+
+<h4>Version 1.33, release date 20-Oct-03 </h4>
+<ul>
+<li>Turnaround report. New report which shows turnaround times for all tests for a selected reg category and date range
+</ul>
+
+<h4>Version 1.32, release date 16-Oct-03 </h4>
+<ul>
+<li>Expected Typings report. Report for R# range available in Exp Typing section of the packing list window.
+<li>Result Entry. Small change: New results say NOT APPLIED if they cannot be applied, e.g. DP*0401 which cannot be applied because it is not DPA or DPB
+<li>**TEST SYSTEM** Login Templates. Window which opens to select default code values now sorts in alpha order
+<li>**TEST SYSTEM** Login adds new patient to recent list
+<li>**TEST SYSTEM** TEST CODE dictionary - new extra field BILLING CODE
+</ul>
+
+<h4>Version 1.31, release date 14-Oct-03 </h4>
+<ul>
+<li>Result Entry. Add allele fields for DPA/DPB to result entry screen.
+<li>Final Reports, single and batch. Add DPA/DPB alleles to report. Needed to reduce the font size to fit them.
+</ul>
+
+<h4>Version 1.30, release date 09-Oct-03 </h4>
+<ul>
+<li>**TEST SYSTEM ONLY** Packing List window has [Login] button to allow batch login of packing list. In HLAPROD system, this button is visible but disabled.
+<li>Packing List Import. Changed program so user may import file even if the Tracking Info line is not at the end of the file
+<li>Packing List. Added [Delete] button to packing list window, so user can now delete packing lists.
+<li>Panel SAVE. Last item changed was not saving from SAVE button - fixed.
+</ul>
+
+<h4>Version 1.29, release date 02-Oct-03 </h4>
+<ul>
+<li>NMDP Export changed to allow 6-char allele values. Bug fix to add commit after batch item update
+<li>Packing List Import. Allow user to override message if same NMDP TR-batch is imported again.
+<li>Panels. Change all panel format to column/row. INI file change so that Luminex panels file in r:\luminex_map.
+</ul>
+
+<h4>Version 1.28, release date 29-Sep-03 </h4>
+<ul>
+<li>Packing List Expected typing.  export can now work with 5-char or 6-char allele column widths
+<li>**TEST SYSTEM ONLY** Login - Added Templates and Worklist Print. Ready for first looks and training
+</ul>
+
+<h4>Version 1.27, release date 19-Sep-03 </h4>
+<ul>
+<li>RELI file import in HLA Bridge (XML Reader). Program changed to work with the new export file format used in RELI Version 5.12
+<li>Login - TEST SYSTEM ONLY - Login function without Templates, for user review. Includes SSN and DOB fields for person, MRN field for specimen.
+</ul>
+
+<h4>Version 1.26, release date 04-Sep-03 </h4>
+<ul>
+<li>Delete specimen. Edit Person/Specimen function allows Delete Specimen for users with manager access - level 7 or higher.
+<li>Result Entry.  New screen design with individual buttons for Result Entry, Verification Log, etc. Allows user to change settings of report batch and NMDP Open Batch after printing the log and before window exit
+<li>Packing list panels. This function now creates two files: the data panel with specimens in row-column order (A1,A2,etc.), and the luminex export panel, with specimens in column-row order (A1,B1,etc.)
+<li>Donor Info Sheets. Bug fix to stop two pages printing for one specimen.
+<li>Patient Reports.  Provider/hospital list created as an admin table. User can modify the list via DataEntry|Admin|Contacts. In the Patient Reports function, the user selects a contact from this list.
+<li>Canned comments, add new comment. Bug fix - window was closing after you click OK, even if you did not add a new comment.
+<li>HLA Types for Specimen Range (Crystal reports). New report created to help Marina report some HLA types electronically for JAPAN specimens.
+</ul>
+
+<h4>Version 1.25, release date 07-Aug-03</h4>
+<ul>
+<li>Login Templates. New window to define fields templates to be used for Login.
+<li>Donor Info Sheets. Added data item sample-type to the report.
+<li>Donor Info Sheets. Fixed logic for checking AB, C, DR test orders
+<li>LBSW Filter window. Fix to program which translates NMD# to R#. If an NMDP# is used by two or more Ref numbers, the system takes the most recent one.
+<li>Patient Reports. Fix to Provider/hospital selection window - error when user closes by clicking X in title bar.
+</ul>
+
+<h4>Version 1.24, release date 01-Aug-03</h4>
+<ul>
+<li>Panels. Added the required Luminex header to panel files. Added Red Cross header and tech/date footers to the Panel printout
+<li>Packing list. Fixed date range criteria on selection window
+<li>Donor Info Sheets. New section of Packinglist window. Allows user to import the NMDP expected typings list, print Donor Information sheets for the Customized Contract
+<li>NMDP Export. Fixed DB error encountered when returning specimens to open batch
+<li>Cord Import. Finished Cord IDs import window
+<li>Cord Completion report. Fixed problem in calculating last result date
+</ul>
+
+<h4>Version 1.23, release date 28-Jul-03</h4>
+<ul>
+<li>Audit Report. Correct date range report, which was truncating user names
+<li>Result Entry. Fix problem when adding new antigens
+<li>Result Entry. Make [Go] button default when user moves to a new row on the list, so user can launch Result Entry detail without using the mouse.
+<li>NMDP Export. When user creates a new LBSW batch, retrieve it automatically when user moves to the View tabpage
+<li>NMDP Export. Change so that Class I row is sent if only 2nd A,B,CW slot is filled, and Class II row is sent if only 2nd DRB1/3/4/5 etc slot is filled
+<li>Cord Completion Report. New report to help with workflow for Cords.
+</ul>
+
+<h4>Version 1.22, release date 08-Jul-03</h4>
+<ul>
+<li>Packing List. New window to import NMDP Typing Request packing lists, create panels from the packing lists, and add packing list specimens to your Result Entry list. Panel creation uses panel template definitions.</li>
+<li>Panel template. New window where administrator can define positions of well CONTRLS in 96-well panel.</li>
+<li>Audit report.  Small change to detail report so the person-who-changed field is not truncated.</li>
+<li>Patient Reports. Bug fix - error after inserting comments.  Also included Text results except for CROSSMATCH.</li>
+</ul>
+
+<h4>Version 1.21, release date 01-Jul-03</h4>
+<ul>
+<li>HLA Bridge. Added Family Relation - converted values and added to the interface.</li>
+<li>Person Edit. Added Family Relation</li>
+<li>Result Entry List. New function: Add ALL to Open Batch</li>
+<li>Patient report. Bug fix (7/1/03) Commit data changes for each record, not just on window exit. as causing a record locking problem.</li>
+<li>LBSW batches. Bug fix (7/1/03) Moving specimens back to Open batch, error on data commit.</li>
+<li>Cord Export. Small change in data grid appearence, so lines are not cut off by the footer</li>
+<li>Antigen window. Commit changes after each locus update</li>
+<li>Canned comments. Commit changes after each save</li>
+</ul>
+
+<h4>Version 1.20, release date 13-Jun-03</h4>
+<ul>
+<li>Lookup windows. Added 'Allow quick select' checkbox. If checked, and the user enters a lookup value with only one matching specimen/person, the system automatically selects that record.</li>
+<li>Person Edit. After Save or Cancel, the system prompts for another record, so the user does not need to relaunch the window for each record. Added validation logic for NMDP ID field.</li>
+<li>Result Entry List. New auto-checkoff options: SameTests, AutoHLA, None.</li>
+<li>Result Entry Detail. System applies new HLA type values in window only after the user has selected an HLA-type test to result.</li>
+<li>Cord Export. Added serologic-equivalent fields, also some corrections</li>
+<li>Antigen Entry: New field serologic-equivalent</li>
+<li>NMDP IDS Import. New window used to import NMDP Ids for St Paul cords.</li>
+<li>Audit Trail. Made [Retrieve] button default for Enter key</li>
+<li>Person Lookup (6/27/03) Bug fix - 6-digit char lookup value was treated as an R-number and returning no match.</li>
+</ul>
+
+<h4>Version 1.19, release date 10-Jun-03</h4>
+<ul>
+<li>Result entry. Added checkbox [ ]Same tests each specimen.</li>
+<li>Result entry. Prevent auto-assignment of any antigen for locus with high-res antigens on file</li>
+<li>Specimen lookup. Allow lookup by NMDP Id</li>
+<li>Antigen codes.  Added high-res Y/N field to table and maintenance window</li>
+<li>Canned comments. Comment description field now wraps in its column.</li>
+<li>Result entry. On HLA-type tests, hide result-text entry field; on other test types, hide the hla-type entry field (but type on file is still displayed in banner).</li>
+<li>Inquiry screen. Display prelim reading date next to each prelim reading</li>
+<li>Person Edit. Drop-down list of Donor Center codes now shows the DCC# as well as the name.</li>
+</ul>
+
+<h4>Version 1.18, release date 02-Jun-03</h4>
+<ul>
+<li>Result Entry, Reports. Require printing of Verif. Log before exit. Disable Results reports (single or batch) if Result Entry screen is open, disable Result Entry if report screen is open</li>
+<li>Toolbar button for Inquiry. Added toolbar button, looks like a magnifying glass, for quick start of the Report|Inquiry screen</li>
+</ul>
+
+<h4>Version 1.17, release date 29-May-03</h4>
+<ul>
+<li>Result Entry. Allow selection of specific HLA tests to result; default all tests with no result date as result=Y; improve formatting of reports, allow up to six non-HLA test results. </li>
+</ul>
+
+<h4>Version 1.16, release date 22-May-03</h4>
+<ul>
+<li>Result Entry. Live implementation of Result Entry, batch reports, single reports </li>
+</ul>
+
+<h4>Version 1.15, release date 30-Apr-03</h4>
+<ul>
+<li>Result Entry -TEST MODE- User can enter antigen values without using asterisk. In editing text comment, user can add a new canned comment and use it in the text comment.  Fixed date-stamp problem in filing prelim results from bridge, so that only NEW prelim results will update locus results on file.  Added delete test function. New specimen list grid appearance. </li>
+<li>Audit trail and report.  System audits all changes to patient/donor, specimen, typing, and test tables.  Audit Report function allows reporting for selected patient/donor, or for a date range.  In report, user can filter for changes to a specific table.</li>
+<li>Result Reports - TEST MODE-  Allow user to move directly to a page and print from there. Moved out single-report function to new Single Results function.</li>
+<li>Single Results. User can print the Final Report or Patient Report for a selected patient/donor. Patient Report, if on file, takes priority.</li>
+<li>Patient Reports. Allow lookup of report by Ref#, separated lookup function from add new report function. Allow printing to upper or lower paper tray.</li>
+<li>Upper/Lower tray printing is now an option for Single reports, Patient reports, and Batch Results. The default setting is lower tray, i.e. to print on letterhead</li>
+<li>Text comments. When you add comments in Result Entry, Edit Patient/Specimen, or Edit Patient Reports, a window opens which lets you view the canned comment dictionary, select a comment, or add a new comment to the dictionary.</li>
+</ul>
+
+<h4>Version 1.14, release date 14-Mar-03</h4>
+<ul>
+<li>Result Entry.  TEST MODE only</li>
+<li>Result Reports.  TEST MODE only</li>
+<li>Specimen/Patient Edit.  TEST MODE only</li>
+<li>XML Reader. Changed so that it copies the files read to a mirror directory, where they can be read for the hlatest bridge.</li>
+</ul>
+
+<h4>Version 1.13, release date 25-Feb-03</h4>
+<ul>
+<li>Result Entry.  TEST MODE build for Sharon's review</li>
+</ul>
+
+<h4>Version 1.12, release date 20-Feb-03</h4>
+<ul>
+<li>Patient Reports.  Allow User to create a second report of the same name.  the ReportName + date will keep them distinct.  Changed genotype-yn so that if the user leaves the data value blank, the Genotype Performed label id not displayed at all.</li>
+<li>Memo fields.  Changed bridge and Db so that patinet-level fields are kept with the person record, not in a separate table.
+</ul>
+
+<h4>Version 1.11, release date 24-Jan-03</h4>
+<ul>
+<li>HLA Validation.  A function to compare Mumps vs. Oracle HLA types. See further description on this site.</li>
+<li>Specimens by Hospital report. A report of specimens received from a hospital.  The user enters From date, To date, and Hospital as run time values.</li>
+</ul>
+
+<h4>Version 1.10, release date 14-Jan-03</h4>
+<ul>
+<li>Antigen List.  This new window, under the Admin menu, displays the list of antigens.  You can delete antigens so that they will not be accepted in Result Entry.  You cannot add to the list from this window: new antigens will be added automatically when you use them in Result Entry</li>
+<li>Validation.  This new window compares the Oracle HLA types with the types in a text file which you have already generated from the Mumps system. </li>
+</ul>
+
+<h4>Version 1.9, release date 10-Jan-03</h4>
+<ul>
+<li>XML Reader.  The reader now includes RELI files, and it keeps a log in R:\hla\Logs\</li>
+<li>Inquiry.  This function nows includes the reading results from RELI and Quicktype</li>
+</ul>
+
+<h4>Version 1.5, release date 08-Nov-02</h4>
+<UL>
+<LI>Patient Reports.  Changed method of bold/unbold - you can now use double-click. Fixed page numbering problem on printed copies.
+</LI>
+<LI>Menu Selector.  New menu item, Tools|Menu Selector, which opens a window witht he list of frequently used menu items.  Single-click on an item to open that function. The menu selector stays open (in the background) for as long as you want it.</LI>
+<LI>Final reports.  Implemented **TEST VERSION** of final reports, for Sharon's review. A prominent header indicates that these are not production-mode reports.</LI>
+<LI>Person Lookup window.  Fixed problem - first user in was locking the recent list window, freezing others.  Now fixed.
+</UL>
+
+<h4>Version 1.4, release date 17-Oct-02</h4>
+<UL>
+<LI>Patient Reports. You cannow establish a report for a patient who is not yet registered.
+</LI>
+<LI>Dictionary Edit</LI>
+<LI>Canned Comment entry</LI>
+</UL>
+
+<h4>Version 1.3, release date 04-Oct-02</h4>
+<UL>
+<LI>Patient Reports</LI>
+<LI>Dictionary Edit</LI>
+<LI>Canned Comment entry</LI>
+</UL>
+
+<h4>Version 1.2, release date 23-Sep-02</h4>
+<UL>
+<LI>XML Writer. Mumps program (not an Oracle program) which creates XML files for each new record or record update made in Mumps.
+<LI>XML Reader. New window to read and file XML messages</LI>
+<LI>Person Inquiry. New window to display and print patient/donor data.</LI>
+</UL>
+
+<h4>Version 1.1,  release date 09-Sep-02</h4>
+<P/>
+<UL>
+<LI>SBT Window changes: Allow display of Inbox and Outbox files with single-click.  Removes leading punctuation characters from the sequences when building them into output files.  Displays a list of any outbox files which could not be interpreted and allows user to print the list. </LI>
+</UL>
+
+<h4>Version 1.0,  release date 16-Aug-02</h4>
+<P/>
+<UL>
+<LI>LBSW filter.  New window which lets the user convert Ref# to NMDP# in an LBSW-formatted file.  Also allows change of Lab code.</LI>
+<LI>SBT Window: New window which collects Sequence-based typing files into files grouped by locus. Output is a formatted NMDP SBT file.</LI>
+</UL>
+
+</BODY>
+</HTML>
+

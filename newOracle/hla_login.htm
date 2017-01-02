@@ -1,0 +1,73 @@
+<HTML>
+
+<H1><A NAME="top">Login of HLA Samples</A></H1>
+<BODY>
+
+<Font Face="Tahoma" size=3>
+Last revision:  March 15, 2004
+&nbsp;&nbsp;
+<A HREF=#top>To print this page, Click here first</A>
+<P ALIGN="left">
+
+<BR><A HREF="#ls_single">Login Individual Samples</A>
+<BR><A HREF="#ls_packinglist">Login Packinglist Samples</A>
+<BR><A HREF="#ls_template">Login Templates</A>
+
+<H3><A NAME="ls_single"></A>Login Individual Samples</H3>
+<ol>
+<li>Select Data Entry|Login from the main menu. The computer opens the login window, locks Login, and assigns the next session number. If another user is using this window, the computer issues a notification and exits.
+<li>Select a login template if desired.
+<li>Click [Next Specimen]. The computer opens the lookup window. Enter the Pt/Donor name or identifier.  The system lists records matching your value. You can chose to enter a new Pt/Donor, or you can choose to enter a new specimen for one of the matching records. Click OK to return to the Login window. You can check the Display Inquiry Window box to show the full Inquiry screen for a matching record row.
+<li>The computer displays the patient and donor fields, with values filled in from the template. The appearence of a field depends on its definition in the template:
+ <ul>
+ <li>A field with an asterisk * in the label is required
+ <li>A greyed-out field is locked and cannot be changed or entered. It may or may not have a default value.
+ <li>A field with white background can be changed
+ </ul>
+<li>Enter the data into each field, then click [Save]. The computer will notify you if you missed any required fields.  Then the computer will save the data and display the new R-number or specimen number at the top of the window in a white backgroud.
+<li>Click [Next Specimen] to enter other specimens. When you are done, click on the Login Report tab. Select number of copies to print, then click the printer icon to print.
+<li>The Login window closes after the Login Report is printed.
+</ol>
+Note: See <A HREF="hla_keyboard.htm">Keyboard Help</A> for lots of hints on entering data quickly using the keyboard.
+
+
+<h3><A NAME="ls_packinglist"></A>Login Packinglist Samples</h3>
+CUSTOMIZED CONTRACT. These are the steps for batch login of customized contract clinical samples from a packing list. You must first import the <A HREF="hla_packing_list.htm">packing list</A>.
+<ol>
+<li>Open the Login window and select the Login Packinglist tab.
+<li>Select the packing list which contains the samples you wish to login. The computer retrieves this list and displays it, in row number order.
+<li>Follow these steps to group all of the High Resolution test orders at the top:
+ <ul>
+ <li>Click inside the grid, then click the Sort Icon on the menu bar. The computer opens the Select Sort window
+ <li>Drag the field ynHighResRequest from the left-hand column over to the right, and drop it above the pkPackinglistItemSeq field, then uncheck this item, so that it sorts the high-resolution 'Yes' values before the 'No' values
+ <li>Click OK to close the Select Sort window. The grid should now display all samples with high resolution orders at the top.
+ </ul>
+<li>Select all of the high resolution rows, then click the [Flag] button. Each selected row should now display the value 'Login' with blue background.
+<li>Open the Select Sort window again, remove yhHighResRequest as a sort value, click Ok and close. The grid should again be sorted by row# (this is important!), but with all the high resolution rows still flagged in blue.
+<li>Click [Preview]. The computer checks for required and valid data, and displays errors if any. If there are any errors, the computer displays a notification in the yellow text bar, and keeps the [Login] button disabled. The detailed error messages are displayed on the far right of each row - you may need to scroll the display to see them. If there are no errors, the [Login] buttom is enabled.
+<li>Click Login. The computer logs in all of the samples, displaying the R-Number or specimen number assigned. Then it adds the samples to the Login Report.
+<li>Print the Login Report. The computer closes the Login window after printing.
+<li>If you need to reprint the report, select Reports|Login Report from the menu.
+</ol>
+
+<h3><A NAME="ls_template"></A>Login Templates</h3>
+Login templates define the fields and default values which are used for logging in specimens of various types.
+<ol>
+<li>Select Data Entry|Admin|Login Templates from the HLA menu. The computer opens the Login Templates window.
+<li>New template. To establish a new template, type the name of the new template in the 'Template name' field, then click the 'New template' button. The computer displays the default template fields grid. Modify the fields grid as needed.
+<li>Select an existing template for update. To make a change to a template, click the 'Select template' button, and the computer opens the Select template window. Select the template you want. The computer returns to the Login template window with the template fields data displayed. Modify the fields grid as needed.
+<li>How to modify the fields grid.  Each row in the fields grid has these columns:
+ <ul>
+  <li>Name of the field. You cannot change this.
+  <li>Used checkbox. If this box is checked, this field will be enabled when a specimen is logged in using this template. If this box is not checked, the field will be disabled - grayed out and skipped - in login
+  <li>Required checkbox. If this box is checked, a value for this field is required. If this box is not checked, a value is optional.
+  <li>Default value. You can enter a default text value by just typing it in. To enter a default dictionary (code) value, click the '...' button at the right of the row. Example: To assign a default registration category 'DONOR' at login, click the button to the right of the 'Registration category' field, then select the value 'DONOR'
+ </ul>
+<li>Test orders. The template fields grid has room to enter up to 5 pre-defined test order codes. Note: This is <b>not</b> a limit in specimen login, you can add as many test orders as you wish
+</ol>
+
+<A HREF=#top>Back to top</A>
+</BODY>
+</HTML>
+
+

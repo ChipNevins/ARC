@@ -1,0 +1,45 @@
+<HTML>
+
+<H1><A NAME="top">Cord Blood</A></H1></CENTER>
+<BODY>
+<FONT FACE="Tahoma" size=3>
+
+Last revision: November 24, 2003
+&nbsp;&nbsp;
+<A HREF=#top>To print this page, Click here first</A>
+
+<h3>Workflow for cords</h3>
+<ol>
+<li>Cord Blood program sends cord sample to HLA lab. HLA lab logs in the sample with ISBT label number.
+<li>HLA lab performs tests and assigns HLA type, indicates hla type is final, and adds the cord to the NMDP Open Batch
+<li>HLA lab exports a file of HLA typings to Cord Blood program. See <A HREF=#cord_export>Cord Export</A>
+<li>Cord Blood program sends file of NMDP Ids to HLA lab. HLA lab imports this file. See <A HREF=#cord_import>Cord Import</A>
+<li>HLA lab sends LBSW file of cords to the NMDP. See section <A HREF="hla_nmdp_export.htm" TARGET="content">NMDP Export</A>
+</ol>
+
+<P ALIGN="left">
+<h3><A NAME=#cord_export>Cord Export</A></h3>
+<ol>
+<li>When the window opens, select a cord donor site from the drop-down list, and select a typing method. <B>Note: Worcester cords are under the donor site DEDHAM</b>
+<li>Click the 'Retrieve Cord List' button to see the list of cords on the computer screen.  Default sort order is by last-name, this was the way cord ids were entered in the HLA system. You can click on any column to sort by that column.
+<li>Click the 'Export' button to create the export file. The system creates a comma-delimited text file with these fields: ID, ALLLELDT, HLADT, ACTION, A1, A2, B1, B2, DA1, DA2, DB1, DB2, RB11, RB12, RB31, RB32, RB41, RB42, RB51, RB52, METHOD, HLA_REF.  The A1,A2,B1,B2 are the serologic equivalent values of the A/B antigens. The value HLA_REF is the identifiers assigned to the sample by the HLA lab.
+<li>ZIP this file and email it to the data manager of the cord site.
+</ol>
+
+<h3><A NAME=#cord_import>Cord Import</A></h3>
+<ol>
+<li>When the site emails a file of NMDP Ids, copy the file to a diskette, or to folder r:\hla\cord\imports.
+<li>In the HLA application, select menu Data Entry |Cord Import
+<li>Click the '...' button to select the file you want to import.
+<li>Indicate which type of file you are importing. Right now, the only choice is St Paul NMDP Ids. The computer displays a description of the file format required - this would be used only in trouble-shooting.
+<li>Click the 'Import' button.  The computer imports the NMDP IDs and displays its progress in the log file display area.
+<li>When the process is done, the log file area will say that import is complete. You can close the window.
+</ol>
+
+<P>
+<A HREF=#top>Back to top</A>
+</FONT>
+</BODY>
+</HTML>
+
+

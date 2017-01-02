@@ -1,0 +1,7 @@
+C:\Program Files\Microsoft SQL Server\100\Setup Bootstrap\Release
+
+http://blogs.msdn.com/b/psssql/archive/2008/08/29/how-to-rebuild-system-databases-in-sql-server-2008.aspx
+
+
+Server name: CHIP-HP7\SQLEXPRESS
+Username: Chip-HP7\Chip

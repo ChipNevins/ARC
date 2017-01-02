@@ -1,0 +1,64 @@
+From: repos800@nmdp.org [mailto:repos800@nmdp.org] 
+Sent: Monday, February 05, 2007 3:20 PM
+To: Ohashi, Marina
+Subject: CRIS Link Pack List. TR-0004422 FedEx#914942060177
+
+Contract Lab Packing List
+
+From:                                             To:
+Repository 800 (Frozen)                           American Red Cross, New England Region
+National Histo. Laboratory                        HLA Services
+4700 Mount Hope Drive                             180 Rustcraft Road
+Baltimore, MD 21215                               Suite #115
+(410) 764-7000                                    Dedham, MA 02026
+
+Date:02/05/2007                    Repository 800
+
+                   Request for Typing
+                   TR-0004422
+
+                                             Turn Around        Smpl
+  Box & Slot #    Donor ID       Category       Time        DC# Type Message
+  ------------   -----------     --------    -----------    --- ---- ------------------
+      1 -  1     0105-8426-6       Cust.          7         037  (A) C* DQ*
+      1 -  2     0344-6786-0       Cust.         14         010  (A) DRB1*
+      1 -  3     0257-6868-0       Cust.         14         081  (A) DRB1 DRB345
+      1 -  4     0413-0238-1       Cust.         14         010  (A) DRB1*
+      1 -  5     0426-0231-8       Cust.         14         024  (A) DRB1*
+      1 -  6     0445-6833-5       Cust.         14         024  (A) DRB1*
+      1 -  7     0417-0113-7       Cust.          7         037  (A) C*
+      1 -  8     0358-2094-3       Cust.          7         037  (A) C*
+      1 -  9     0164-9585-5       Cust.         14         024  (A) A* B* C* DRB1*
+      1 - 10     0103-4929-8       Cust.         14         033  (A) DRB1 DRB345
+      1 - 11     0208-3627-6       Cust.         14         002  (A) C* DQ*
+      1 - 12     0297-5236-7       Cust.          7         037  (A) A B C
+      1 - 13     0147-5831-2       Cust.         14         054  (A) DRB1 DRB345
+      1 - 14     0289-7812-0       Cust.         14         007  (A) DRB1*
+      1 - 15     0261-6189-3       Cust.          7         046  (A) C* DQ*
+      1 - 16     0296-0028-5       Cust.         14         023  (A) DRB1 DRB345
+      1 - 17     0268-3327-7       Cust.         14         070  (A) DRB1 DRB345
+      1 - 18     0249-2372-4       Cust.          7         081  (A) A B C
+      1 - 19     0090-9680-1       Cust.         14         039  (A) C*
+      1 - 20     0271-7186-7       Cust.         14         066  (A) DRB1*
+      1 - 21     0356-4669-4       Cust.         14         005  (A) A* B* C* DRB1*
+      1 - 22     0265-0834-1       Cust.         14         091  (A) C* DQ*
+      1 - 23     0344-6197-0       Cust.         14         057  (A) A* B* C* DRB1*
+      1 - 24     0244-6232-7       Cust.         14         043  (A) DRB1 DRB345
+      1 - 25     0095-6674-6       Cust.         14         063  (A) DRB1*
+      1 - 26     0465-2432-8       Cust.          7         060  (A) C* DQ* DPB1*
+      1 - 27     0144-5579-4       Cust.          7         002  (A) C* DQ*
+      1 - 28     0208-0462-1       Cust.         14         002  (A) DRB1 DRB345
+      1 - 29     0135-1430-2       Cust.          7         066  (A) A B C
+      1 - 30     0288-6164-9       Cust.         14         025  (A) C*
+      1 - 31     0369-8619-8       Cust.          7         010  (A) DRB1*
+      1 - 32     0187-6271-6       Cust.         14         031  (A) DRB1*
+      1 - 33     0131-5034-7       Cust.         14         006  (A) DRB1 DRB345
+      1 - 34     0322-5983-0       Cust.         14         007  (A) DRB1 DRB345
+      1 - 35     0277-4021-6       Cust.          7         039  (A) C*
+      1 - 36     0094-6248-2       Cust.         14         074  (A) A* C* DRB1*
+      1 - 37     0177-9282-1       Cust.         14         094  (A) A* C* DRB1*
+      1 - 38     0237-7097-7       Cust.          7         067  (A) A B C
+Tracking Information:  Shipper = FedEx, Tracking Number = 914942060177
+Comments:
+
+

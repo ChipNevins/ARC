@@ -1,0 +1,16 @@
+Remote Connection to ARC Email
+
+ARC now has web access to email.  here are the instructions I got, but I have not tested them because I do not have an ARC account.
+
+1) From your Internet browser (e.g., Internet Explorer), enter the web site name 'http://ARCMAIL2.REDCROSS.ORG'
+
+2) The Remote Email screen opens, and you first need to specify whether your are connecting from inside the ARC network or from an external location such as your home.  You then enter your username/password, your normal ARC (not HLA) values.
+
+3) You are prompted again for username/password.  This time, enter the user name 'D01/' (Dee zero one) followed by your username, no spaces.  E.g., if your username is 'myName', you would enter 'D01/myname'.  Enter your mormal password.
+
+4) You are connected to read or write email.  Note that your address book is not available from the web connection.
+
+
+p:/hla/newOracle/remote_email.txt
+
+- end - 

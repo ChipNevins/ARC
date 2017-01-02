@@ -1,0 +1,36 @@
+From: repos800@nmdp.org [mailto:repos800@nmdp.org] 
+Sent: Monday, February 05, 2007 3:20 PM
+To: Ohashi, Marina
+Subject: CRIS Link Pack List. TR-0004423 FedEx#914942060177
+
+Contract Lab Packing List
+
+From:                                             To:
+Repository 800 (Frozen)                           American Red Cross, New England Region
+National Histo. Laboratory                        HLA Services
+4700 Mount Hope Drive                             180 Rustcraft Road
+Baltimore, MD 21215                               Suite #115
+(410) 764-7000                                    Dedham, MA 02026
+
+Date:02/05/2007                    Repository 800
+
+                   Request for Typing
+                   TR-0004423
+
+                                             Turn Around        Smpl
+  Box & Slot #    Donor ID       Category       Time        DC# Type Message
+  ------------   -----------     --------    -----------    --- ---- ------------------
+      1 -  1     0483-2071-7       Cust.          7         037  (A) C* DQ*
+      1 -  2     0511-6785-6       Cust.         14         010  (A) DRB1*
+      1 -  3     0375-7097-5       Cust.         14         081  (A) DRB1 DRB345
+      1 -  4     0032-9432-9       Cust.         14         010  (A) DRB1*
+      1 -  5     0072-3660-7       Cust.         14         024  (A) DRB1*
+      1 -  6     0828-9143-3       Cust.         14         024  (A) DRB1*
+      1 -  7     0834-9218-1       Cust.          7         037  (A) C*
+      1 -  8     0592-8427-3       Cust.          7         037  (A) C*
+      1 -  9     0621-4283-1       Cust.         14         024  (A) A* B* C* DRB1*
+      1 - 10     0349-0366-6       Cust.         14         033  (A) DRB1 DRB345
+Tracking Information:  Shipper = FedEx, Tracking Number = 914942060177
+Comments:
+
+

@@ -1,0 +1,108 @@
+Connected.
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PKPACKINGLIST                             NOT NULL NUMBER(8)
+ STRLOCALNAME                              NOT NULL VARCHAR2(40)
+ STRNMDPNAME                               NOT NULL VARCHAR2(40)
+ DTREQUESTED                               NOT NULL DATE
+ CDWHOENTERED                                       NUMBER(6)
+ FLGDELETED                                         NUMBER(1)
+ DTRECORDCREATED                                    DATE
+ DTRECORDMODIFIED                                   DATE
+
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PKPACKINGLIST                             NOT NULL NUMBER(8)
+ PKPACKINGLISTITEMSEQ                      NOT NULL NUMBER(8)
+ STRBOXSLOTLOCATION                        NOT NULL VARCHAR2(25)
+ STRNMDPID                                          VARCHAR2(15)
+ STRCATEGORY                                        VARCHAR2(25)
+ NBRTURNAROUNDDAYS                                  NUMBER(2)
+ STRDONORCENTER                                     VARCHAR2(10)
+ STRSAMPLETYPE                                      VARCHAR2(20)
+ STRTESTLIST                                        VARCHAR2(100)
+ YNHIGHRESREQUEST                                   CHAR(1)
+ FLGDELETED                                         NUMBER(1)
+ DTRECORDCREATED                                    DATE
+ DTRECORDMODIFIED                                   DATE
+ STRLOGINREFNUM                                     VARCHAR2(20)
+ STRLASTNAME                                        VARCHAR2(40)
+ STRFIRSTNAME                                       VARCHAR2(40)
+ STRMRN                                             VARCHAR2(25)
+
+
+select pkpackinglistitemseq SEQN, SUBSTR(strlastname,1,10) LASTNAME,
+   SUBSTR(strfirstname,1,10) FIRSTNAME, SUBSTR(strloginrefnum,1,8) RNUM,
+   STRMRN
+from hla_packinglist_item
+where pkpackinglist = 18020 ;
+
+UPDATE hla_packinglist_item
+  SET STRMRN=STRLASTNAME
+where pkpackinglist = 18020 ;
+
+UPDATE hla_packinglist_item
+  SET STRLASTNAME = STRFIRSTNAME
+where pkpackinglist = 18020 ;
+
+UPDATE hla_packinglist_item
+  SET STRFIRSTNAME = STRMRN
+where pkpackinglist = 18020 ;
+
+
+Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PKPID                                     NOT NULL NUMBER(8)
+ STRLASTNAME                               NOT NULL VARCHAR2(35)
+ STRFIRSTNAME                              NOT NULL VARCHAR2(35)
+ STRREFNUM                                 NOT NULL VARCHAR2(20)
+ STRPATIENTDONOR                                    VARCHAR2(15)
+ STRCBUID                                           VARCHAR2(20)
+ STRNMDPID                                          VARCHAR2(20)
+ STRMRN                                             VARCHAR2(20)
+ CDREGCAT                                           NUMBER(6)
+ CDDONORTYPE                                        NUMBER(6)
+ CDAVAILABILITY                                     NUMBER(6)
+ CDDONORLOCATION                                    NUMBER(6)
+ CDDONORCENTER                                      NUMBER(6)
+ CDWHOENTERED                                       NUMBER(6)
+ FLGDELETED                                         NUMBER(1)
+ DTRECORDCREATED                                    DATE
+ DTRECORDMODIFIED                                   DATE
+ STRCOMMENT                                         VARCHAR2(2000)
+ STRFAMRELATION                                     VARCHAR2(250)
+ DTDOB                                              DATE
+ STRSSN                                             VARCHAR2(12)
+
+
+select substr(strlastname,1,10) LASTNAME, SUBSTR(strfirstname,1,10) FIRSTNAME, strrefnum, SUBSTR(strmrn,1,10) MRN
+from hla_person
+where strrefnum in 
+  (select strloginrefnum from hla_packinglist_item
+    where pkpackinglist = 18020) ;
+
+
+UPDATE hla_person
+ SET STRMRN=STRLASTNAME
+where strrefnum in 
+  (select strloginrefnum from hla_packinglist_item
+    where pkpackinglist = 18020) ;
+    
+UPDATE hla_person
+ SET STRLASTNAME = STRFIRSTNAME
+where strrefnum in 
+  (select strloginrefnum from hla_packinglist_item
+    where pkpackinglist = 18020) ;
+
+UPDATE hla_person
+ SET STRFIRSTNAME = STRMRN
+where strrefnum in 
+  (select strloginrefnum from hla_packinglist_item
+    where pkpackinglist = 18020) ;
+
+UPDATE hla_person
+ SET STRMRN = ''
+where strrefnum in 
+  (select strloginrefnum from hla_packinglist_item
+    where pkpackinglist = 18020) ;
+
