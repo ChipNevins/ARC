@@ -1,5 +1,10 @@
 arc_SqlServer_Pb_log.txt
 
+12-20-16  10 hours
+.Net code to create PDF files from Patient Report tables
+This is not in PB.  It is a Windows Forms app HlaPtReportsExport
+
+
 09-14-16  9.5 hours  Report comments
 From: Chip Nevins [mailto:chip.nevins@gmail.com] 
 Sent: Wednesday, September 14, 2016 10:16 PM
