@@ -1,5 +1,245 @@
 arc_SqlServer_Pb_log.txt
 
+Modification 4/17/16
+
+3/22 Meeting with ARC on new contract.  ARC will move DB to new server,run HLA SqlServer there until end of year.
+
+01-22-16
+Account hcronin/heather01
+
+
+12-28-15 .75 hours  (support)
+- Email on Dynal file reader issues occurring on one machine
+- Email on how to undelete an inventory box 2011-T
+
+12-20-15 3.0 hours 
+Corrected issue in dynal reader becasase the R# Pattern() check was matched by a header line
+- Also properly closed the XLS file
+- Tested with all old and new format files that Tatiana sent
+
+
+12-16-18  Sent Version 5-11
+
+P:\HlaSqlServer\XcopyDeploy\Copy Latest Version.bat
+
+12-15-15 5.0 hours Tatiana sent new fields to be read over bridge. New UType files.
+Programming change to n_dynal reader
+
+w_reader
+  pfc_postOPen goes to various directories defined in FILE LOACATIONS part of INI file, collecting
+    the file names that need to be run
+
+	For example:
+	ls_Directory = ProfileString(ls_iniFile, 'FileLocations', 'HmlDirectory', 'r:\hla\xml\')
+	n_fileSrv.of_ChangeDirectory(ls_Directory)
+	n_fileSrv.of_DirList('*.xml', 0, lnv_DirAttrib)
+
+	for every file added after the date the reader last ran, adds the filename and type to dw_1:
+	HML, XML, LUMINEX, RELI, DYNAL_SBT
+
+  of_run() - loops through filenames in dw_1 and runs them:
+    n_xml_reader	inv_xml
+	n_reli_reader	inv_reli
+	n_luminex_reader	inv_luminex
+	n_hml_reader  inv_hml
+	n_dynalsbt_reader  inv_dynalsbt
+
+n_dynalsbt_reader
+ of_readfile()  new code for file type uTYPE 7.1
+	
+UType 7.1 format
+Line 1:
+Reported by hlauser; uTYPE 7.1 RUO; 11/18/2015 10:26:12
+  - so use uTYPE 7.1 RUO as anchor
+Start collecting at line 6
+Each data line has values in these colums
+col 1: R#
+col 2-3: A locus
+col 4-5: B locus
+col 6-7: C locus
+col 8-9:  DQB1 locus
+col 12-13: DRB1 locus
+
+
+
+11-18-15  Meeting in Dedham on future plans for infrastructure and software version  1.50
+
+
+11-10-15  Questions about login of 2d sepcimen for the same NMDP.  First login was manual, and the NMDP field was populated in the name field but not in the NMDP ID field.  The user may have mistyped the NMDP # and the system rejected it on the check digit business rule.  2.0 (main)
+
+
+8-12-15  Helped Romei with question about login templates  1.5 (maint)
+
+7-5-15
+Question about login templates and worksheet templates  1.25 (maint)
+Hi Chip,
+I deleted “DRB3” in the Panel Loci section for the test code DR (low resolution) as well as the one in DR/DQ (low res) so that when DR (low resolution) and DR/DQ (low res) are ordered, DRB3 is not added to the LUMINEX-PATIENTS worksheet.  We logged some samples in today, and now the tests ordered are not being displayed on the Login Worklist (see attached file).  You can see that samples 510371-510378 do not show the tests ordered under “test list” (these samples were logged in with a premade login template).  How can I get those tests to show up on the login worklist?  Did I do something wrong?
+ 
+Fearing I did something wrong, I added DRB3 back into the panel loci section for DR (low resolution) and DR/DQ (low res).  I logged in a “test” sample using a premade login template and the tests ordered still do not show up under test list on the Login Worklist. 
+ 
+So two questions:
+ 
+1)      How do I get the tests ordered back on the Login Worklist?
+2)      What is the Worksheet Template (under the Admin menu)?  Is this what controls where the test ordered goes in the worksheets? 
+ 
+Thanks,
+Romie
+ 
+6-12-15  Email help for Romei on adding a new user
+
+
+3-31-15  Question on Ambiguity string
+R# 099197  Yu, Neng
+
+
+3-11-15  1.5 hours
+Sent Version 5.10
+
+3-20-15  - 3.0 hours
+dw_patient_report_item did not contain columns in select for DPA and DPB
+locus (because they are not displayed). However, n_patient_report references
+these fields, so include them in select
+
+
+-- get default second signature
+hla.ini
+[CONSTANTS]
+DefaultSignature=ACNSIG
+
+sqlca.logid = 'nevins'
+
+n_canned_comment.of_GetDefaultSecondSignature()
+	string ls_CannedCommentKey, ls_ret
+	ls_CannedCommentKey = '.' + sqlca.logid + 'SIG'
+	ls_ret = this.of_TranslateText(ls_CannedCommentKey)
+	return ls_ret
+
+w_report_single.Open()
+	n_canned_comment  lnv_canned_comment
+	lnv_canned_comment = create n_canned_comment
+	ls_DefaultSecondSignature = lnv_canned_comment.of_GetDefaultSecondSignature()
+	if ls_DefaultSecondSignature <> '' then
+		ddlb_signature.SelectItem(ls_DefaultSecondSignature,0)
+	else
+		ddlb_signature.SelectItem('-- select --',0)
+	end if
+	destroy lnv_canned_comment
+
+
+-- change 'result date' to 'report date'
+n_final_report.of_retrieve()
+	resultText += testnames[testIndex] + '  result date: ' &
+	resultText += testnames[testIndex] + '  report date: ' &
+
+
+u_patient_report.of_AdjustSignatures()
+// 3-15-15 select second signature - we translate the canned comment here, not
+//  below in the For loop, because the 2d signature is text, not a canned comment abbrev.
+// 3-20-15 Swap sig1 and sig2 so Neng's name follows the other name
+If cbx_sig_1.Checked Then ls_Signatures[1] = ddlb_signatures.text
+If cbx_sig_2.Checked Then ls_Signatures[2] = lnv_comment.of_TranslateText('.' + 'YUNSIG')
+
+
+email from Sharon 3-19
+Hi Chip,
+We had a lab inspection today from N.Y. state. The inspector cited us for the language used on our individual or batched reports. Can you replace “result date” with report date? I attached a report and circled where the change should be.
+ 
+Also we have two donor location in the system, one is Boston and one is Boston ACS. Is it possible to merge the Boston donors into Boston ACS and eliminate the Boston location? Originally the Boston location was over by Fenway park. They closed this center and moved the donor room over to Tufts. Which is how we named two different Boston cites. The older staff knew to only use Boston ACS, but newer staff did not. Now they are both used.  If this is a big project, it isn’t worth the effort.
+ 
+Thanks for your help. See you tomorrow.
+
+3-14-15  3.25 hrs
+On final and patient reports, allow user to select the first signature instead of
+  it being hard-wired to Sharon.
+  
+  w_final_report_single
+    Layout: add control ddlb_signature, below the 2d signature cbx
+	Instance variable:  datastore ids_signatures
+	
+	Open event
+		int  row
+		datastore lds_signatures
+		lds_signatures = create datastore
+		lds_signatures.dataObject = 'dddw_signatures'
+		lds_signatures.setTransObject(sqlca)
+		If lds_signatures.retrieve() > 0 Then
+			lds_signatures.SetSort('strcennedcomment')
+			lds_signatures.Sort()
+		End If
+		ddlb_signature.AddItem('-- select --')
+		For row = 1 to lds_signatures.rowCount()
+			ddlb_signature.AddItem(string(lds_signatures.object.strCannedComment[row]))
+		Next
+		ddlb_signature.SelectItem('-- select --',0)
+		
+	of_retrieve()
+	  - set this in the If .. Else for the final report and for the patient report
+			inv_final_report.is_signature_2 = ddlb_signature.text
+
+	
+
+So, the change will be to let the user add other canned comments ending in 'SIG', then show a drop down of these
+in the window.  We will save the user selection into a new instance variable:
+
+n_final_report
+  instance variable  n_final_report.is_signature_2   // for example, = Sharon Alosco or Neng Yu
+  of_retrieve()
+	  If ib_signature_2 Then
+		// 3/15/15 - use the second signature string. This value was set by the
+		// calling window such as w_final_report_single or w_final_report_batch
+		adw_report.object.sig2[dwRow] =  '~r~n~r~n' + is_signature_2
+		//adw_report.object.sig2[dwRow] =  '~r~n~r~n' + lnv_comment.of_translateText('.YUNSIG')
+	  End If
+
+n_patient_report
+	instance variable  is_signature_2
+	of_retrieve()
+		// signatures
+		// 3-15-15 select second signature - we translate the canned comment here, not
+		//  below in the For loop, because the 2d signature is text, not a canned comment abbrev.
+		If ib_signature_1 = true Then ls_Signatures[1] = lnv_comment.of_TranslateText('.' + 'YUNSIG')
+		If ib_signature_2 = true Then ls_Signatures[2] = is_signature_2
+
+Patient reports diagram
+-------------------------------------------------------------------------
+w_patient_report
+  [Preview] button
+    rb_wide checked: > w_patient_report_preview_landscape
+			instantiates the nvo, calls its of_retrieve()
+			u_patient_report_landscape  (this has the visuals)
+		otherwise:	 > w_patient_report_preview
+			instantiates the nvo, calls its of_retrieve()
+			u_patient_report	(this has the visuals)
+
+-------------------------------------------------------------------------
+w_patient_report  has [Preview] button
+   w_patient_report_preview  -> u_patient_report
+   w_patient_report_preview_landscape -> u_patient_report_landscape
+   
+u_patient_report
+	Layout:  add control ddlb_signature
+	add control ddlb_signatures,  selection changed event: parent.post of_adjustSignatures()
+	function of_RetrieveDddw()
+	of_AdjustSignatures()
+		// 3-15-15 select second signature - we translate the canned comment here, not
+		//  below in the For loop, because the 2d signature is text, not a canned comment abbrev.
+		If cbx_sig_1.Checked Then ls_Signatures[1] = lnv_comment.of_TranslateText('.' + 'YUNSIG')
+		If cbx_sig_2.Checked Then ls_Signatures[2] = is_signature_2
+
+		For i = 1 to UpperBound(ls_Signatures)
+			If len(ls_signatures[i]) > 0 Then
+				li_row = ldwc_sigs.InsertRow(0)
+				ls_text = '~r~n~r~n' + ls_Signatures[i]
+				ldwc_sigs.SetItem(li_row, 'text', ls_text)
+			End if
+		Next
+	
+u_patient_report_landscape
+	Layout:  add control ddlb_signature
+	add control ddlb_signatures,  selection changed event: parent.post of_adjustSignatures()
+	function of_RetrieveDddw()
+
+
 9-8-14
 Emailed XCopyDeploy instructions to Christine
 1. Log onto the PC under the HLAUSER account.
@@ -64,6 +304,7 @@ w_hla_search.cb_search  clicked()
 
 SQLCODE error:
 error:
+-- errorText set in code above
 If sqlca.sqlcode <> 0 Then
 	ls_msgparm[1] = sqlca.sqlerrtext
 	gnv_app.inv_error.of_Message('pfc_dwdberror', ls_msgparm, errorText)
@@ -129,7 +370,7 @@ Added label print to Print R-number labels
 
 5-11-13  5.0 hrs
 
-Label format:
+Label format diagram
 - Logical label is 2.25in perf to perf
 - Black mark backing
 - Each logical label has 8 physical labels:
@@ -231,7 +472,7 @@ In this file, the commands print 8 labels; each label has a bar code and text.
 ^XZ - end label
 
 
-How this works in application:
+Label printing diagram, how this works in application:
 
 -- hla.ini file
 [LabelFormat]
